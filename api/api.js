@@ -12,7 +12,7 @@ mongoose.connect('mongodb://localhost/lcbo');
 
 var InventoryModel = mongoose.model('inventory', models.schema.inventory);
 var StoreModel = mongoose.model('store', models.schema.store);
-
+var ProductModel = mongoose.model('product', models.schema.product);
 
 var app = express();
 app.use(bodyParser.json());
@@ -22,6 +22,7 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 var router = express.Router();
 restify.serve(router, InventoryModel);
 restify.serve(router, StoreModel);
+restify.serve(router, ProductModel);
 
 app.use(router);
 
