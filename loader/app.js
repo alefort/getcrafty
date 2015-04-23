@@ -163,8 +163,10 @@ function processStoreRecord(storeRecord){
             doc = newDoc;
         }
         doc.save(function(err, doc) {
-            // console.log('stored store ' + doc.store_no);
+            return;
         });
+
+        return;
     });
 }
 
@@ -185,8 +187,10 @@ function processProductRecord(productRecord){
             doc = newDoc;
         }
         doc.save(function(err, doc) {
-
+            return;
         });
+
+        return;
     });
 }
 function processInventoryRecord(inventoryRecord){
@@ -206,16 +210,18 @@ function processInventoryRecord(inventoryRecord){
             doc = newDoc;
         }
         doc.save(function(err, doc) {
-
+            return;
             if(err){
                 console.log(err);
             }
         });
+
+        return;
     });
 }
 
 
-//getPager('stores', getAllStores);
+getPager('stores', getAllStores);
 getPager('products', getAllProducts);
-//getPager('inventories', getAllInventories);
+getPager('inventories', getAllInventories);
 
