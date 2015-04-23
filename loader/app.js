@@ -52,7 +52,6 @@ function getPager(element, callback){
         headers: lcboLoader.config.headers
     }).then(function(response) {
         var paging = response.getBody().pager;
-        //paging.total_pages = 5;
         lcboLoader.pager[element] = paging;
         if(callback !== undefined){
             callback();
@@ -181,7 +180,7 @@ function processProductRecord(productRecord){
             doc = product(productRecord);
         }else{
             // Update all records
-            var newDoc = store(storeRecord);
+            var newDoc = product(productRecord);
             newDoc._id = doc._id;
             doc = newDoc;
         }
@@ -202,12 +201,11 @@ function processInventoryRecord(inventoryRecord){
             doc = inventory(inventoryRecord);
         }else{
             // Update all records
-            var newDoc = store(storeRecord);
+            var newDoc = inventory(inventoryRecord);
             newDoc._id = doc._id;
             doc = newDoc;
         }
         doc.save(function(err, doc) {
-            console.log(doc.id);
 
             if(err){
                 console.log(err);
@@ -217,7 +215,7 @@ function processInventoryRecord(inventoryRecord){
 }
 
 
-getPager('stores', getAllStores);
-//getPager('products', getAllProducts);
+//getPager('stores', getAllStores);
+getPager('products', getAllProducts);
 //getPager('inventories', getAllInventories);
 
