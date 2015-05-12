@@ -1,28 +1,28 @@
 (function(){
   'use strict';
 
-  var app = angular.module('getCrafty.beer', ['ngRoute']);
+  var app = angular.module('getCrafty.location', ['ngRoute']);
 
   app.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/beer/:beer_id', {
-      templateUrl: 'beer/beer.html',
-      controller: 'beerCtrl'
+    $routeProvider.when('/location/:location_id', {
+      templateUrl: 'location/location.html',
+      controller: 'locationCtrl'
     });
   }])
 
-  app.controller('beerCtrl', function($scope, $route, $routeParams, $http) {
-    var beer_id = ($routeParams.beer_id || "");
-    $scope.beer_data = {};
+  app.controller('locationCtrl', function($scope, $route, $routeParams, $http) {
+    var location_id = ($routeParams.location_id || "");
+    $scope.location_data = {};
     
     var config = {
-      url: 'https://lcboapi.com/products/' + beer_id,
+      url: 'https://lcboapi.com/stores/' + location_id,
       headers: { 'Authorization': 'Token MDoyMjk2OWIyOC1kZjBlLTExZTQtYWQzOS0yN2NiZjIwYTYxY2Y6aFZhNUFiN3hZZllod245TW1hdGJuNHptRE1YRTUwaG9PUnFJ' }
     }
 
     var responsePromise = $http(config);
 
     responsePromise.success(function(data, status, headers, config) {
-      $scope.beer = data.result;
+      $scope.location = data.result;
     });
 
     responsePromise.error(function(data, status, headers, config) {

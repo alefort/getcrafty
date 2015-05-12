@@ -27,8 +27,8 @@
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="#/beer">beer</a></li>
-						<li><a href="#/home">home</a></li>
+						<li><a href="#/beer">Beer</a></li>
+						<li><a href="#/location">Locations</a></li>
 					</ul>
 				</div>
 			</div>
@@ -38,13 +38,21 @@
 				<div ng-view></div>
 			</div>
 		</main>
+		<footer>
+			<div class="container">
+				{{ 'GetCrafty v%VERSION%.' | interpolate }}
+			</div>
+		</footer>
 		<script src="bower_components/angular/angular.js"></script>
 		<script src="bower_components/angular-route/angular-route.js"></script>
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script src="app.js"></script>
-		<script src="beer/beer.js"></script>
 		<script src="home/home.js"></script>
+		<script src="beer/beer.js"></script>
+		<script src="beer-search/beer-search.js"></script>
+		<script src="location/location.js"></script>
+		<script src="location-search/location-search.js"></script>
 		<script src="components/version/version.js"></script>
 		<script src="components/version/version-directive.js"></script>
 		<script src="components/version/interpolate-filter.js"></script>
