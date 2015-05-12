@@ -1,28 +1,28 @@
 (function(){
   'use strict';
 
-  var app = angular.module('getCrafty.location', ['ngRoute']);
+  var app = angular.module('getCrafty.store', ['ngRoute']);
 
   app.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/location/:location_id', {
-      templateUrl: 'location/location.html',
-      controller: 'locationCtrl'
+    $routeProvider.when('/store/:store_id', {
+      templateUrl: 'store/store.html',
+      controller: 'storeCtrl'
     });
   }])
 
-  app.controller('locationCtrl', function($scope, $route, $routeParams, $http) {
-    var location_id = ($routeParams.location_id || "");
-    $scope.location_data = {};
+  app.controller('storeCtrl', function($scope, $route, $routeParams, $http) {
+    var store_id = ($routeParams.store_id || "");
+    $scope.store_data = {};
     
     var config = {
-      url: 'https://lcboapi.com/stores/' + location_id,
+      url: 'https://lcboapi.com/stores/' + store_id,
       headers: { 'Authorization': 'Token MDoyMjk2OWIyOC1kZjBlLTExZTQtYWQzOS0yN2NiZjIwYTYxY2Y6aFZhNUFiN3hZZllod245TW1hdGJuNHptRE1YRTUwaG9PUnFJ' }
     }
 
     var responsePromise = $http(config);
 
     responsePromise.success(function(data, status, headers, config) {
-      $scope.location = data.result;
+      $scope.store = data.result;
     });
 
     responsePromise.error(function(data, status, headers, config) {
