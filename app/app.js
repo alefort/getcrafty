@@ -6,8 +6,8 @@
     'getCrafty.home',
     'getCrafty.beer',
     'getCrafty.beerSearch',
-    'getCrafty.location',
-    'getCrafty.locationSearch',
+    'getCrafty.store',
+    'getCrafty.storeSearch',
     'getCrafty.version'
   ]);
 
