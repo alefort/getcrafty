@@ -3,6 +3,7 @@
 
   var app = angular.module('getCrafty', [
     'ngRoute',
+    'ngGeolocation',
     'getCrafty.home',
     'getCrafty.beer',
     'getCrafty.beerSearch',

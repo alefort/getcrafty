@@ -13,5 +13,8 @@
     "html5-boilerplate": "~4.3.0",
     "bootstrap": "~3.3.4",
     "jquery": "~2.1.4"
+  },
+  "devDependencies": {
+    "ngGeolocation": "~0.0.7"
   }
 }
