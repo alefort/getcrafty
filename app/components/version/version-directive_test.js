@@ -1,7 +1,7 @@
 'use strict';
 
-describe('myApp.version module', function() {
-  beforeEach(module('myApp.version'));
+describe('getCrafty.version module', function() {
+  beforeEach(module('getCrafty.version'));
 
   describe('app-version directive', function() {
     it('should print current version', function() {

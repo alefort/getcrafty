@@ -1,0 +1,11 @@
+<h1 class="page-header">Locations Nearest You</h1>
+<div class="list-group" ng-repeat="(key, location) in locationData">
+	<a href="#/store/{{location.store_no}}" class="list-group-item">
+		<h2 class="list-group-item-heading">{{location.name}}</h2>
+		<p class="list-group-item-text">
+			{{location.address_line_1}}<br>
+			{{location.distance_in_meters / 1000 | number : 1}}km away
+		</p>
+	</a>
+</div>
+

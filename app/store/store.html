@@ -1,0 +1,54 @@
+<h1 class="page-heading">{{store.name}}</h1>
+
+<address>
+	{{store.address_line_1}}<br>
+	{{store.address_line_2}}<br>
+	{{store.city}}, {{store.province}} &nbsp; {{store.postal_code}}<br>
+	{{store.telephone}}
+</address>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Day</th>
+			<th>Open</th>
+			<th>Close</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Sun</td>
+			<td>{{store.sunday_open / 60}}</td>
+			<td>{{store.sunday_close / 60}}</td>
+		</tr>
+		<tr>
+			<td>Mon</td>
+			<td>{{store.monday_open / 60}}</td>
+			<td>{{store.monday_close / 60}}</td>
+		</tr>
+		<tr>
+			<td>Tue</td>
+			<td>{{store.tuesday_open / 60}}</td>
+			<td>{{store.tuesday_close / 60}}</td>
+		</tr>
+		<tr>
+			<td>Wed</td>
+			<td>{{store.wednesday_open / 60}}</td>
+			<td>{{store.wednesday_close / 60}}</td>
+		</tr>
+		<tr>
+			<td>Thu</td>
+			<td>{{store.thursday_open / 60}}</td>
+			<td>{{store.thursday_close / 60}}</td>
+		</tr>
+		<tr>
+			<td>Fri</td>
+			<td>{{store.friday_open / 60}}</td>
+			<td>{{store.friday_close / 60}}</td>
+		</tr>
+		<tr>
+			<td>Sat</td>
+			<td>{{store.saturday_open / 60}}</td>
+			<td>{{store.saturday_close / 60}}</td>
+		</tr>
+	</tbody>
+</table>
