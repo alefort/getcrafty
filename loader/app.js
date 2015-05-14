@@ -5,14 +5,19 @@
 
 
 // Some bootstrapping
-var requestify = require( 'requestify' );
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var models = require('../models/models.js');
+var requestify = require( 'requestify' ),
+    mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+    models = require('../models/models.js'),
+    http = require('http-request'),
+    fs = require('fs'),
+    zip = require('adm-zip'),
+    converter = require("csvtojson").core.Converter;
 
 var lcboLoader = {
     config: {
         url: 'https://lcboapi.com/',
+        urlnonhttps: 'http://lcboapi.com/',
         per_page: 100,
         first_page: 1,
         headers: {
@@ -188,6 +193,7 @@ function processProductRecord(productRecord){
         }
         doc.save(function(err, doc) {
             return;
+
         });
 
         return;
@@ -210,18 +216,86 @@ function processInventoryRecord(inventoryRecord){
             doc = newDoc;
         }
         doc.save(function(err, doc) {
+            console.log('Inventory Saved: ' + inventoryRecord.product_id);
             return;
-            if(err){
-                console.log(err);
-            }
         });
 
         return;
     });
 }
 
+function getDatasetsZip(){
+    var options = {url: lcboLoader.config.urlnonhttps + 'datasets/latest.zip'};
+    http.get(options, 'data/latest.zip', function (error, result) {
+        if (error) {
+            console.error(error);
+        } else {
+            console.log('File downloaded at: ' + result.file);
+            extractDatasetsZip();
+        }
+    });
+}
 
-getPager('stores', getAllStores);
-getPager('products', getAllProducts);
-getPager('inventories', getAllInventories);
+function extractDatasetsZip(){
+    // reading archives
+    var zipfile = new zip('data/latest.zip');
 
+    zipfile.extractAllTo("./data", true);
+
+    //Load Data now
+    console.log('Done extracting csv files');
+
+}
+
+function convertTsFs(record){
+    for(var innerKey in record){
+        if(record[innerKey] == 't'){
+            record[innerKey] = true;
+        }else if(record[innerKey] == 'f'){
+            record[innerKey] = false;
+        }
+    }
+
+    return record;
+}
+
+function loadDataset(schema, fileName){
+    var fileStream=fs.createReadStream(fileName);
+    //new converter instance
+    var csvConverter=new converter({constructResult:false});
+
+    //end_parsed will be emitted once parsing finished
+    csvConverter.on("record_parsed",function(jsonObj, rawObj, rowIndex){
+        var record = jsonObj;
+        record = convertTsFs(record);
+
+        if(schema == 'stores'){
+            processStoreRecord(record);
+        }else if (schema == 'products'){
+            processProductRecord(record);
+        }else if(schema == 'inventories') {
+            processInventoryRecord(record);
+        }
+    });
+
+    //read from file
+    fileStream.pipe(csvConverter);
+}
+
+function convertCSVtoJSON(csvFile, jsonFile){
+    var csvConverter=new converter({constructResult:false});
+    var readStream=fs.createReadStream(csvFile);
+
+    var writeStream=fs.createWriteStream(jsonFile);
+
+    readStream.pipe(csvConverter).pipe(writeStream);
+}
+
+//getDatasetsZip();
+//extractDatasetsZip();
+//convertCSVtoJSON('./data/stores.csv','./data/stores.json');
+//convertCSVtoJSON('./data/products.csv','./data/products.json');
+//convertCSVtoJSON('./data/inventories.csv','./data/inventories.json');
+//loadDataset('stores', './data/stores.csv');
+//loadDataset('products', './data/products.csv');
+loadDataset('inventories', './data/inventories.csv');
