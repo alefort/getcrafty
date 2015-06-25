@@ -260,30 +260,32 @@ function convertTsFs(record){
 }
 
 function loadDataset(schema, fileName){
-    var fileStream=fs.createReadStream(fileName);
-    //new converter instance
-    var csvConverter=new converter({constructResult:false});
+    var fs = require('fs');
 
-    //end_parsed will be emitted once parsing finished
-    csvConverter.on("record_parsed",function(jsonObj, rawObj, rowIndex){
-        var record = jsonObj;
-        record = convertTsFs(record);
+    fs.readFile(fileName, 'utf8', function (err, data) {
+        if (err) {
+            console.log('Error: ' + err);
+            return;
+        }
 
-        if(schema == 'stores'){
-            processStoreRecord(record);
-        }else if (schema == 'products'){
-            processProductRecord(record);
-        }else if(schema == 'inventories') {
-            processInventoryRecord(record);
+        data = JSON.parse(data);
+
+        for( var i = 0; i < data.length; i++) {
+            var record = data[i];
+
+            if (schema == 'stores') {
+                processStoreRecord(record);
+            } else if (schema == 'products') {
+                processProductRecord(record);
+            } else if (schema == 'inventories') {
+                processInventoryRecord(record);
+            }
         }
     });
-
-    //read from file
-    fileStream.pipe(csvConverter);
 }
 
 function convertCSVtoJSON(csvFile, jsonFile){
-    var csvConverter=new converter({constructResult:false});
+    var csvConverter=new converter({constructResult:false, toArrayString:true});
     var readStream=fs.createReadStream(csvFile);
 
     var writeStream=fs.createWriteStream(jsonFile);
@@ -293,9 +295,9 @@ function convertCSVtoJSON(csvFile, jsonFile){
 
 //getDatasetsZip();
 //extractDatasetsZip();
-//convertCSVtoJSON('./data/stores.csv','./data/stores.json');
-//convertCSVtoJSON('./data/products.csv','./data/products.json');
-//convertCSVtoJSON('./data/inventories.csv','./data/inventories.json');
-//loadDataset('stores', './data/stores.csv');
-//loadDataset('products', './data/products.csv');
-loadDataset('inventories', './data/inventories.csv');
+convertCSVtoJSON('./data/stores.csv','./data/stores.json');
+convertCSVtoJSON('./data/products.csv','./data/products.json');
+convertCSVtoJSON('./data/inventories.csv','./data/inventories.json');
+//loadDataset('stores', './data/stores.json');
+//loadDataset('products', './data/products.json');
+//loadDataset('inventories', './data/inventories.json');
