@@ -265,17 +265,20 @@ function loadDataset(schema, fileName){
     var csvConverter=new converter({constructResult:false});
 
     //end_parsed will be emitted once parsing finished
-    csvConverter.on("record_parsed",function(jsonObj, rawObj, rowIndex){
-        var record = jsonObj;
-        record = convertTsFs(record);
+    csvConverter.on("end_parsed",function(jsonObj){
+	console.log(jsonObj);
+        for(var record in jsonObj){
 
-        if(schema == 'stores'){
-            processStoreRecord(record);
-        }else if (schema == 'products'){
-            processProductRecord(record);
-        }else if(schema == 'inventories') {
-            processInventoryRecord(record);
-        }
+		record = convertTsFs(record);
+
+        	if(schema == 'stores'){
+            		processStoreRecord(record);
+        	}else if (schema == 'products'){
+            		processProductRecord(record);
+        	}else if(schema == 'inventories') {
+            		processInventoryRecord(record);
+        	}
+	}
     });
 
     //read from file
@@ -296,6 +299,6 @@ function convertCSVtoJSON(csvFile, jsonFile){
 //convertCSVtoJSON('./data/stores.csv','./data/stores.json');
 //convertCSVtoJSON('./data/products.csv','./data/products.json');
 //convertCSVtoJSON('./data/inventories.csv','./data/inventories.json');
-//loadDataset('stores', './data/stores.csv');
+loadDataset('stores', './data/stores.csv');
 //loadDataset('products', './data/products.csv');
-loadDataset('inventories', './data/inventories.csv');
+//loadDataset('inventories', './data/inventories.csv');
