@@ -7,12 +7,18 @@ var gulp = require('gulp'),
 	cleancss = new LessPluginCleanCSS({ advanced: true }),
 	autoprefix = new LessPluginAutoPrefix({ browsers: ["last 2 versions"] });
 
+function swallowError (error) {
+    console.log(error.toString());
+    this.emit('end');
+}
+
 gulp.task('less', function () {
 	return gulp.src('./less/**/*.less')
 		.pipe(less({
 			plugins: [autoprefix, cleancss],
 			paths: [ path.join(__dirname, 'less', 'includes') ]
 		}))
+		.on('error', swallowError)
 		.pipe(gulp.dest('./app/css'));
 });
 
