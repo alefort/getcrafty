@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="">
 		<title>Get Crafty</title>
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans">
 		<link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
 		<link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
 		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -14,18 +15,18 @@
 		<script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 	</head>
 	<body>
-		<nav class="navbar navbar-inverse navbar-fixed-top" bs-navbar>
+		<nav class="navbar navbar-default navbar-fixed-top" bs-navbar bs-collapse data-start-collapsed="true">
 			<div class="container">
 				<div class="navbar-header" data-match-route="/$">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" bs-collapse-toggle>
 						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#/">Get Crafty</a>
+					<a class="navbar-brand" href="#">Get Crafty</a>
 				</div>
-				<div id="navbar" class="collapse navbar-collapse">
+				<div id="navbar" class="collapse navbar-collapse" bs-collapse-target>
 					<ul class="nav navbar-nav">
 						<li data-match-route="/beer"><a href="#/beer">Beer</a></li>
 						<li data-match-route="/store.*"><a href="#/stores">Stores</a></li>
@@ -34,9 +35,7 @@
 			</div>
 		</nav>
 		<main class="main" id="main">
-			<div class="container">
-				<div ng-view></div>
-			</div>
+			<div ng-view></div>
 		</main>
 		<footer>
 			<div class="container">
