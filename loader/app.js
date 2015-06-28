@@ -200,25 +200,9 @@ function processProductRecord(productRecord){
     });
 }
 function processInventoryRecord(inventoryRecord){
-    inventory.findOne({ product_id: inventoryRecord.product_id, store_id: inventoryRecord.store_id }, function (err, doc) {
+      var  doc = inventory(inventoryRecord);
 
-        if (err){
-            console.log(err);
-            process.exit();
-        }
-
-        if(doc == null){
-            doc = inventory(inventoryRecord);
-        }else{
-            // Update all records
-            var newDoc = inventory(inventoryRecord);
-            newDoc._id = doc._id;
-            doc = newDoc;
-        }
-        doc.save(function(err, doc) {
-            return;
-        });
-
+    doc.save(function(err, doc) {
         return;
     });
 }
