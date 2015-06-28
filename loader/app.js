@@ -216,7 +216,6 @@ function processInventoryRecord(inventoryRecord){
             doc = newDoc;
         }
         doc.save(function(err, doc) {
-            console.log('Inventory Saved: ' + inventoryRecord.product_id);
             return;
         });
 
