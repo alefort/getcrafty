@@ -12,7 +12,7 @@ var requestify = require( 'requestify' ),
     http = require('http-request'),
     fs = require('fs'),
     zip = require('adm-zip'),
-    converter = require("csvtojson").core.Converter;
+    csv = require('ya-csv');
 
 var lcboLoader = {
     config: {
@@ -260,44 +260,25 @@ function convertTsFs(record){
 }
 
 function loadDataset(schema, fileName){
-    var fs = require('fs');
+    // equivalent of csv.createCsvFileReader('data.csv')
+    var reader = csv.createCsvFileReader(fileName, {columnsFromHeader: true});
+    var writer = new csv.CsvWriter(process.stdout);
 
-    fs.readFile(fileName, 'utf8', function (err, data) {
-        if (err) {
-            console.log('Error: ' + err);
-            return;
-        }
+    reader.addListener('data', function(data) {
+        var record = convertTsFs(data);
 
-        data = JSON.parse(data);
-
-        for( var i = 0; i < data.length; i++) {
-            var record = data[i];
-
-            if (schema == 'stores') {
-                processStoreRecord(record);
-            } else if (schema == 'products') {
-                processProductRecord(record);
-            } else if (schema == 'inventories') {
-                processInventoryRecord(record);
-            }
+        if(schema == 'stores'){
+            processStoreRecord(record);
+        }else if (schema == 'products'){
+            processProductRecord(record);
+        }else if(schema == 'inventories') {
+            processInventoryRecord(record);
         }
     });
 }
 
-function convertCSVtoJSON(csvFile, jsonFile){
-    var csvConverter=new converter({constructResult:false, toArrayString:true});
-    var readStream=fs.createReadStream(csvFile);
-
-    var writeStream=fs.createWriteStream(jsonFile);
-
-    readStream.pipe(csvConverter).pipe(writeStream);
-}
-
 //getDatasetsZip();
 //extractDatasetsZip();
-convertCSVtoJSON('./data/stores.csv','./data/stores.json');
-convertCSVtoJSON('./data/products.csv','./data/products.json');
-convertCSVtoJSON('./data/inventories.csv','./data/inventories.json');
-//loadDataset('stores', './data/stores.json');
+//loadDataset('stores', './data/stores.csv');
 //loadDataset('products', './data/products.json');
-//loadDataset('inventories', './data/inventories.json');
+loadDataset('inventories', './data/inventories.csv');
