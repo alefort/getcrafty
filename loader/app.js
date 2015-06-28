@@ -106,28 +106,27 @@ function convertTsFs(record){
     return record;
 }
 
-function emptyDataset(schema){
-    schema.remove({}, function(){
-        return;
-    });
-}
-
 function loadDataset(schema, schemaName, fileName){
-    // equivalent of csv.createCsvFileReader('data.csv')
-    var reader = csv.createCsvFileReader(fileName, {columnsFromHeader: true});
-    var writer = new csv.CsvWriter(process.stdout);
-    emptyDataset(schema);
+    schema.remove({}, function(err){
+        if (err){
 
-    reader.addListener('data', function(data) {
-        var record = convertTsFs(data);
-
-        if(schemaName == 'stores'){
-            processStoreRecord(record);
-        }else if (schemaName == 'products'){
-            processProductRecord(record);
-        }else if(schemaName == 'inventories') {
-            processInventoryRecord(record);
         }
+
+        // equivalent of csv.createCsvFileReader('data.csv')
+        var reader = csv.createCsvFileReader(fileName, {columnsFromHeader: true});
+        var writer = new csv.CsvWriter(process.stdout);
+
+        reader.addListener('data', function(data) {
+            var record = convertTsFs(data);
+
+            if(schemaName == 'stores'){
+                processStoreRecord(record);
+            }else if (schemaName == 'products'){
+                processProductRecord(record);
+            }else if(schemaName == 'inventories') {
+                processInventoryRecord(record);
+            }
+        });
     });
 }
 
