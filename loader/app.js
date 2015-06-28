@@ -47,160 +47,24 @@ var store = mongoose.model('store', lcboLoader.mongo.store.schema);
 var product = mongoose.model('product', lcboLoader.mongo.product.schema);
 var inventory = mongoose.model('inventory', lcboLoader.mongo.inventory.schema);
 
-function getPager(element, callback){
-    requestify.request(lcboLoader.config.url+element, {
-        method: 'GET',
-        params: {
-            'per_page': lcboLoader.config.per_page,
-            'page': lcboLoader.config.first_page
-        },
-        headers: lcboLoader.config.headers
-    }).then(function(response) {
-        var paging = response.getBody().pager;
-        lcboLoader.pager[element] = paging;
-        if(callback !== undefined){
-            callback();
-        }
-    });
-}
-
-function getAllStores(){
-    if(lcboLoader.pager.stores.current_page <= lcboLoader.pager.stores.total_pages) {
-        requestify.request(lcboLoader.config.url+'stores', {
-            method: 'GET',
-            params: {
-                'per_page': lcboLoader.config.per_page,
-                'page': lcboLoader.pager.stores.current_page
-            },
-            headers: lcboLoader.config.headers
-        }).then(function (response) {
-            handleStoreData(response.getBody());
-        });
-    }else{
-
-    }
-}
-
-function getAllProducts(){
-    if(lcboLoader.pager.products.current_page <= lcboLoader.pager.products.total_pages) {
-        requestify.request(lcboLoader.config.url + 'products', {
-            method: 'GET',
-            params: {
-                'per_page': lcboLoader.config.per_page,
-                'page': lcboLoader.pager.products.current_page
-            },
-            headers: lcboLoader.config.headers
-        }).then(function (response) {
-            console.log(response.getBody().pager);
-            handleProductData(response.getBody());
-        });
-    }
-}
-
-function getAllInventories(){
-    if(lcboLoader.pager.inventories.current_page <= lcboLoader.pager.inventories.total_pages) {
-        requestify.request(lcboLoader.config.url + 'inventories', {
-            method: 'GET',
-            params: {
-                'per_page': lcboLoader.config.per_page,
-                'page': lcboLoader.pager.inventories.current_page
-            },
-            headers: lcboLoader.config.headers
-        }).then(function (response) {
-            console.log(response.getBody().pager);
-            handleInventoryData(response.getBody());
-        });
-    }
-}
-
-function handleStoreData(data){
-    var result = data.result;
-    var key;
-
-    for(key in result){
-        processStoreRecord(result[key]);
-    }
-
-    lcboLoader.pager.stores.current_page++;
-    getAllStores();
-
-}
-
-function handleProductData(data){
-    var result = data.result;
-    var key;
-
-    for(key in result){
-        processProductRecord(result[key]);
-    }
-
-    lcboLoader.pager.products.current_page++;
-    getAllProducts();
-
-}
-
-function handleInventoryData(data){
-    var result = data.result;
-    var key;
-
-    for(key in result){
-        processInventoryRecord(result[key]);
-    }
-
-    lcboLoader.pager.inventories.current_page++;
-    getAllInventories();
-
-}
-
 function processStoreRecord(storeRecord){
-    store.findOne({ id: storeRecord.id }, function (err, doc) {
-        if (err){
-            console.log(err);
-            process.exit();
-        }
+    var doc = store(storeRecord);
 
-        if(doc == null){
-            doc = store(storeRecord);
-        }else{
-            // Update all records
-            var newDoc = store(storeRecord);
-            newDoc._id = doc._id;
-            doc = newDoc;
-        }
-        doc.save(function(err, doc) {
-            return;
-        });
-
+    doc.save(function(err, doc) {
         return;
     });
 }
 
 function processProductRecord(productRecord){
-    product.findOne({ id: productRecord.id }, function (err, doc) {
+    var doc = product(productRecord);
 
-        if (err){
-            console.log(err);
-            process.exit();
-        }
-
-        if(doc == null){
-            doc = product(productRecord);
-        }else{
-            // Update all records
-            var newDoc = product(productRecord);
-            newDoc._id = doc._id;
-            doc = newDoc;
-        }
-        doc.save(function(err, doc) {
-            return;
-
-        });
-
+    doc.save(function(err, doc) {
         return;
+
     });
 }
 function processInventoryRecord(inventoryRecord){
-      var  doc = inventory(inventoryRecord);
+    var  doc = inventory(inventoryRecord);
 
     doc.save(function(err, doc) {
         return;
@@ -242,19 +106,26 @@ function convertTsFs(record){
     return record;
 }
 
-function loadDataset(schema, fileName){
+function emptyDataset(schema){
+    schema.remove({}, function(){
+        return;
+    });
+}
+
+function loadDataset(schema, schemaName, fileName){
     // equivalent of csv.createCsvFileReader('data.csv')
     var reader = csv.createCsvFileReader(fileName, {columnsFromHeader: true});
     var writer = new csv.CsvWriter(process.stdout);
+    emptyDataset(schema);
 
     reader.addListener('data', function(data) {
         var record = convertTsFs(data);
 
-        if(schema == 'stores'){
+        if(schemaName == 'stores'){
             processStoreRecord(record);
-        }else if (schema == 'products'){
+        }else if (schemaName == 'products'){
             processProductRecord(record);
-        }else if(schema == 'inventories') {
+        }else if(schemaName == 'inventories') {
             processInventoryRecord(record);
         }
     });
@@ -262,6 +133,6 @@ function loadDataset(schema, fileName){
 
 //getDatasetsZip();
 //extractDatasetsZip();
-//loadDataset('stores', './data/stores.csv');
-//loadDataset('products', './data/products.csv');
-loadDataset('inventories', './data/inventories.csv');
+loadDataset(store, 'stores', './data/stores.csv');
+loadDataset(product, 'products', './data/products.csv');
+loadDataset(inventory, 'inventories', './data/inventories.csv');
