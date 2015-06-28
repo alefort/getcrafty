@@ -279,5 +279,5 @@ function loadDataset(schema, fileName){
 //getDatasetsZip();
 //extractDatasetsZip();
 //loadDataset('stores', './data/stores.csv');
-loadDataset('products', './data/products.csv');
-//loadDataset('inventories', './data/inventories.csv');
+//loadDataset('products', './data/products.csv');
+loadDataset('inventories', './data/inventories.csv');
