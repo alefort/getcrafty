@@ -118,6 +118,8 @@ var lcboLoader = {
     },
     getDatasetsZip: function(){
         var options = {url: 'http://' + lcboLoader.config.url + '/datasets/latest.zip'};
+        lcboLoader.log('Downloading file: ' + options);
+
         http.get(options, 'data/latest.zip', function (error, result) {
             if (error) {
                 lcboLoader.error(error);
@@ -184,16 +186,12 @@ var lcboLoader = {
                     lcboLoader.processInventoryRecord(record);
                 }
             });
-
-            reader.addListener('end', function(data){
-                lcboLoader.log('test');
-            })
         });
     },
     loadAllDatasets: function(){
         lcboLoader.loadDataset(lcboLoader.mongo.store.model, 'stores', './data/stores.csv');
-        //lcboLoader.loadDataset(lcboLoader.mongo.product.model, 'products', './data/products.csv');
-        //lcboLoader.loadDataset(lcboLoader.mongo.inventory.model, 'inventories', './data/inventories.csv');
+        lcboLoader.loadDataset(lcboLoader.mongo.product.model, 'products', './data/products.csv');
+        lcboLoader.loadDataset(lcboLoader.mongo.inventory.model, 'inventories', './data/inventories.csv', true);
     }
 };
 /* Final Bootstrap */
