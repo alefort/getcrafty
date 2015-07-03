@@ -178,6 +178,13 @@ var lcboLoader = {
             reader.addListener('data', function(data) {
                 var record = lcboLoader.convertTsFs(data);
 
+                /*
+                No needto process records that are dead
+                 */
+                if(record.is_dead == false){
+                    return;
+                }
+
                 if(schemaName == 'stores'){
                     lcboLoader.processStoreRecord(record);
                 }else if (schemaName == 'products'){
