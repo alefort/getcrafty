@@ -28,13 +28,25 @@ var eventController = {
         /* Lets setup the events we care about */
         eventEmitter.on('download_data', lcboLoader.getDatasetsZip);
         eventEmitter.on('extract_data', lcboLoader.extractDatasetsZip);
-        eventEmitter.on('load_data', lcboLoader.loadAllDatasets)
+        eventEmitter.on('load_data', lcboLoader.loadAllDatasets);
+        eventEmitter.on('exit', lcboLoader.terminate);
+
     }
 };
 
 var lcboLoader = {
     init: function(){
         lcboLoader.mongo.db = mongoose.connect('mongodb://' + lcboLoader.config.mongo.host + '/' + lcboLoader.config.mongo.db);
+        lcboLoader.log('Successfully connected to Mongo');
+    },
+    log: function(message){
+        console.log(lcboLoader.getDate() + ':  ' + message);
+    },
+    error: function(message){
+        console.error(lcboLoader.getDate() + ':  ' + message);
+    },
+    getDate: function(){
+      return new Date().toString();
     },
     config: {
         url: 'lcboapi.com',
@@ -64,24 +76,43 @@ var lcboLoader = {
         },
         db: ''
     },
+    terminate: function(){
+        lcboLoader.log('Terminating data load process.');
+        process.exit(0);
+    },
     processStoreRecord: function(storeRecord){
         var doc = lcboLoader.mongo.store.model(storeRecord);
 
-        doc.save(function(err, doc) {
+        doc.save(function(error, doc) {
+            if (error) {
+                lcboLoader.error(error);
+                process.exit(1);
+            }
+
             return;
         });
     },
     processProductRecord: function(productRecord){
         var doc = lcboLoader.mongo.product.model(productRecord);
 
-        doc.save(function(err, doc) {
+        doc.save(function(error, doc) {
+            if (error) {
+                lcboLoader.error(error);
+                process.exit(1);
+            }
+
             return;
         });
     },
     processInventoryRecord: function(inventoryRecord){
         var  doc = lcboLoader.mongo.inventory.model(inventoryRecord);
 
-        doc.save(function(err, doc) {
+        doc.save(function(error, doc) {
+            if (error) {
+                lcboLoader.error(error);
+                process.exit(1);
+            }
+
             return;
         });
     },
@@ -89,15 +120,19 @@ var lcboLoader = {
         var options = {url: 'http://' + lcboLoader.config.url + '/datasets/latest.zip'};
         http.get(options, 'data/latest.zip', function (error, result) {
             if (error) {
-                console.error(error);
+                lcboLoader.error(error);
+                process.exit(1);
             }
+
+            eventEmitter.emit('extract_data');
         });
     },
     extractDatasetsZip: function(){
         var unzipper = new zip(lcboLoader.config.data.zip)
 
-        unzipper.on('error', function (err) {
-            console.log('Error extracting zip: ' + err);
+        unzipper.on('error', function (error) {
+            lcboLoader.error('Error extracting zip: ' + error);
+            process.exit(1);
         });
 
         unzipper.on('extract', function (log) {
@@ -130,12 +165,12 @@ var lcboLoader = {
     },
     loadDataset: function(schema, schemaName, fileName){
         /* First let's wipe the collection clean */
-        schema.remove({}, function(err){
-            if (err){
-
+        schema.remove({}, function(error){
+            if (error) {
+                lcboLoader.error(error);
+                process.exit(1);
             }
 
-            // equivalent of csv.createCsvFileReader('data.csv')
             var reader = csv.createCsvFileReader(fileName, {columnsFromHeader: true});
 
             reader.addListener('data', function(data) {
@@ -149,16 +184,20 @@ var lcboLoader = {
                     lcboLoader.processInventoryRecord(record);
                 }
             });
+
+            reader.addListener('end', function(data){
+                lcboLoader.log('test');
+            })
         });
     },
     loadAllDatasets: function(){
         lcboLoader.loadDataset(lcboLoader.mongo.store.model, 'stores', './data/stores.csv');
-        lcboLoader.loadDataset(lcboLoader.mongo.product.model, 'products', './data/products.csv');
-        lcboLoader.loadDataset(lcboLoader.mongo.inventory.model, 'inventories', './data/inventories.csv');
+        //lcboLoader.loadDataset(lcboLoader.mongo.product.model, 'products', './data/products.csv');
+        //lcboLoader.loadDataset(lcboLoader.mongo.inventory.model, 'inventories', './data/inventories.csv');
     }
 };
 /* Final Bootstrap */
 eventController.init();
 lcboLoader.init();
 /* Now, let's kick off the work */
-eventEmitter.emit('extract_data');
+eventEmitter.emit('download_data');
