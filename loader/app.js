@@ -140,7 +140,7 @@ var lcboLoader = {
 
         unzipper.on('extract', function (log) {
             lcboLoader.log('Finished extracting files from archive.');
-            lcboLoader.log(log);
+
             /* Let's emit the next event in the chain */
             eventEmitter.emit('load_dataset', lcboLoader.mongo.store.model, 'stores', './data/stores.csv');
             eventEmitter.emit('load_dataset', lcboLoader.mongo.product.model, 'products', './data/products.csv');
@@ -205,7 +205,7 @@ var lcboLoader = {
                 /*
                 Lets let the handler know we're done this file
                  */
-                eventEmitter.emit('load_data_complete', schemaName);
+                eventEmitter.emit('load_dataset_complete', schemaName);
             });
         });
     },
