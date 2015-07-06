@@ -28,8 +28,9 @@ var eventController = {
         /* Lets setup the events we care about */
         eventEmitter.on('download_data', lcboLoader.getDatasetsZip);
         eventEmitter.on('extract_data', lcboLoader.extractDatasetsZip);
-        eventEmitter.on('load_data', lcboLoader.loadAllDatasets);
+        eventEmitter.on('load_dataset', lcboLoader.loadDataset);
         eventEmitter.on('exit', lcboLoader.terminate);
+        eventEmitter.on('load_dataset_complete', lcboLoader.maybeExit);
 
     }
 };
@@ -118,7 +119,7 @@ var lcboLoader = {
     },
     getDatasetsZip: function(){
         var options = {url: 'http://' + lcboLoader.config.url + '/datasets/latest.zip'};
-        lcboLoader.log('Downloading file: ' + options);
+        lcboLoader.log('Downloading file: ' + options.url);
 
         http.get(options, 'data/latest.zip', function (error, result) {
             if (error) {
@@ -138,8 +139,13 @@ var lcboLoader = {
         });
 
         unzipper.on('extract', function (log) {
+            lcboLoader.log('Finished extracting files from archive.');
+            lcboLoader.log(log);
             /* Let's emit the next event in the chain */
-            eventEmitter.emit('load_data');
+            eventEmitter.emit('load_dataset', lcboLoader.mongo.store.model, 'stores', './data/stores.csv');
+            eventEmitter.emit('load_dataset', lcboLoader.mongo.product.model, 'products', './data/products.csv');
+            eventEmitter.emit('load_dataset', lcboLoader.mongo.inventory.model, 'inventories', './data/inventories.csv');
+
             return;
         });
 
@@ -179,7 +185,7 @@ var lcboLoader = {
                 var record = lcboLoader.convertTsFs(data);
 
                 /*
-                No needto process records that are dead
+                No need to process records that are dead
                  */
                 if(record.is_dead == false){
                     return;
@@ -193,12 +199,25 @@ var lcboLoader = {
                     lcboLoader.processInventoryRecord(record);
                 }
             });
+
+            reader.addListener('end', function(data) {
+                lcboLoader.log('Finished loading data for "' + schemaName + '" from ' + fileName);
+                /*
+                Lets let the handler know we're done this file
+                 */
+                eventEmitter.emit('load_data_complete', schemaName);
+            });
         });
     },
     loadAllDatasets: function(){
         lcboLoader.loadDataset(lcboLoader.mongo.store.model, 'stores', './data/stores.csv');
         lcboLoader.loadDataset(lcboLoader.mongo.product.model, 'products', './data/products.csv');
-        lcboLoader.loadDataset(lcboLoader.mongo.inventory.model, 'inventories', './data/inventories.csv', true);
+        lcboLoader.loadDataset(lcboLoader.mongo.inventory.model, 'inventories', './data/inventories.csv');
+    },
+    maybeExit: function(schemaName){
+        if(schemaName == 'inventories'){
+            eventEmitter.emit('exit');
+        }
     }
 };
 /* Final Bootstrap */
