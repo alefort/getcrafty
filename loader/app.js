@@ -187,7 +187,7 @@ var lcboLoader = {
                 /*
                 No need to process records that are dead
                  */
-                if(record.is_dead == false){
+                if(record.is_dead == true){
                     return;
                 }
 
