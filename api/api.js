@@ -25,7 +25,7 @@ restify.serve(router, InventoryModel);
 restify.serve(router, StoreModel);
 restify.serve(router, ProductModel);
 
-app.use(compress);
+//app.use(compress);
 app.use(router);
 
 
