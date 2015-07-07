@@ -121,7 +121,7 @@ var lcboLoader = {
         var options = {url: 'http://' + lcboLoader.config.url + '/datasets/latest.zip'};
         lcboLoader.log('Downloading file: ' + options.url);
 
-        http.get(options, 'data/latest.zip', function (error, result) {
+        http.get(options, '/node/getcrafty/loader/data/latest.zip', function (error, result) {
             if (error) {
                 lcboLoader.error(error);
                 process.exit(1);
@@ -142,9 +142,9 @@ var lcboLoader = {
             lcboLoader.log('Finished extracting files from archive.');
 
             /* Let's emit the next event in the chain */
-            eventEmitter.emit('load_dataset', lcboLoader.mongo.store.model, 'stores', './data/stores.csv');
-            eventEmitter.emit('load_dataset', lcboLoader.mongo.product.model, 'products', './data/products.csv');
-            eventEmitter.emit('load_dataset', lcboLoader.mongo.inventory.model, 'inventories', './data/inventories.csv');
+            eventEmitter.emit('load_dataset', lcboLoader.mongo.store.model, 'stores', '/node/getcrafty/loader/data/stores.csv');
+            eventEmitter.emit('load_dataset', lcboLoader.mongo.product.model, 'products', '/node/getcrafty/loader/data/products.csv');
+            eventEmitter.emit('load_dataset', lcboLoader.mongo.inventory.model, 'inventories', '/node/getcrafty/loader/data/inventories.csv');
 
             return;
         });
@@ -210,9 +210,9 @@ var lcboLoader = {
         });
     },
     loadAllDatasets: function(){
-        lcboLoader.loadDataset(lcboLoader.mongo.store.model, 'stores', './data/stores.csv');
-        lcboLoader.loadDataset(lcboLoader.mongo.product.model, 'products', './data/products.csv');
-        lcboLoader.loadDataset(lcboLoader.mongo.inventory.model, 'inventories', './data/inventories.csv');
+        lcboLoader.loadDataset(lcboLoader.mongo.store.model, 'stores', '/node/getcrafty/loader/data/stores.csv');
+        lcboLoader.loadDataset(lcboLoader.mongo.product.model, 'products', '/node/getcrafty/loader/data/products.csv');
+        lcboLoader.loadDataset(lcboLoader.mongo.inventory.model, 'inventories', '/node/getcrafty/loader/data/inventories.csv');
     },
     maybeExit: function(schemaName){
         if(schemaName == 'inventories'){
