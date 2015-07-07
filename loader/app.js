@@ -57,8 +57,8 @@ var lcboLoader = {
             'Authorization': 'Token MDphNWJlOWVlNi1kZmU2LTExZTQtOTI0Mi1iYmJjODAzYmFiMWY6akFwYTA1MG5RbHFXb3RNSG03NUE2ZUNjVnZFT3Rick9CNDNH'
         },
         data: {
-            zip: './data/latest.zip',
-            folder: './data'
+            zip: '/node/getcrafty/loader/data/latest.zip',
+            folder: '/node/getcrafty/loader/data'
         },
         mongo: {
             host: '127.0.0.1:27017',
