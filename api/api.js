@@ -6,7 +6,8 @@ var express = require('express'),
     http = require('http'),
     models = require('../models/models.js'),
     restify = require('express-restify-mongoose'),
-    methodOverride = require('method-override');;
+    methodOverride = require('method-override'),
+    compress = require('compression');
 
 mongoose.connect('mongodb://localhost/lcbo');
 
@@ -25,6 +26,7 @@ restify.serve(router, StoreModel);
 restify.serve(router, ProductModel);
 
 app.use(router);
+app.use(compress);
 
 app.listen(3000, function() {
     console.log("Express server listening on port 3000");

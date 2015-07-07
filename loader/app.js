@@ -21,7 +21,7 @@ var mongoose = require('mongoose'),
     zip = require('decompress-zip'),
     csv = require('ya-csv'),
     events = require('events'),
-    eventEmitter = new events.EventEmitter();;
+    eventEmitter = new events.EventEmitter();
 
 var eventController = {
     init: function(){
