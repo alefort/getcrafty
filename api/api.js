@@ -16,6 +16,7 @@ var StoreModel = mongoose.model('store', models.schema.store);
 var ProductModel = mongoose.model('product', models.schema.product);
 
 var app = express();
+//app.use(compress);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('X-HTTP-Method-Override'));
@@ -25,9 +26,7 @@ restify.serve(router, InventoryModel);
 restify.serve(router, StoreModel);
 restify.serve(router, ProductModel);
 
-//app.use(compress);
 app.use(router);
-
 
 app.listen(3000, function() {
     console.log("Express server listening on port 3000");
