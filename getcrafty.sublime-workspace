@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"$location",
+				"$locationProvider	AngularJS"
+			],
+			[
 				"do",
 				"dodecahedron-01-full"
 			],
@@ -404,10 +408,18 @@
 	"buffers":
 	[
 		{
-			"file": "Vagrantfile",
+			"file": "app/app.js",
 			"settings":
 			{
-				"buffer_size": 5376,
+				"buffer_size": 514,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/store/store.js",
+			"settings":
+			{
+				"buffer_size": 937,
 				"line_ending": "Windows"
 			}
 		}
@@ -477,10 +489,81 @@
 	"expanded_folders":
 	[
 		"/C/xampp/htdocs/getcrafty",
-		"/C/xampp/htdocs/getcrafty/app"
+		"/C/xampp/htdocs/getcrafty/app",
+		"/C/xampp/htdocs/getcrafty/app/beer",
+		"/C/xampp/htdocs/getcrafty/app/beer-search",
+		"/C/xampp/htdocs/getcrafty/app/css",
+		"/C/xampp/htdocs/getcrafty/app/home",
+		"/C/xampp/htdocs/getcrafty/app/store",
+		"/C/xampp/htdocs/getcrafty/app/stores",
+		"/C/xampp/htdocs/getcrafty/less"
 	],
 	"file_history":
 	[
+		"/C/xampp/htdocs/getcrafty/app/index.html",
+		"/C/xampp/htdocs/getcrafty/less/app.less",
+		"/C/xampp/htdocs/getcrafty/gulpfile.js",
+		"/C/xampp/htdocs/getcrafty/app/home/home.html",
+		"/C/xampp/htdocs/getcrafty/app/stores/stores.html",
+		"/C/xampp/htdocs/getcrafty/app/stores/stores.js",
+		"/C/xampp/htdocs/getcrafty/app/store/store.html",
+		"/C/xampp/htdocs/dev/tbk-base/src/wp-content/themes/tbk-base/functions.php",
+		"/C/xampp/htdocs/getcrafty/app/css/app.css",
+		"/C/xampp/htdocs/getcrafty/app/store-search/store-search.html",
+		"/C/xampp/htdocs/getcrafty/app/store-search/store-search_test.js",
+		"/C/xampp/htdocs/getcrafty/app/store-search/store-search.js",
+		"/C/xampp/htdocs/getcrafty/bower.json",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/jquery/src/sizzle/dist/sizzle.min.map",
+		"/C/xampp/htdocs/getcrafty/app/app.js",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/angular-loader/angular-loader.js",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/angular-mocks/angular-mocks.js",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/angular-route/angular-route.js",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/angular-route/angular-route.min.js",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/angular-route/angular-route.min.js.map",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/angular/angular.js",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/angular/angular.min.js",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/angular/angular.min.js.map",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/bootstrap/less/variables.less",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/html5-boilerplate/404.html",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/html5-boilerplate/doc/extend.md",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/html5-boilerplate/doc/usage.md",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/html5-boilerplate/js/vendor/jquery-1.10.2.min.js",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/jquery/dist/jquery.js",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/jquery/dist/jquery.min.js",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/jquery/dist/jquery.min.map",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/jquery/src/ajax.js",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/jquery/src/core/init.js",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/jquery/src/sizzle/dist/sizzle.js",
+		"/C/xampp/htdocs/getcrafty/app/bower_components/jquery/src/sizzle/dist/sizzle.min.js",
+		"/C/xampp/htdocs/getcrafty/app/location/location_test.js",
+		"/C/xampp/htdocs/getcrafty/app/store/store.js",
+		"/C/xampp/htdocs/getcrafty/app/store/store_test.js",
+		"/C/xampp/htdocs/getcrafty/app/beer-search/beer-search.html",
+		"/C/xampp/htdocs/getcrafty/app/location/location.js",
+		"/C/xampp/htdocs/getcrafty/app/location-search/location-search.html",
+		"/C/xampp/htdocs/getcrafty/app/location-search/location-search.js",
+		"/C/xampp/htdocs/getcrafty/app/beer/beer.html",
+		"/C/xampp/htdocs/getcrafty/app/beer/beer.js",
+		"/C/xampp/htdocs/getcrafty/app/beer-search/beer-search.js",
+		"/C/xampp/htdocs/getcrafty/app/location/location.html",
+		"/C/xampp/htdocs/getcrafty/app/location-search/location-search_test.js",
+		"/C/xampp/htdocs/getcrafty/app/home/home.js",
+		"/C/xampp/htdocs/getcrafty/app/home/home_test.js",
+		"/C/xampp/htdocs/getcrafty/app/beer-search/beer-search_test.js",
+		"/C/xampp/htdocs/getcrafty/app/index-async.html",
+		"/C/xampp/htdocs/getcrafty/app/beer/beer_test.js",
+		"/C/xampp/htdocs/getcrafty/app/components/version/version_test.js",
+		"/C/xampp/htdocs/getcrafty/package.json",
+		"/C/xampp/htdocs/getcrafty/app/view1/view1.js",
+		"/C/xampp/htdocs/getcrafty/app/view1/view1_test.js",
+		"/C/xampp/htdocs/getcrafty/app/view2/view2.js",
+		"/C/xampp/htdocs/getcrafty/app/view2/view2_test.js",
+		"/C/xampp/htdocs/getcrafty/app/components/version/interpolate-filter.js",
+		"/C/xampp/htdocs/getcrafty/app/components/version/interpolate-filter_test.js",
+		"/C/xampp/htdocs/getcrafty/app/components/version/version-directive.js",
+		"/C/xampp/htdocs/getcrafty/app/components/version/version-directive_test.js",
+		"/C/xampp/htdocs/getcrafty/app/components/version/version.js",
 		"/C/web/dev/beverleyhillshome.com/index.php",
 		"/C/xampp/htdocs/dev/sundownersdaycare.com/src/wp-content/themes/sundowners/views/outdated-browser.php",
 		"/C/xampp/htdocs/dev/oxfordccc.ca/src/searchreplacedb2.php",
@@ -544,81 +627,26 @@
 		"/C/xampp/htdocs/dev/sundownersdaycare.com/src/wp-content/themes/sundowners/less/common/think.less",
 		"/C/xampp/htdocs/dev/sundownersdaycare.com/src/wp-content/themes/sundowners/less/bootstrap/variables.less",
 		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/shortcodes/views/search-manager-listing.php",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/css-theme/page-job-listing.css",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/less/page-job-listing.less",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/views/single-gotowebinar.php",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/shortcodes/shortcodes.php",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/template-full-width.php",
-		"/C/xampp/htdocs/dev/tbkcreative.com/.gitignore",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/less/style.less",
-		"/C/xampp/htdocs/dev/tbkcreative.com/Gruntfile.js",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/footer.php",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/index.php",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/single.php",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/single-eguide.php",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/header-blog.php",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/page-about.php",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/less/home.less",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/less/header.less",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/functions.php",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/style.css",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/less/footer.less",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/less/our-work.less",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/less/projects.less",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/shortcodes/views/tbku_filter.php",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/sidebar.php",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/views/nav-header.php",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/js/tbk_theme.js",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/less/blog.less",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/less/responsive.less",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/css/blog.css",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/css/responsive.css",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/css/style.css",
-		"/C/Users/Scott/Downloads/qatbkc5_tbkcreativev2.sql",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/less/bootstrap.less",
-		"/C/xampp/htdocs/dev/tbkcreative.com/package.json",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/js/bootstrap/affix.js",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/css/font-awesome.css",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/css-lib/bootstrap-responsive.css",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/css-lib/bootstrap.css",
-		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/css-theme/responsive.css",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/css/js_composer_front.css",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/views/footers/footer-public.php",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/less/page-products.less",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/js/scripts.js",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/views/shortcodes/products/product-specs.php",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/less/product-spec-sheet.less",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/views/product-spec-sheet-pdf.php",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/views/shortcodes/latest-blog-post.php",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/less/page-tax-types.less",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/views/shortcodes/warranty-information.php",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/views/shortcodes/products/brand-image.php",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/views/product-landing-type.php",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/views/shortcodes/find-a-dealer.php",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/header.php",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/functions.php",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/less/common/fonts.less",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/css/master-slider-home.css",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/single-product-pdf.php",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/controllers/ajax.php",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/less/product-comparison.less",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/Gruntfile.js",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/controllers/tooltips.php",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/js/ga-events.js",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/less/master-slider-home.less",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/less/page-warranty-registration.less",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/package.json",
-		"/C/xampp/htdocs/dev/silhouetteappliances.com/src/wp-content/themes/silhouette/lib/dompdf-0.6.1/include/stylesheet.cls.php"
+		"/C/xampp/htdocs/dev/tbkcreative.com/src/wp-content/themes/tbk/css-theme/page-job-listing.css"
 	],
 	"find":
 	{
-		"height": 22.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
+			"C:\\xampp\\htdocs\\getcrafty\\app",
+			"C:\\xampp\\htdocs\\getcrafty\\app\\home",
+			"C:\\xampp\\htdocs\\getcrafty\\app",
+			"C:\\xampp\\htdocs\\getcrafty\\app\\store",
+			"C:\\xampp\\htdocs\\getcrafty\\app\\store-search",
+			"C:\\xampp\\htdocs\\getcrafty\\app\\location",
+			"C:\\xampp\\htdocs\\getcrafty\\app\\location-search",
+			"C:\\xampp\\htdocs\\getcrafty\\app",
+			"C:\\xampp\\htdocs\\getcrafty",
 			"C:\\xampp\\htdocs\\dev\\sundownersdaycare.com\\src\\wp-content\\plugins\\js_composer",
 			"C:\\xampp\\htdocs\\dev\\sundownersdaycare.com\\src\\wp-content\\themes\\sundowners\\less\\bootstrap\\mixins",
 			"C:\\xampp\\htdocs\\dev\\sundownersdaycare.com\\src\\wp-content\\themes\\sundowners\\less",
@@ -732,6 +760,21 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"store-search",
+			"storeSearch",
+			"location_data",
+			"location",
+			"beer",
+			"beer..",
+			"beer.beer",
+			"{{",
+			"<br>\n",
+			",\n\"",
+			"myData",
+			"view2",
+			"view1",
+			"myApp",
+			"jquery",
 			"hover",
 			"qa.tbkcreative.com",
 			"responsive_bg",
@@ -844,22 +887,7 @@
 			".span11",
 			".span10",
 			".span9",
-			".span8",
-			".span7",
-			".span6",
-			".span5",
-			".span4",
-			".span3",
-			".span2",
-			".span1",
-			".row-fluid",
-			".filter li a",
-			".blog #header .main-nav ",
-			".blog ",
-			" + 'js/bootstrap/",
-			"qa.tbkcreative.com",
-			"logo-suds",
-			"brand-image"
+			".span8"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -867,6 +895,19 @@
 		"regex": false,
 		"replace_history":
 		[
+			"stores",
+			"locationData",
+			"store",
+			"location",
+			"beer.",
+			"{{beer.",
+			"{{beer.\n",
+			"}}<br><br>\n{{\n",
+			"}}<br>\n",
+			"beer_data",
+			"home",
+			"beer",
+			"getCrafty",
 			"localhost",
 			"style=\"display:block\" alt=",
 			"http://www.tbkcreative.com/sawdac",
@@ -981,13 +1022,7 @@
 			"staggered-section",
 			"",
 			"<div class=\"image-wrapper\">\n				<img src=\"<?php echo site_url();?>/wp-content/themes/mdrn/images/low-maintenance.jpg\">\n			</div>",
-			"staggered-section",
-			"'",
-			"",
-			"event-accordion",
-			"",
-			"\\\"",
-			"\""
+			"staggered-section"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -998,29 +1033,59 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Vagrantfile",
-					"semi_transient": true,
+					"file": "app/app.js",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5376,
+						"buffer_size": 514,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2177,
-								2177
+								500,
+								500
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/store/store.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 937,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
@@ -1036,7 +1101,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 22.0
+		"height": 23.0
 	},
 	"input":
 	{
@@ -1081,7 +1146,7 @@
 	"project": "getcrafty.sublime-project",
 	"replace":
 	{
-		"height": 40.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":

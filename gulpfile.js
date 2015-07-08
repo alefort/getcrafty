@@ -2,6 +2,7 @@ var gulp = require('gulp'),
 	less = require('gulp-less'),
 	watch = require('gulp-watch'),
 	path = require('path'),
+	browserSync = require('browser-sync').create(),
 	LessPluginCleanCSS = require('less-plugin-clean-css'),
 	LessPluginAutoPrefix = require('less-plugin-autoprefix'),
 	cleancss = new LessPluginCleanCSS({ advanced: true }),
@@ -19,11 +20,25 @@ gulp.task('less', function () {
 			paths: [ path.join(__dirname, 'less', 'includes') ]
 		}))
 		.on('error', swallowError)
-		.pipe(gulp.dest('./app/css'));
+		.pipe(gulp.dest('./app/css'))
+		.pipe(browserSync.stream());
 });
 
 gulp.task('watch', function() {
 	gulp.watch('./**/*.less', ['less']);
 });
 
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        proxy: "localhost:8000/app/"
+    });
+});
+
 gulp.task('default', ['watch']);
+
+gulp.task('dev', ['browser-sync'], function() {
+	gulp.watch('./**/*.less', ['less']);
+	gulp.watch('./**/*.css');
+	gulp.watch('./**/*.js').on('change', browserSync.reload);
+	gulp.watch('./**/*.html').on('change', browserSync.reload);
+});
