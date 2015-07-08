@@ -16,7 +16,7 @@ var StoreModel = mongoose.model('store', models.schema.store);
 var ProductModel = mongoose.model('product', models.schema.product);
 
 var app = express();
-//app.use(compress);
+app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('X-HTTP-Method-Override'));
