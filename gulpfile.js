@@ -14,7 +14,7 @@ function swallowError (error) {
 }
 
 gulp.task('less', function () {
-	return gulp.src('./less/**/*.less')
+	return gulp.src('./less/*.less')
 		.pipe(less({
 			plugins: [autoprefix, cleancss],
 			paths: [ path.join(__dirname, 'less', 'includes') ]
@@ -37,8 +37,8 @@ gulp.task('browser-sync', function() {
 gulp.task('default', ['watch']);
 
 gulp.task('dev', ['browser-sync'], function() {
-	gulp.watch('./**/*.less', ['less']);
-	gulp.watch('./**/*.css');
-	gulp.watch('./**/*.js').on('change', browserSync.reload);
-	gulp.watch('./**/*.html').on('change', browserSync.reload);
+	gulp.watch('./less/*.less', ['less']);
+	gulp.watch('./app/css/*.css');
+	gulp.watch('./app/**/*.js').on('change', browserSync.reload);
+	gulp.watch('./app/**/*.html').on('change', browserSync.reload);
 });

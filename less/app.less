@@ -1,41 +1,66 @@
-@primary: #2c3e50;
+@ash-dark: #313234;
+@brown: #883222;
+@beige: #ab9e90;
+@white: #fff;
+
+@primary: @ash-dark;
+
+@grey-dark: #313234;
+@umber: #883222;
+@beige: #ab9e90;
+
+@blue-light: #656775;
+@blue-dark: #2E303E;
+
+@green-light: #687C70;
+@green-dark: #2E4135;
 
 body {
 	font-family: 'Open Sans', sans-serif;
-	padding-top: 47px;
+	padding-top: 70px;
 }
 
 .navbar {
 	background: @primary;
 
 	.navbar-brand {
-		color: #fff;
+		color: @white;
 		text-transform: uppercase;
 		font-weight: bold;
 		text-shadow: none;
+		height: auto;
+
+		img {
+			height: 40px;
+			width: auto;
+		}
 
 		&:hover,
 		&:focus {
-			color: #fff;
+			color: @white;
 		}
 	}
 
 	.navbar-toggle {
-		border-color: #111;
+		border-color: @white;
 
 		.icon-bar {
-			background-color: #fff;
+			background-color: @white;
 		}
 	}
 
 	.navbar-nav {
 		& > li {
 			& > a {
-				color: #fff;
+				color: @white;
+				padding: 25px;
+				font-family: 'Roboto Slab';
+				text-transform: uppercase;
+				font-size: 18px;
 
 				&:hover,
 				&:focus {
-					color: #fff;
+					color: @white;
 					background-color: darken(@primary, 5%);
 				}
 			}
@@ -45,8 +70,6 @@ body {
 
 .jumbotron {
 	text-align: center;
-	background: #18bc9c;
-	color: #fff;
 
 	h1 {
 		font-weight: bold;
@@ -56,4 +79,18 @@ body {
 	.img-responsive {
 		display: inline-block;
 	}
+
+	img {
+		height: 300px;
+		width: auto;
+	}
+}
+
+h1,
+h2,
+h3,
+h4
+h5,
+h6 {
+	font-family: 'Roboto Slab';
 }
