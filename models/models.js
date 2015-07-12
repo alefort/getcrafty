@@ -26,8 +26,8 @@ module.exports = {
             telephone: String,
             fax: String,
             location: {
-                x: Number,
-                y: Number
+                latitude: Number,
+                longitude: Number
             },
             latitude: Number,
             longitude: Number,
