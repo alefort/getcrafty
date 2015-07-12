@@ -81,8 +81,8 @@ var lcboLoader = {
     },
     processStoreRecord: function(storeRecord){
         var doc = lcboLoader.mongo.store.model(storeRecord);
-        doc.location.x = doc.latitude;
-        doc.location.y = doc.longitude;
+        doc.location.lat = doc.latitude;
+        doc.location.long = doc.longitude;
 
         doc.save(function(error, doc) {
             if (error) {
