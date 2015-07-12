@@ -25,6 +25,10 @@ module.exports = {
             postal_code: String,
             telephone: String,
             fax: String,
+            location: {
+                x: Number,
+                y: Number
+            },
             latitude: Number,
             longitude: Number,
             products_count: Number,

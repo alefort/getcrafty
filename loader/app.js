@@ -21,7 +21,9 @@ var mongoose = require('mongoose'),
     zip = require('decompress-zip'),
     csv = require('ya-csv'),
     events = require('events'),
-    eventEmitter = new events.EventEmitter();
+    eventEmitter = new events.EventEmitter(),
+    ini = require('ini'),
+    config = require('get-config').sync(__dirname + '/config');
 
 var eventController = {
     init: function(){
@@ -56,10 +58,6 @@ var lcboLoader = {
         headers: {
             'Authorization': 'Token MDphNWJlOWVlNi1kZmU2LTExZTQtOTI0Mi1iYmJjODAzYmFiMWY6akFwYTA1MG5RbHFXb3RNSG03NUE2ZUNjVnZFT3Rick9CNDNH'
         },
-        data: {
-            zip: '/node/getcrafty/loader/data/latest.zip',
-            folder: '/node/getcrafty/loader/data'
-        },
         mongo: {
             host: '127.0.0.1:27017',
             db: 'lcbo'
@@ -83,6 +81,8 @@ var lcboLoader = {
     },
     processStoreRecord: function(storeRecord){
         var doc = lcboLoader.mongo.store.model(storeRecord);
+        doc.location.x = doc.latitude;
+        doc.location.y = doc.longitude;
 
         doc.save(function(error, doc) {
             if (error) {
@@ -121,7 +121,7 @@ var lcboLoader = {
         var options = {url: 'http://' + lcboLoader.config.url + '/datasets/latest.zip'};
         lcboLoader.log('Downloading file: ' + options.url);
 
-        http.get(options, '/node/getcrafty/loader/data/latest.zip', function (error, result) {
+        http.get(options, config.loader.datapath + '/latest.zip', function (error, result) {
             if (error) {
                 lcboLoader.error(error);
                 process.exit(1);
@@ -131,7 +131,7 @@ var lcboLoader = {
         });
     },
     extractDatasetsZip: function(){
-        var unzipper = new zip(lcboLoader.config.data.zip)
+        var unzipper = new zip(config.loader.datapath + '/latest.zip')
 
         unzipper.on('error', function (error) {
             lcboLoader.error('Error extracting zip: ' + error);
@@ -142,9 +142,9 @@ var lcboLoader = {
             lcboLoader.log('Finished extracting files from archive.');
 
             /* Let's emit the next event in the chain */
-            eventEmitter.emit('load_dataset', lcboLoader.mongo.store.model, 'stores', '/node/getcrafty/loader/data/stores.csv');
-            eventEmitter.emit('load_dataset', lcboLoader.mongo.product.model, 'products', '/node/getcrafty/loader/data/products.csv');
-            eventEmitter.emit('load_dataset', lcboLoader.mongo.inventory.model, 'inventories', '/node/getcrafty/loader/data/inventories.csv');
+            eventEmitter.emit('load_dataset', lcboLoader.mongo.store.model, 'stores', config.loader.datapath + '/stores.csv');
+            eventEmitter.emit('load_dataset', lcboLoader.mongo.product.model, 'products', config.loader.datapath + '/products.csv');
+            eventEmitter.emit('load_dataset', lcboLoader.mongo.inventory.model, 'inventories', config.loader.datapath + '/inventories.csv');
 
             return;
         });
@@ -154,7 +154,7 @@ var lcboLoader = {
         });
 
         unzipper.extract({
-            path: lcboLoader.config.data.folder,
+            path: config.loader.datapath,
             filter: function (file) {
                 return file.type !== "SymbolicLink";
             }
@@ -210,9 +210,9 @@ var lcboLoader = {
         });
     },
     loadAllDatasets: function(){
-        lcboLoader.loadDataset(lcboLoader.mongo.store.model, 'stores', '/node/getcrafty/loader/data/stores.csv');
-        lcboLoader.loadDataset(lcboLoader.mongo.product.model, 'products', '/node/getcrafty/loader/data/products.csv');
-        lcboLoader.loadDataset(lcboLoader.mongo.inventory.model, 'inventories', '/node/getcrafty/loader/data/inventories.csv');
+        lcboLoader.loadDataset(lcboLoader.mongo.store.model, 'stores', config.loader.datapath + '/stores.csv');
+        lcboLoader.loadDataset(lcboLoader.mongo.product.model, 'products', config.loader.datapath + '/products.csv');
+        lcboLoader.loadDataset(lcboLoader.mongo.inventory.model, 'inventories', config.loader.datapath + '/inventories.csv');
     },
     maybeExit: function(schemaName){
         if(schemaName == 'inventories'){
