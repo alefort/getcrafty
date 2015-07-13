@@ -15,6 +15,21 @@ var InventoryModel = mongoose.model('inventory', models.schema.inventory);
 var StoreModel = mongoose.model('store', models.schema.store);
 var ProductModel = mongoose.model('product', models.schema.product);
 
+var apiQueries = {
+    storesNear: function(long, lat){
+        return {location: {
+            $near: {
+                $geometry: {
+                    type: "Point",
+                    coordinates: [long, lat]
+                },
+                $maxDistance: 50000,
+                $minDistance: 0
+            }
+        }
+    };
+}};
+
 var app = express();
 app.use(compress());
 app.use(bodyParser.json());
@@ -27,6 +42,15 @@ restify.serve(router, StoreModel);
 restify.serve(router, ProductModel);
 
 app.use(router);
+
+app.get('/data/fn/storesNear', function(req, res) {
+
+   StoreModel.find(apiQueries.storesNear(req.query.long, req.query.lat), function(err,docs){
+       res.send(docs);
+   });
+
+
+});
 
 app.listen(3000, function() {
     console.log("Express server listening on port 3000");
