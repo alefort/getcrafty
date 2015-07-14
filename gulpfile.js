@@ -20,7 +20,7 @@ gulp.task('less', function () {
 			paths: [ path.join(__dirname, 'less', 'includes') ]
 		}))
 		.on('error', swallowError)
-		.pipe(gulp.dest('./app/css'))
+		.pipe(gulp.dest('./app/public/css'))
 		.pipe(browserSync.stream());
 });
 
@@ -38,7 +38,7 @@ gulp.task('default', ['watch']);
 
 gulp.task('dev', ['browser-sync'], function() {
 	gulp.watch('./less/*.less', ['less']);
-	gulp.watch('./app/css/*.css');
-	gulp.watch('./app/**/*.js').on('change', browserSync.reload);
-	gulp.watch('./app/**/*.html').on('change', browserSync.reload);
+	gulp.watch('./app/public/css/*.css');
+	gulp.watch('./app/public/**/*.js').on('change', browserSync.reload);
+	gulp.watch('./app/public/**/*.html').on('change', browserSync.reload);
 });
