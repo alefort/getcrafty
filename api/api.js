@@ -33,32 +33,15 @@ var apiQueries = {
     getInventoryByStore: function (store_id) {
         return {store_id: store_id};
     },
-    getProductsFromIDs: function (ids) {
+    getProductsFromIDs: function (ids, primaryCategory, producerExclusions) {
         return {
             id: {
                 $in: ids
             },
             producer_name: {
-                $nin: [
-                    "Molson's Brewery of Canada Limited",
-                    "Sleeman Brewing & Malting Co",
-                    "Labatt Breweries Ontario",
-                    "Miller Brewing Company",
-                    "Moosehead Breweries Limited",
-                    "Heineken's Brouwerijen Nederland BV",
-                    "Guinness Brewing Worldwide",
-                    "Cerveceria Modelo Sa de Cv",
-                    "Diageo Canada Inc",
-                    "Coors Brewers Limited",
-                    "Cerveceria Cuauhtemoc Moctezuma",
-                    "James Ready Brewing Company",
-                    "Lakeport Brewing Corporation",
-                    "The Brick Brewing Co.",
-                    "Miller Brewing Trading Co Ltd",
-                    
-                ]
+                $nin: producerExclusions
             },
-            primary_category: 'Beer'
+            primary_category: primaryCategory
         };
     }
 };
@@ -114,7 +97,23 @@ app.get('/data/fn/productsAtStore', function(req, res) {
             arrayInventories[docs[index].product_id] = docs[index];
         }
 
-        ProductModel.find(apiQueries.getProductsFromIDs(arrayIds), function(err,products){
+        ProductModel.find(apiQueries.getProductsFromIDs(arrayIds, 'Beer',[
+            "Molson's Brewery of Canada Limited",
+            "Sleeman Brewing & Malting Co",
+            "Labatt Breweries Ontario",
+            "Miller Brewing Company",
+            "Moosehead Breweries Limited",
+            "Heineken's Brouwerijen Nederland BV",
+            "Guinness Brewing Worldwide",
+            "Cerveceria Modelo Sa de Cv",
+            "Diageo Canada Inc",
+            "Coors Brewers Limited",
+            "Cerveceria Cuauhtemoc Moctezuma",
+            "James Ready Brewing Company",
+            "Lakeport Brewing Corporation",
+            "The Brick Brewing Co.",
+            "Miller Brewing Trading Co Ltd"
+        ]), function(err,products){
             for(var index in products){
                 var product = products[index];
                 product.inventory.quantity = arrayInventories[product.id].quantity;
