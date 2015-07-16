@@ -48,7 +48,14 @@ var apiQueries = {
                     "Heineken's Brouwerijen Nederland BV",
                     "Guinness Brewing Worldwide",
                     "Cerveceria Modelo Sa de Cv",
-                    "Diageo Canada Inc"
+                    "Diageo Canada Inc",
+                    "Coors Brewers Limited",
+                    "Cerveceria Cuauhtemoc Moctezuma",
+                    "James Ready Brewing Company",
+                    "Lakeport Brewing Corporation",
+                    "The Brick Brewing Co.",
+                    "Miller Brewing Trading Co Ltd",
+                    
                 ]
             },
             primary_category: 'Beer'
