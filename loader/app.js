@@ -110,23 +110,18 @@ var lcboLoader = {
         });
     },
     processInventoryRecord: function(inventoryRecord){
-        var productModel = lcboLoader.mongo.product.model;
-        var storeModel = lcboLoader.mongo.store.model;
+        var  doc = lcboLoader.mongo.inventory.model(inventoryRecord);
 
-            productModel.findOne({id: inventoryRecord.product_id}, function(error, product){
-                var  doc = lcboLoader.mongo.inventory.model(inventoryRecord);
+        doc.product = product;
 
-                doc.product = product;
+        doc.save(function(error, doc) {
+            if (error) {
+                lcboLoader.error(error);
+                process.exit(1);
+            }
 
-                doc.save(function(error, doc) {
-                    if (error) {
-                        lcboLoader.error(error);
-                        process.exit(1);
-                    }
-
-                    return;
-                });
-            });
+            return;
+        });
     },
     getDatasetsZip: function(){
         var options = {url: 'http://' + lcboLoader.config.url + '/datasets/latest.zip'};
