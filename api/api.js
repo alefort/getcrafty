@@ -84,16 +84,20 @@ app.get('/data/fn/productIdByStore', function(req, res) {
 
 app.get('/data/fn/productsAtStore', function(req, res) {
 
-    InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), {
-        '_id': 0,
-        'product_id': 1
-    }, function(err,docs){
+    InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), function(err,docs){
         var arrayIds = [];
-        for(var doc in docs){
-            arrayIds.push(docs[doc].product_id);
+        var arrayInventories = [];
+
+        for(var index in docs){
+            arrayIds.push(docs[index].product_id);
+            arrayInventories[docs[index].product_id] = docs[index];
         }
 
         ProductModel.find(apiQueries.getProductsFromIDs(arrayIds), function(err,products){
+            for(var index in products){
+                var product = products[index];
+                product.inventory.quantity = arrayInventories[product.id].quantity;
+            }
             res.send(products);
         });
     });
