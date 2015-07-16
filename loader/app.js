@@ -232,5 +232,5 @@ var lcboLoader = {
 eventController.init();
 lcboLoader.init();
 /* Now, let's kick off the work */
-//eventEmitter.emit('download_data');
-lcboLoader.loadAllDatasets();
+eventEmitter.emit('download_data');
+//lcboLoader.loadAllDatasets();
