@@ -46,7 +46,9 @@ var apiQueries = {
                     "Miller Brewing Company",
                     "Moosehead Breweries Limited",
                     "Heineken's Brouwerijen Nederland BV",
-                    "Guinness Brewing Worldwide"
+                    "Guinness Brewing Worldwide",
+                    "Cerveceria Modelo Sa de Cv",
+                    "Diageo Canada Inc"
                 ]
             },
             primary_category: 'Beer'
