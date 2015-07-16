@@ -37,7 +37,17 @@ var apiQueries = {
         return {
             id: {
                 $in: ids
-            }
+            },
+            producer_name: {
+                $nin: [
+                    "Molson's Brewery of Canada Limited",
+                    "Sleeman Brewing & Malting Co",
+                    "Labatt Breweries Ontario",
+                    "Miller Brewing Company",
+                    "Moosehead Breweries Limited"
+                ]
+            },
+            primary_category: 'Beer'
         };
     }
 };
