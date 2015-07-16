@@ -107,16 +107,23 @@ var lcboLoader = {
         });
     },
     processInventoryRecord: function(inventoryRecord){
-        var  doc = lcboLoader.mongo.inventory.model(inventoryRecord);
+        var productModel = lcboLoader.mongo.product.model;
+        var storeModel = lcboLoader.mongo.store.model;
 
-        doc.save(function(error, doc) {
-            if (error) {
-                lcboLoader.error(error);
-                process.exit(1);
-            }
+            productModel.findOne({id: inventoryRecord.product_id}, function(error, product){
+                var  doc = lcboLoader.mongo.inventory.model(inventoryRecord);
 
-            return;
-        });
+                doc.product = product;
+
+                doc.save(function(error, doc) {
+                    if (error) {
+                        lcboLoader.error(error);
+                        process.exit(1);
+                    }
+
+                    return;
+                });
+            });
     },
     getDatasetsZip: function(){
         var options = {url: 'http://' + lcboLoader.config.url + '/datasets/latest.zip'};
@@ -211,8 +218,8 @@ var lcboLoader = {
         });
     },
     loadAllDatasets: function(){
-        lcboLoader.loadDataset(lcboLoader.mongo.store.model, 'stores', config.loader.datapath + '/stores.csv');
-        lcboLoader.loadDataset(lcboLoader.mongo.product.model, 'products', config.loader.datapath + '/products.csv');
+        //lcboLoader.loadDataset(lcboLoader.mongo.store.model, 'stores', config.loader.datapath + '/stores.csv');
+        //lcboLoader.loadDataset(lcboLoader.mongo.product.model, 'products', config.loader.datapath + '/products.csv');
         lcboLoader.loadDataset(lcboLoader.mongo.inventory.model, 'inventories', config.loader.datapath + '/inventories.csv');
     },
     maybeExit: function(schemaName){
@@ -225,4 +232,5 @@ var lcboLoader = {
 eventController.init();
 lcboLoader.init();
 /* Now, let's kick off the work */
-eventEmitter.emit('download_data');
+//eventEmitter.emit('download_data');
+lcboLoader.loadAllDatasets();
