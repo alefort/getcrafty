@@ -16,19 +16,31 @@ var StoreModel = mongoose.model('store', models.schema.store);
 var ProductModel = mongoose.model('product', models.schema.product);
 
 var apiQueries = {
-    storesNear: function(long, lat){
-        return {location: {
-            $near: {
-                $geometry: {
-                    type: "Point",
-                    coordinates: [long, lat]
-                },
-                $maxDistance: 50000,
-                $minDistance: 0
+    storesNear: function (long, lat) {
+        return {
+            location: {
+                $near: {
+                    $geometry: {
+                        type: "Point",
+                        coordinates: [long, lat]
+                    },
+                    $maxDistance: 50000,
+                    $minDistance: 0
+                }
             }
-        }
-    };
-}};
+        };
+    },
+    getInventoryByStore: function (store_id) {
+        return {store_id: store_id};
+    },
+    getProductsFromIDs: function (ids) {
+        return {
+            id: {
+                $in: ids
+            }
+        };
+    }
+};
 
 var app = express();
 app.use(compress());
@@ -49,6 +61,42 @@ app.get('/data/fn/storesNear', function(req, res) {
        res.send(docs);
    });
 
+});
+
+app.get('/data/fn/inventoryByStore', function(req, res) {
+
+    InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), function(err,docs){
+        res.send(docs);
+    });
+
+});
+
+app.get('/data/fn/productIdByStore', function(req, res) {
+
+    InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), {
+        '_id': 0,
+        'product_id': 1
+    }, function(err,docs){
+        res.send(docs);
+    });
+
+});
+
+app.get('/data/fn/productsAtStore', function(req, res) {
+
+    InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), {
+        '_id': 0,
+        'product_id': 1
+    }, function(err,docs){
+        var arrayIds = [];
+        for(var doc in docs){
+            arrayIds.push(docs[doc].product_id);
+        }
+
+        ProductModel.find(apiQueries.getProductsFromIDs(arrayIds), function(err,products){
+            res.send(products);
+        });
+    });
 
 });
 

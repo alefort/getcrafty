@@ -110,7 +110,7 @@ var lcboLoader = {
         });
     },
     processInventoryRecord: function(inventoryRecord){
-        var  doc = lcboLoader.mongo.inventory.model(inventoryRecord);
+        var doc = lcboLoader.mongo.inventory.model(inventoryRecord);
 
         doc.save(function(error, doc) {
             if (error) {
