@@ -31,9 +31,12 @@ var eventController = {
         eventEmitter.on('download_data', lcboLoader.getDatasetsZip);
         eventEmitter.on('extract_data', lcboLoader.extractDatasetsZip);
         eventEmitter.on('load_dataset', lcboLoader.loadDataset);
+        eventEmitter.on('load_stores', lcboLoader.loadStores);
+        eventEmitter.on('load_products', lcboLoader.loadProducts);
+        eventEmitter.on('load_inventories', lcboLoader.loadInventories);
         eventEmitter.on('exit', lcboLoader.terminate);
-        eventEmitter.on('load_dataset_complete', lcboLoader.maybeExit);
-
+        eventEmitter.on('load_dataset_complete', lcboLoader.datasetLoaded);
+        eventEmitter.on('start_dataload', lcboLoader.loadStores);
     }
 };
 
@@ -150,10 +153,8 @@ var lcboLoader = {
             lcboLoader.log('Finished extracting files from archive.');
 
             /* Let's emit the next event in the chain */
-            eventEmitter.emit('load_dataset', lcboLoader.mongo.store.model, 'stores', config.loader.datapath + '/stores.csv');
-            eventEmitter.emit('load_dataset', lcboLoader.mongo.product.model, 'products', config.loader.datapath + '/products.csv');
-            eventEmitter.emit('load_dataset', lcboLoader.mongo.inventory.model, 'inventories', config.loader.datapath + '/inventories.csv');
 
+            eventEmitter.emit('start_dataload');
             return;
         });
 
@@ -217,14 +218,26 @@ var lcboLoader = {
             });
         });
     },
-    loadAllDatasets: function(){
-        //lcboLoader.loadDataset(lcboLoader.mongo.store.model, 'stores', config.loader.datapath + '/stores.csv');
-        //lcboLoader.loadDataset(lcboLoader.mongo.product.model, 'products', config.loader.datapath + '/products.csv');
-        lcboLoader.loadDataset(lcboLoader.mongo.inventory.model, 'inventories', config.loader.datapath + '/inventories.csv');
+    loadStores: function(){
+        eventEmitter.emit('load_dataset', lcboLoader.mongo.store.model, 'stores', config.loader.datapath + '/stores.csv');
     },
-    maybeExit: function(schemaName){
-        if(schemaName == 'inventories'){
-            eventEmitter.emit('exit');
+    loadProducts: function(){
+        eventEmitter.emit('load_dataset', lcboLoader.mongo.product.model, 'products', config.loader.datapath + '/products.csv');
+    },
+    loadInventories: function(){
+        eventEmitter.emit('load_dataset', lcboLoader.mongo.inventory.model, 'inventories', config.loader.datapath + '/inventories.csv');
+    },
+    datasetLoaded: function(schemaName){
+        switch(schemaName){
+            case 'stores':
+                lcboLoader.loadProducts();
+                break;
+            case 'products':
+                lcboLoader.loadInventories();
+                break;
+            case 'inventories':
+                eventEmitter.emit('exit');
+                break;
         }
     }
 };
