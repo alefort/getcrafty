@@ -45,7 +45,8 @@ var apiQueries = {
                     "Labatt Breweries Ontario",
                     "Miller Brewing Company",
                     "Moosehead Breweries Limited",
-                    "Heineken's Brouwerijen Nederland BV"
+                    "Heineken's Brouwerijen Nederland BV",
+                    "Guinness Brewing Worldwide"
                 ]
             },
             primary_category: 'Beer'
