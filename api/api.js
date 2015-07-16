@@ -41,7 +41,10 @@ var apiQueries = {
             producer_name: {
                 $nin: producerExclusions
             },
-            primary_category: primaryCategory
+            primary_category: primaryCategory,
+            secondary_category: {
+                $nin: ['Specialty']
+            }
         };
     }
 };
