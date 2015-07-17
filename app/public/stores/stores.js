@@ -1,19 +1,19 @@
 (function(){
   'use strict';
 
-  var app = angular.module('getCrafty.stores', [
-    'ngRoute',
+  var stores = angular.module('getCrafty.stores', [
     'ngGeolocation'
   ]);
 
-  app.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/stores/', {
-      templateUrl: 'stores/stores.html',
-      controller: 'storesCtrl'
-    });
-  }])
+  stores.config(function($stateProvider) {
+      $stateProvider.state('stores', {
+        url: '/stores/',
+        templateUrl: 'stores/stores.html',
+        controller: 'storesCtrl',
+      });
+  });
 
-  app.controller('storesCtrl', function($scope, $route, $routeParams, $http, $geolocation) {
+  stores.controller('storesCtrl', function($scope, $route, $routeParams, $http, $geolocation) {
     var coords = {},
         responsePromise,
         config = {

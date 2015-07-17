@@ -1,14 +1,16 @@
-'use strict';
+(function(){
+	'use strict';
 
-angular.module('getCrafty.home', ['ngRoute'])
+	var home = angular.module('getCrafty.home', []);
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/', {
-    templateUrl: 'home/home.html',
-    controller: 'homeCtrl'
-  });
-}])
+	home.config(function($stateProvider) {
+	    $stateProvider.state('main', {
+	    	url: '/',
+	    	templateUrl: 'home/home.html',
+	    });
+	});
 
-.controller('homeCtrl', [function() {
+	home.controller('homeCtrl', [function() {
 
-}]);
+	}]);
+})();

@@ -2,7 +2,7 @@
   'use strict';
 
   var app = angular.module('getCrafty', [
-    'ngRoute',
+    'ui.router',
     'ngGeolocation',
     'mgcrea.ngStrap',
     'getCrafty.home',
@@ -13,9 +13,16 @@
     'getCrafty.version'
   ]);
 
-  app.config(function($locationProvider, $routeProvider) {
-    $routeProvider.otherwise({redirectTo: '/'});
+  app.config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
   });
+
+  app.run(
+    ['$rootScope', '$state', '$stateParams', function ($rootScope,   $state,   $stateParams) {
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+    }]
+  );
 
   app.controller('LocationTest', function($scope, $location) {
     $scope.currentPath = $location.path();

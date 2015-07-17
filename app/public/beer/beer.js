@@ -1,17 +1,18 @@
 (function(){
   'use strict';
 
-  var app = angular.module('getCrafty.beer', ['ngRoute']);
+  var beer = angular.module('getCrafty.beer', []);
 
-  app.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/beer/:beer_id', {
-      templateUrl: 'beer/beer.html',
-      controller: 'beerCtrl'
-    });
-  }])
+  beer.config(function($stateProvider) {
+      $stateProvider.state('beer', {
+        url: '/beer/{beer_id}',
+        templateUrl: 'beer/beer.html',
+        controller: 'beerCtrl',
+      });
+  });
 
-  app.controller('beerCtrl', function($scope, $route, $routeParams, $http) {
-    var beer_id = ($routeParams.beer_id || "");
+  beer.controller('beerCtrl', function($scope, $state, $stateParams, $http) {
+    var beer_id = ($stateParams.beer_id || "");
     $scope.beer_data = {};
     
     var config = {

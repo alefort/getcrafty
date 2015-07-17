@@ -133,7 +133,7 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
           } else {
             if (options.container) {
               parent = findElement(options.container);
-              after = parent[0].lastChild ? angular.element(parent[0].lastChild) : null;
+              after = parent[0] && parent[0].lastChild ? angular.element(parent[0].lastChild) : null;
             } else {
               parent = null;
               after = options.element;
@@ -161,10 +161,14 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
           if(options.backdrop) {
             $animate.enter(backdropElement, bodyElement, null);
           }
-          // Support v1.3+ $animate
-          // https://github.com/angular/angular.js/commit/bf0f5502b1bbfddc5cdd2f138efd9188b8c652a9
-          var promise = $animate.enter(modalElement, parent, after, enterAnimateCallback);
-          if(promise && promise.then) promise.then(enterAnimateCallback);
+
+          // Support v1.2+ $animate
+          // https://github.com/angular/angular.js/issues/11713
+          if(angular.version.minor <= 2) {
+            $animate.enter(modalElement, parent, after, enterAnimateCallback);
+          } else {
+            $animate.enter(modalElement, parent, after).then(enterAnimateCallback);
+          }
 
           $modal.$isShown = scope.$isShown = true;
           safeDigest(scope);
@@ -201,10 +205,14 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
           if(scope.$emit(options.prefixEvent + '.hide.before', $modal).defaultPrevented) {
             return;
           }
-          var promise = $animate.leave(modalElement, leaveAnimateCallback);
-          // Support v1.3+ $animate
-          // https://github.com/angular/angular.js/commit/bf0f5502b1bbfddc5cdd2f138efd9188b8c652a9
-          if(promise && promise.then) promise.then(leaveAnimateCallback);
+
+          // Support v1.2+ $animate
+          // https://github.com/angular/angular.js/issues/11713
+          if(angular.version.minor <= 2) {
+            $animate.leave(modalElement, leaveAnimateCallback);
+          } else {
+            $animate.leave(modalElement).then(leaveAnimateCallback);
+          }
 
           if(options.backdrop) {
             $animate.leave(backdropElement);
@@ -300,19 +308,16 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
 
         // Directive options
         var options = {scope: scope, element: element, show: false};
-        angular.forEach(['template', 'contentTemplate', 'placement', 'container', 'animation', 'id'], function(key) {
+        angular.forEach(['template', 'contentTemplate', 'placement', 'backdrop', 'keyboard', 'html', 'container', 'animation', 'id', 'prefixEvent', 'prefixClass'], function(key) {
           if(angular.isDefined(attr[key])) options[key] = attr[key];
         });
 
-        // use string regex match for boolean values
-        var falseValueRegExp = /^(false|0|)$/;
-        angular.forEach(['keyboard', 'html'], function(key) {
-          if(angular.isDefined(attr[key])) options[key] = !falseValueRegExp.test(attr[key]);
+        // use string regex match boolean attr falsy values, leave truthy values be
+        var falseValueRegExp = /^(false|0|)$/i;
+        angular.forEach(['backdrop', 'keyboard', 'html', 'container'], function(key) {
+          if(angular.isDefined(attr[key]) && falseValueRegExp.test(attr[key]))
+            options[key] = false;
         });
-
-        if(angular.isDefined(attr.backdrop)) {
-          options.backdrop = falseValueRegExp.test(attr.backdrop) ? false : attr.backdrop;
-        }
 
         // Support scope as data-attrs
         angular.forEach(['title', 'content'], function(key) {

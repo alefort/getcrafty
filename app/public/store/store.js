@@ -1,16 +1,17 @@
 (function(){
   'use strict';
 
-  var app = angular.module('getCrafty.store', ['ngRoute']);
+  var store = angular.module('getCrafty.store', []);
 
-  app.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/store/:store_id', {
-      templateUrl: 'store/store.html',
-      controller: 'storeCtrl'
-    });
-  }])
+  store.config(function($stateProvider) {
+      $stateProvider.state('store', {
+        url: '/store/{store_id}',
+        templateUrl: 'store.html',
+        controller: 'storeCtrl',
+      });
+  });
 
-  app.controller('storeCtrl', function($scope, $route, $routeParams, $http) {
+  store.controller('storeCtrl', function($scope, $route, $routeParams, $http) {
     var store_id = ($routeParams.store_id || "");
     $scope.store_data = {};
     
