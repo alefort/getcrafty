@@ -62,6 +62,12 @@ restify.serve(router, ProductModel);
 
 app.use(router);
 
+app.all('/*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
+
 app.get('/data/fn/storesNear', function(req, res) {
 
    StoreModel.find(apiQueries.storesNear(req.query.long, req.query.lat), function(err,docs){
@@ -115,7 +121,8 @@ app.get('/data/fn/productsAtStore', function(req, res) {
             "James Ready Brewing Company",
             "Lakeport Brewing Corporation",
             "The Brick Brewing Co.",
-            "Miller Brewing Trading Co Ltd"
+            "Miller Brewing Trading Co Ltd",
+            "Brick Brewing Co. Ltd. N / A"
         ]), function(err,products){
             for(var index in products){
                 var product = products[index];
