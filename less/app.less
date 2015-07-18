@@ -16,74 +16,21 @@
 @green-dark: #2E4135;
 
 body {
-	font-family: 'Open Sans', sans-serif;
-	padding-top: 70px;
-}
-
-.navbar {
-	background: @primary;
-
-	.navbar-brand {
-		color: @white;
-		text-transform: uppercase;
-		font-weight: bold;
-		text-shadow: none;
-		height: auto;
-
-		img {
-			height: 40px;
-			width: auto;
-		}
-
-		&:hover,
-		&:focus {
-			color: @white;
-		}
-	}
-
-	.navbar-toggle {
-		border-color: @white;
-
-		.icon-bar {
-			background-color: @white;
-		}
-	}
-
-	.navbar-nav {
-		& > li {
-			& > a {
-				color: @white;
-				padding: 25px;
-				font-family: 'Roboto Slab';
-				text-transform: uppercase;
-				font-size: 18px;
-
-				&:hover,
-				&:focus {
-					color: @white;
-					background-color: darken(@primary, 5%);
-				}
-			}
-		}
-	}
+  font-family: 'Roboto', sans-serif;
 }
 
 .jumbotron {
-	text-align: center;
+  text-align: center;
 
-	h1 {
-		font-weight: bold;
-		text-transform: uppercase;
-	}
+  h1 {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 
-	.img-responsive {
-		display: inline-block;
-	}
-
-	img {
-		height: 300px;
-		width: auto;
-	}
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 h1,
@@ -92,5 +39,9 @@ h3,
 h4
 h5,
 h6 {
-	font-family: 'Roboto Slab';
+  font-family: 'Oswald';
+}
+
+.table-hours {
+  display: none;
 }

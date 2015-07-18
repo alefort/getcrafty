@@ -5,25 +5,46 @@
 
   store.config(function($stateProvider) {
       $stateProvider.state('store', {
-        url: '/store/{store_id}',
-        templateUrl: 'store.html',
+        url: '/store/{storeID}',
+        templateUrl: 'store/store.html',
         controller: 'storeCtrl',
       });
   });
 
-  store.controller('storeCtrl', function($scope, $route, $routeParams, $http) {
-    var store_id = ($routeParams.store_id || "");
-    $scope.store_data = {};
+  store.controller('storeCtrl', function($scope, $state, $stateParams, $http) {
+    var storeID = ($stateParams.storeID || "");
+    $scope.store = {};
     
+    // get store info
     var config = {
-      url: 'https://lcboapi.com/stores/' + store_id,
-      headers: { 'Authorization': 'Token MDoyMjk2OWIyOC1kZjBlLTExZTQtYWQzOS0yN2NiZjIwYTYxY2Y6aFZhNUFiN3hZZllod245TW1hdGJuNHptRE1YRTUwaG9PUnFJ' }
+      url: 'http://qa.getcrafty.co:3000/api/v1/stores/?id=' + storeID,
     }
 
     var responsePromise = $http(config);
 
     responsePromise.success(function(data, status, headers, config) {
-      $scope.store = data.result;
+      $scope.store = data[0];
+      console.log($scope.store);
+    });
+
+    responsePromise.error(function(data, status, headers, config) {
+      alert("AJAX failed!");
+    });
+
+
+
+    // get beers at store
+    $scope.store.beers = {};
+
+    var config = {
+      url: 'http://qa.getcrafty.co:3000/data/fn/productsAtStore?store_id=' + storeID,
+    }
+
+    var responsePromise = $http(config);
+
+    responsePromise.success(function(data, status, headers, config) {
+      $scope.store.beers = data;
+      console.log($scope.store.beers);
     });
 
     responsePromise.error(function(data, status, headers, config) {

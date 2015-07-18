@@ -5,25 +5,26 @@
 
   beer.config(function($stateProvider) {
       $stateProvider.state('beer', {
-        url: '/beer/{beer_id}',
+        url: '/beer/{beerID}',
         templateUrl: 'beer/beer.html',
         controller: 'beerCtrl',
       });
   });
 
   beer.controller('beerCtrl', function($scope, $state, $stateParams, $http) {
-    var beer_id = ($stateParams.beer_id || "");
+    var beerID = ($stateParams.beerID || "");
     $scope.beer_data = {};
     
+    // get store info
     var config = {
-      url: 'https://lcboapi.com/products/' + beer_id,
-      headers: { 'Authorization': 'Token MDoyMjk2OWIyOC1kZjBlLTExZTQtYWQzOS0yN2NiZjIwYTYxY2Y6aFZhNUFiN3hZZllod245TW1hdGJuNHptRE1YRTUwaG9PUnFJ' }
+      url: 'http://qa.getcrafty.co:3000/api/v1/products/?id=' + beerID,
     }
 
     var responsePromise = $http(config);
 
     responsePromise.success(function(data, status, headers, config) {
-      $scope.beer = data.result;
+      $scope.beer = data[0];
+      console.log($scope.beer);
     });
 
     responsePromise.error(function(data, status, headers, config) {

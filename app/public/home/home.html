@@ -1,11 +1,17 @@
-<div class="jumbotron">
+<section class="jumbotron">
   <div class="container">
-  	<img class="img-responsive" src="img/logo-large.png">
+    <img class="brand" src="img/logo-large.png">
     <h1>Get Crafty</h1>
     <p>Find your favourite craft beers at your closest LCBO.</p>
-    <p>
-    	<a class="btn btn-primary btn-lg" ui-sref="stores" role="button">Find Stores</a>
-    	<a class="btn btn-default btn-lg" ui-sref="beerSearch" role="button">Find Beer</a>
-    </p>
   </div>
-</div>
+</section>
+<section class="home-locations">
+  <div class="list-group" ng-repeat="(key, location) in locationData | limitTo: 3">
+    <a ui-sref="store({storeID: location.id})" class="list-group-item">
+      <h2 class="list-group-item-heading">{{location.name}}</h2>
+      <p class="list-group-item-text">
+        {{location.address_line_1}}
+      </p>
+    </a>
+  </div>
+</section>

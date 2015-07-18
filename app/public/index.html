@@ -1,66 +1,45 @@
 <!doctype html>
 <html lang="en" ng-app="getCrafty" class="no-js">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="">
-		<title>Get Crafty</title>
-		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab">
-		<link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
-		<link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
-		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="css/app.css">
-		<base href="/app/public/"></head>
-		<script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
-	</head>
-	<body>
-		<nav class="navbar navbar-default navbar-fixed-top" bs-navbar bs-collapse data-start-collapsed="true">
-			<div class="container">
-				<div class="navbar-header" data-match-route="/$">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" bs-collapse-toggle>
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">
-						<img src="img/brand.png">
-					</a>
-				</div>
-				<div id="navbar" class="collapse navbar-collapse" bs-collapse-target>
-					<ul class="nav navbar-nav">
-						<li data-match-route="/beer"><a href="#/beer">Beer</a></li>
-						<li data-match-route="/store.*"><a href="#/stores">Stores</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<main class="main" id="main">
-			<div ui-view></div>
-		</main>
-		<footer>
-			<div class="container">
-				<div ng-controller="LocationTest">
-					Current: {{currentPath}}<br>
-				</div>
-				{{ 'GetCrafty v%VERSION%.' | interpolate }}
-			</div>
-		</footer>
-		<script src="bower_components/angular/angular.js"></script>
-		<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-		<script src="bower_components/ngGeolocation/ngGeolocation.js"></script>
-		<script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
-		<script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
-		<script src="app.js"></script>
-		<script src="home/home.js"></script>
-		<script src="beer/beer.js"></script>
-		<script src="beer-search/beer-search.js"></script>
-		<script src="store/store.js"></script>
-		<script src="stores/stores.js"></script>
-		<script src="components/version/version.js"></script>
-		<script src="components/version/version-directive.js"></script>
-		<script src="components/version/interpolate-filter.js"></script>
-	</body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Get Crafty</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Oswald:400,700,300|Roboto:400,700,700italic,400italic' rel='stylesheet">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <base href="/app/public/"></head>
+    <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+  </head>
+  <body>
+    <main class="main" id="main">
+      <div ui-view></div>
+    </main>
+    <footer>
+      <div class="container">
+        <div ng-controller="LocationTest">
+          Current: {{currentPath}}<br>
+        </div>
+        {{ 'GetCrafty v%VERSION%.' | interpolate }}
+      </div>
+    </footer>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ngGeolocation/ngGeolocation.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    <script src="app.js"></script>
+    <script src="home/home.js"></script>
+    <script src="beer/beer.js"></script>
+    <script src="beer-search/beer-search.js"></script>
+    <script src="store/store.js"></script>
+    <script src="stores/stores.js"></script>
+    <script src="components/version/version.js"></script>
+    <script src="components/version/version-directive.js"></script>
+    <script src="components/version/interpolate-filter.js"></script>
+  </body>
 </html>
