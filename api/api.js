@@ -7,7 +7,8 @@ var express = require('express'),
     models = require('../models/models.js'),
     restify = require('express-restify-mongoose'),
     methodOverride = require('method-override'),
-    compress = require('compression');
+    compress = require('compression'),
+    cors = require('cors');
 
 mongoose.connect('mongodb://localhost/lcbo');
 
@@ -54,6 +55,7 @@ app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('X-HTTP-Method-Override'));
+app.use(cors());
 
 var router = express.Router();
 restify.serve(router, InventoryModel);
@@ -62,11 +64,7 @@ restify.serve(router, ProductModel);
 
 app.use(router);
 
-app.all('/*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next();
-});
+
 
 app.get('/data/fn/storesNear', function(req, res) {
 
