@@ -149,7 +149,7 @@ app.get('/data/fn/productsAtStore', function(req, res) {
             "San Miguel Brewing Int Ltd",
             "Tuborg International A / S",
             "Kenya Breweries",
-            ""
+            "Karlovacka Pivovara"
         ]), function(err,products){
             for(var index in products){
                 var product = products[index];
