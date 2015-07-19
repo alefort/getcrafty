@@ -138,8 +138,18 @@ app.get('/data/fn/productsAtStore', function(req, res) {
             "Holsten-Brauerei",
             "Stiegl Getranke & Service Gmbh",
             "Hacker-Pschorr Brau Ag Munchen",
-            "Casa Do Valle"
-
+            "Casa Do Valle",
+            "Beck & Company",
+            "The Whitbread Beer Co.",
+            "Carlsberg Canada Inc.",
+            "Brewery Group Denmark A / S",
+            "Brau Union International Gmbh",
+            "Bavaria Inc",
+            "Kompania Piwowarska",
+            "San Miguel Brewing Int Ltd",
+            "Tuborg International A / S",
+            "Kenya Breweries",
+            ""
         ]), function(err,products){
             for(var index in products){
                 var product = products[index];
