@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css">
     <link rel="stylesheet" href="css/app.css">
     <base href="/app/public/"></head>
     <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
@@ -19,20 +20,12 @@
     <main class="main" id="main">
       <div ui-view></div>
     </main>
-    <footer>
-      <div class="container">
-        <div ng-controller="LocationTest">
-          Current: {{currentPath}}<br>
-        </div>
-        {{ 'GetCrafty v%VERSION%.' | interpolate }}
-      </div>
-    </footer>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/ngGeolocation/ngGeolocation.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
-    <script src="bower_components/angular-spinners/dist/angular-spinners.min.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
     <script src="app.js"></script>
     <script src="home/home.js"></script>
     <script src="beer/beer.js"></script>
