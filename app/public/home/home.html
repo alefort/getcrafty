@@ -6,7 +6,7 @@
   </div>
 </section>
 <section class="home-locations">
-  <div class="list-group" ng-repeat="(key, location) in locationData | limitTo: 3">
+  <div class="list-group" ng-repeat="(key, location) in locationData | limitTo: 12">
     <a ui-sref="store({storeID: location.id})" class="list-group-item">
       <h2 class="list-group-item-heading">{{location.name}}</h2>
       <p class="list-group-item-text">
