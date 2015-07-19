@@ -20,7 +20,7 @@
       timeout: 60000
     }).then(function(position) {
       coords = position.coords;
-      config.url = 'http://qa.getcrafty.co:3000/data/fn/storesNear?lat=' + coords.latitude + '&long=' + coords.longitude;
+      config.url = 'http://qa.getcrafty.co:3000/api/v1/storesNear?lat=' + coords.latitude + '&long=' + coords.longitude;
       $scope.locationData = {};
       responsePromise = $http(config);
 

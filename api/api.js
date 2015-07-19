@@ -66,7 +66,7 @@ app.use(router);
 
 
 
-app.get('/data/fn/storesNear', function(req, res) {
+app.get('/api/v1/storesNear', function(req, res) {
 
    StoreModel.find(apiQueries.storesNear(req.query.long, req.query.lat), function(err,docs){
        res.send(docs);
@@ -74,7 +74,7 @@ app.get('/data/fn/storesNear', function(req, res) {
 
 });
 
-app.get('/data/fn/inventoryByStore', function(req, res) {
+app.get('/api/v1/inventoryByStore', function(req, res) {
 
     InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), function(err,docs){
         res.send(docs);
@@ -82,7 +82,7 @@ app.get('/data/fn/inventoryByStore', function(req, res) {
 
 });
 
-app.get('/data/fn/productIdByStore', function(req, res) {
+app.get('/api/v1/productIdByStore', function(req, res) {
 
     InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), {
         '_id': 0,
@@ -93,7 +93,7 @@ app.get('/data/fn/productIdByStore', function(req, res) {
 
 });
 
-app.get('/data/fn/productsAtStore', function(req, res) {
+app.get('/api/v1/productsAtStore', function(req, res) {
 
     InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), function(err,docs){
         var arrayIds = [];

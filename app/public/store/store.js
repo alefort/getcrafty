@@ -37,7 +37,7 @@
     $scope.store.beers = {};
 
     var config = {
-      url: 'http://qa.getcrafty.co:3000/data/fn/productsAtStore?store_id=' + storeID,
+      url: 'http://qa.getcrafty.co:3000/api/v1/productsAtStore?store_id=' + storeID,
     }
 
     var responsePromise = $http(config);
