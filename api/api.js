@@ -149,7 +149,10 @@ app.get('/data/fn/productsAtStore', function(req, res) {
             "San Miguel Brewing Int Ltd",
             "Tuborg International A / S",
             "Kenya Breweries",
-            "Karlovacka Pivovara"
+            "Karlovacka Pivovara",
+            "Browary Warka",
+            "Stroh Brewery Company",
+            "Baltika Brewery"
         ]), function(err,products){
             for(var index in products){
                 var product = products[index];
