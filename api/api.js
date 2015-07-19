@@ -120,7 +120,26 @@ app.get('/data/fn/productsAtStore', function(req, res) {
             "Lakeport Brewing Corporation",
             "The Brick Brewing Co.",
             "Miller Brewing Trading Co Ltd",
-            "Brick Brewing Co. Ltd. N / A"
+            "Brick Brewing Co. Ltd. N / A",
+            "Zywiec Breweries Plc",
+            "Okocim Brewery",
+            "Creemore Springs Brewery",
+            "Mcauslan Brewing Inc.",
+            "Unicer-Uniao Cervejeira",
+            "Browar Dojlidy",
+            "L'Vivske Pivovarnia",
+            "Caribbean Development Ltd",
+            "Paulaner Brauerei Gmbh",
+            "Qingdao Brewery",
+            "N.V.INTERBREW. Belgium",
+            "Grolsche Bierbrouwerij B.V.",
+            "Asia Pacific Breweries",
+            "Brasseries Kronenbourg",
+            "Holsten-Brauerei",
+            "Stiegl Getranke & Service Gmbh",
+            "Hacker-Pschorr Brau Ag Munchen",
+            "Casa Do Valle"
+
         ]), function(err,products){
             for(var index in products){
                 var product = products[index];
