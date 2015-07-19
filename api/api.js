@@ -8,7 +8,8 @@ var express = require('express'),
     restify = require('express-restify-mongoose'),
     methodOverride = require('method-override'),
     compress = require('compression'),
-    cors = require('cors');
+    cors = require('cors'),
+    config = require('get-config').sync(__dirname + '/config');
 
 mongoose.connect('mongodb://localhost/lcbo');
 
@@ -64,37 +65,28 @@ restify.serve(router, ProductModel);
 
 app.use(router);
 
-
-
 app.get('/api/v1/storesNear', function(req, res) {
-
    StoreModel.find(apiQueries.storesNear(req.query.long, req.query.lat), function(err,docs){
        res.send(docs);
    });
-
 });
 
 app.get('/api/v1/inventoryByStore', function(req, res) {
-
     InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), function(err,docs){
         res.send(docs);
     });
-
 });
 
 app.get('/api/v1/productIdByStore', function(req, res) {
-
     InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), {
         '_id': 0,
         'product_id': 1
     }, function(err,docs){
         res.send(docs);
     });
-
 });
 
 app.get('/api/v1/productsAtStore', function(req, res) {
-
     InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), function(err,docs){
         var arrayIds = [];
         var arrayInventories = [];
@@ -104,56 +96,7 @@ app.get('/api/v1/productsAtStore', function(req, res) {
             arrayInventories[docs[index].product_id] = docs[index];
         }
 
-        ProductModel.find(apiQueries.getProductsFromIDs(arrayIds, 'Beer',[
-            "Molson's Brewery of Canada Limited",
-            "Sleeman Brewing & Malting Co",
-            "Labatt Breweries Ontario",
-            "Miller Brewing Company",
-            "Moosehead Breweries Limited",
-            "Heineken's Brouwerijen Nederland BV",
-            "Guinness Brewing Worldwide",
-            "Cerveceria Modelo Sa de Cv",
-            "Diageo Canada Inc",
-            "Coors Brewers Limited",
-            "Cerveceria Cuauhtemoc Moctezuma",
-            "James Ready Brewing Company",
-            "Lakeport Brewing Corporation",
-            "The Brick Brewing Co.",
-            "Miller Brewing Trading Co Ltd",
-            "Brick Brewing Co. Ltd. N / A",
-            "Zywiec Breweries Plc",
-            "Okocim Brewery",
-            "Creemore Springs Brewery",
-            "Mcauslan Brewing Inc.",
-            "Unicer-Uniao Cervejeira",
-            "Browar Dojlidy",
-            "L'Vivske Pivovarnia",
-            "Caribbean Development Ltd",
-            "Paulaner Brauerei Gmbh",
-            "Qingdao Brewery",
-            "N.V.INTERBREW. Belgium",
-            "Grolsche Bierbrouwerij B.V.",
-            "Asia Pacific Breweries",
-            "Brasseries Kronenbourg",
-            "Holsten-Brauerei",
-            "Stiegl Getranke & Service Gmbh",
-            "Hacker-Pschorr Brau Ag Munchen",
-            "Casa Do Valle",
-            "Beck & Company",
-            "The Whitbread Beer Co.",
-            "Carlsberg Canada Inc.",
-            "Brewery Group Denmark A / S",
-            "Brau Union International Gmbh",
-            "Bavaria Inc",
-            "Kompania Piwowarska",
-            "San Miguel Brewing Int Ltd",
-            "Tuborg International A / S",
-            "Kenya Breweries",
-            "Karlovacka Pivovara",
-            "Browary Warka",
-            "Stroh Brewery Company",
-            "Baltika Brewery"
-        ]), function(err,products){
+        ProductModel.find(apiQueries.getProductsFromIDs(arrayIds, 'Beer', config.api.brewery_exclusions), function(err,products){
             for(var index in products){
                 var product = products[index];
                 product.inventory.quantity = arrayInventories[product.id].quantity;
@@ -161,7 +104,6 @@ app.get('/api/v1/productsAtStore', function(req, res) {
             res.send(products);
         });
     });
-
 });
 
 app.listen(3000, function() {
