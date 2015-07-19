@@ -7,6 +7,25 @@
 </section>
 <div class="container">
   <section class="home-locations">
+    <accordion>
+      <accordion-group>
+        <accordion-heading>Or search by postal code <i class="fa fa-angle-right"></i></accordion-heading>
+        <form class="form-inline">
+          <div class="form-group">
+            <label class="sr-only" for="postal-code">Postal Code</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="postal-code" name="postal-code" placeholder="Postal Code" required>
+              <span class="input-group-btn">
+                <button class="btn btn-primary" role="button=" type="button">
+                  <span class="btn-text sr-only">Search</span>
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </form>
+      </accordion-group>
+    </accordion>
     <p ng-if="!locationData">Loading locations...</p>
     <div class="list-group" ng-if="locationData" ng-repeat="(key, location) in locationData | limitTo: 12">
       <a ui-sref="store({storeID: location.id})" class="list-group-item">

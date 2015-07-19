@@ -2,9 +2,10 @@
   'use strict';
 
   var app = angular.module('getCrafty', [
+    'ngAnimate',
     'ui.router',
+    'ui.bootstrap',
     'ngGeolocation',
-    'mgcrea.ngStrap',
     'angular-loading-bar',
     'getCrafty.home',
     'getCrafty.beer',

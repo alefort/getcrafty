@@ -2,9 +2,10 @@
   <p ng-if="!beer">Loading beer information...</p>
   <div class="beer-information" ng-if="beer">
     <h1>{{beer.name}} <small>{{beer.price_in_cents / 100 | currency}}</small></h1>
-    <h2>{{beer.style}} {{beer.tertiary_category}} by {{beer.producer_name}} ({{beer.origin}})</h2>
+    <h2>{{beer.tertiary_category}}</h2>
+    <p>A {{beer.style}} beer by {{beer.producer_name}} ({{beer.origin}})</p>
     <strong>Tags:</strong> {{beer.tags}}<br>
-    <a href="{{beer.image_url}}"><img src="{{beer.image_thumb_url}}"></a><br>
+    <a href="{{beer.image_url}}"><img ng-src="{{beer.image_thumb_url}}"></a><br>
     <h3>Serving Suggestion:</h3>
     <p>{{beer.serving_suggestion}}</p>
     <h3>Tasting Note:</h3>
@@ -16,7 +17,7 @@
   </div>
   <div ng-if="store" class="action-bar">
     <a ui-sref="store({storeID: store.id})" class="btn btn-primary btn-action">
-      <span class="btn-text">Select a new beer</span>
+      <span class="btn-text"><i class="fa fa-angle-left"></i> Select a new beer</span>
       <small>from {{store.name}}</small>
     </a>
   </div>
