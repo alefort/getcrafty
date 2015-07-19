@@ -1,0 +1,29 @@
+{
+  "name": "angular-spinners",
+  "version": "2.1.8",
+  "authors": [
+    "Alex Ford <alex.ford@codetunnel.com>"
+  ],
+  "main": [
+    "dist/angular-spinners.min.js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "homepage": "https://github.com/codetunnel/angular-spinners",
+  "_release": "2.1.8",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.1.8",
+    "commit": "fbb34c25b01cdbf1d18530e6119eae7a101c59d0"
+  },
+  "_source": "git://github.com/codetunnel/angular-spinners.git",
+  "_target": "~2.1.8",
+  "_originalSource": "angular-spinners",
+  "_direct": true
+}

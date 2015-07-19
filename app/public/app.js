@@ -5,6 +5,7 @@
     'ui.router',
     'ngGeolocation',
     'mgcrea.ngStrap',
+    'angularSpinners',
     'getCrafty.home',
     'getCrafty.beer',
     'getCrafty.beerSearch',

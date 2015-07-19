@@ -5,13 +5,17 @@
     <p>Find your favourite craft beers at your closest LCBO.</p>
   </div>
 </section>
-<section class="home-locations">
-  <div class="list-group" ng-repeat="(key, location) in locationData | limitTo: 12">
-    <a ui-sref="store({storeID: location.id})" class="list-group-item">
-      <h2 class="list-group-item-heading">{{location.name}}</h2>
-      <p class="list-group-item-text">
-        {{location.address_line_1}}
-      </p>
-    </a>
-  </div>
-</section>
+<div class="container">
+  <section class="home-locations">
+    <spinner name="locationsSpinner" on-loaded="getLocations()">Finding locations near you...</spinner>
+    <p ng-if="!locationData">No locations.</p>
+    <div class="list-group" ng-if="locationData" ng-repeat="(key, location) in locationData | limitTo: 12">
+      <a ui-sref="store({storeID: location.id})" class="list-group-item">
+        <h2 class="list-group-item-heading">{{location.name}}</h2>
+        <p class="list-group-item-text">
+          {{location.address_line_1}}
+        </p>
+      </a>
+    </div>
+  </section>
+</div>

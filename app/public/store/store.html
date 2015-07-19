@@ -1,16 +1,25 @@
-<h1 class="page-heading">{{store.name}}</h1>
-
-<address>
-  {{store.address_line_1}}<br>
-  {{store.address_line_2}}<br>
-  {{store.telephone}}
-</address>
-<section class="store-beers">
-  <h2>Beers</h2>
-  <div class="list-group" ng-repeat="(key, beer) in store.beers | orderBy : 'name'">
-    <a ui-sref="beer({beerID: beer.id})" class="list-group-item">
-      <h4 class="list-group-item-heading">{{beer.name}}</h4>
-      {{beer.inventory.quantity}} {{beer.package_unit_type}}s available
-    </a>
-  </div>
-</section>
+<div class="container">
+  <section class="store-information">
+    <spinner name="storeInformationSpinner" on-loaded="getStoreInformation()">Loading your store...</spinner>
+    <p ng-if="!store">Couldn't load store information</p>
+    <div class="store-information-inner" ng-if="store">
+      <h1 class="page-heading">{{store.name}}</h1>
+      <address>
+        {{store.address_line_1}}<br>
+        {{store.address_line_2}}<br>
+        {{store.telephone}}
+      </address>
+    </div>
+  </section>
+  <section class="store-beers">
+    <h2>Beers</h2>
+    <spinner name="storeBeersSpinner" on-loaded="getStoreBeers()">Loading your store's beer selection...</spinner>
+    <p ng-if="!store.beers">Couldn't load beer selection</p>
+    <div class="list-group" ng-if="store.beers" ng-repeat="(key, beer) in store.beers | orderBy : 'name'">
+      <a ui-sref="beer({beerID: beer.id})" class="list-group-item">
+        <h4 class="list-group-item-heading">{{beer.name}}</h4>
+        {{beer.inventory.quantity}} {{beer.package_unit_type}}s available
+      </a>
+    </div>
+  </section>
+</div>

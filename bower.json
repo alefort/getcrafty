@@ -13,7 +13,8 @@
     "html5-boilerplate": "~4.3.0",
     "bootstrap": "~3.3.4",
     "jquery": "~2.1.4",
-    "angular-strap": "~2.2.1"
+    "angular-strap": "~2.2.1",
+    "angular-spinners": "~2.1.8"
   },
   "devDependencies": {
     "ngGeolocation": "~0.0.7"

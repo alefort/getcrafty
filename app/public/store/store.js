@@ -11,44 +11,58 @@
       });
   });
 
-  store.controller('storeCtrl', function($scope, $state, $stateParams, $http) {
+  store.controller('storeCtrl', function($scope, $state, $stateParams, $http, spinnerService) {
     var storeID = ($stateParams.storeID || "");
-    $scope.store = {};
     
-    // get store info
-    var config = {
-      url: 'http://qa.getcrafty.co:3000/api/v1/stores/?id=' + storeID,
+    $scope.getStoreInformation = function() {
+      $scope.store = {};
+
+      spinnerService.show('storeInformationSpinner');
+      
+      // get store info
+      var config = {
+        url: 'http://qa.getcrafty.co:3000/api/v1/stores/?id=' + storeID,
+      }
+
+      var responsePromise = $http(config);
+
+      responsePromise.success(function(data, status, headers, config) {
+        $scope.store = data[0];
+        console.log($scope.store);
+      });
+
+      responsePromise.error(function(data, status, headers, config) {
+        alert("AJAX failed!");
+      });
+
+      responsePromise.finally(function() {
+        spinnerService.hide('storeInformationSpinner');
+      });
     }
 
-    var responsePromise = $http(config);
+    $scope.getStoreBeers = function() {
+      $scope.store.beers = {};
 
-    responsePromise.success(function(data, status, headers, config) {
-      $scope.store = data[0];
-      console.log($scope.store);
-    });
+      spinnerService.show('storeBeersSpinner');
 
-    responsePromise.error(function(data, status, headers, config) {
-      alert("AJAX failed!");
-    });
+      var config = {
+        url: 'http://qa.getcrafty.co:3000/api/v1/productsAtStore?store_id=' + storeID,
+      }
 
+      var responsePromise = $http(config);
 
+      responsePromise.success(function(data, status, headers, config) {
+        $scope.store.beers = data;
+        console.log($scope.store.beers);
+      });
 
-    // get beers at store
-    $scope.store.beers = {};
+      responsePromise.error(function(data, status, headers, config) {
+        $scope.store.beers = false;
+      });
 
-    var config = {
-      url: 'http://qa.getcrafty.co:3000/api/v1/productsAtStore?store_id=' + storeID,
+      responsePromise.finally(function() {
+        spinnerService.hide('storeBeersSpinner');
+      });
     }
-
-    var responsePromise = $http(config);
-
-    responsePromise.success(function(data, status, headers, config) {
-      $scope.store.beers = data;
-      console.log($scope.store.beers);
-    });
-
-    responsePromise.error(function(data, status, headers, config) {
-      alert("AJAX failed!");
-    });
   });
 })();
