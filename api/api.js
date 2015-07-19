@@ -7,7 +7,9 @@ var express = require('express'),
     models = require('../models/models.js'),
     restify = require('express-restify-mongoose'),
     methodOverride = require('method-override'),
-    compress = require('compression');
+    compress = require('compression'),
+    cors = require('cors'),
+    config = require('get-config').sync(__dirname + '/config');
 
 mongoose.connect('mongodb://localhost/lcbo');
 
@@ -54,6 +56,7 @@ app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('X-HTTP-Method-Override'));
+app.use(cors());
 
 var router = express.Router();
 restify.serve(router, InventoryModel);
@@ -62,35 +65,28 @@ restify.serve(router, ProductModel);
 
 app.use(router);
 
-app.get('/data/fn/storesNear', function(req, res) {
-
+app.get('/api/v1/storesNear', function(req, res) {
    StoreModel.find(apiQueries.storesNear(req.query.long, req.query.lat), function(err,docs){
        res.send(docs);
    });
-
 });
 
-app.get('/data/fn/inventoryByStore', function(req, res) {
-
+app.get('/api/v1/inventoryByStore', function(req, res) {
     InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), function(err,docs){
         res.send(docs);
     });
-
 });
 
-app.get('/data/fn/productIdByStore', function(req, res) {
-
+app.get('/api/v1/productIdByStore', function(req, res) {
     InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), {
         '_id': 0,
         'product_id': 1
     }, function(err,docs){
         res.send(docs);
     });
-
 });
 
-app.get('/data/fn/productsAtStore', function(req, res) {
-
+app.get('/api/v1/productsAtStore', function(req, res) {
     InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), function(err,docs){
         var arrayIds = [];
         var arrayInventories = [];
@@ -100,23 +96,7 @@ app.get('/data/fn/productsAtStore', function(req, res) {
             arrayInventories[docs[index].product_id] = docs[index];
         }
 
-        ProductModel.find(apiQueries.getProductsFromIDs(arrayIds, 'Beer',[
-            "Molson's Brewery of Canada Limited",
-            "Sleeman Brewing & Malting Co",
-            "Labatt Breweries Ontario",
-            "Miller Brewing Company",
-            "Moosehead Breweries Limited",
-            "Heineken's Brouwerijen Nederland BV",
-            "Guinness Brewing Worldwide",
-            "Cerveceria Modelo Sa de Cv",
-            "Diageo Canada Inc",
-            "Coors Brewers Limited",
-            "Cerveceria Cuauhtemoc Moctezuma",
-            "James Ready Brewing Company",
-            "Lakeport Brewing Corporation",
-            "The Brick Brewing Co.",
-            "Miller Brewing Trading Co Ltd"
-        ]), function(err,products){
+        ProductModel.find(apiQueries.getProductsFromIDs(arrayIds, 'Beer', config.api.brewery_exclusions), function(err,products){
             for(var index in products){
                 var product = products[index];
                 product.inventory.quantity = arrayInventories[product.id].quantity;
@@ -124,7 +104,6 @@ app.get('/data/fn/productsAtStore', function(req, res) {
             res.send(products);
         });
     });
-
 });
 
 app.listen(3000, function() {

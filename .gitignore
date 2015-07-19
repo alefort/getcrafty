@@ -57,6 +57,5 @@ sitemap.xml
 sitemap.xml.gz
 .idea
 node_modules
-*.json
 *.csv
 *.zip
