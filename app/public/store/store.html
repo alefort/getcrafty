@@ -15,8 +15,11 @@
     <p ng-if="!store.beers">Loading beer selection...</p>
     <div class="list-group" ng-if="store.beers" ng-repeat="(key, beer) in store.beers | orderBy : 'name'">
       <a ui-sref="beer({beerID: beer.id, storeID: store.id})" class="list-group-item">
-        <h4 class="list-group-item-heading"><i class="fa fa-beer"></i> {{beer.name}} <small>{{beer.price_in_cents / 100 | currency}}</small></h4>
-        {{beer.inventory.quantity}} {{beer.package_unit_type}}s available
+        <h4 class="list-group-item-heading"><i class="fa fa-beer"></i> {{beer.name}}</h4>
+        <h5>{{beer.tertiary_category}}</h5>
+        <span class="pull-left">{{beer.price_in_cents / 100 | currency}}</span>
+        <span class="pull-right">{{beer.inventory.quantity}} {{beer.package_unit_type}}s available</span>
+        <div class="clearfix"></div>
       </a>
     </div>
   </section>

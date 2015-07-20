@@ -25,7 +25,6 @@
 
     responsePromise.success(function(data, status, headers, config) {
       $scope.beer = data[0];
-      console.log($scope.beer);
     });
 
     responsePromise.error(function(data, status, headers, config) {
@@ -44,7 +43,6 @@
 
       responsePromise.success(function(data, status, headers, config) {
         $scope.store = data[0];
-        console.log($scope.store);
       });
 
       responsePromise.error(function(data, status, headers, config) {
