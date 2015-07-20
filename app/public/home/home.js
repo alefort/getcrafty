@@ -47,6 +47,8 @@
           responsePromise,
           config = {};
 
+      postal = postal.replace(' ', '').replace('-', '');
+
       var config = {
         url: 'http://geocoder.ca/?json=1&postal=' + postal
       }
