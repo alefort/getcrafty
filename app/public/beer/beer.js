@@ -18,7 +18,7 @@
 
     // get store info
     var config = {
-      url: 'http://qa.getcrafty.co:3000/api/v1/products/?id=' + beerID,
+      url: 'http://www.getcrafty.co:3000/api/v1/products/?id=' + beerID,
     }
 
     var responsePromise = $http(config);
@@ -36,7 +36,7 @@
 
       // get store info
       var config = {
-        url: 'http://qa.getcrafty.co:3000/api/v1/stores/?id=' + storeID,
+        url: 'http://www.getcrafty.co:3000/api/v1/stores/?id=' + storeID,
       }
 
       var responsePromise = $http(config);
