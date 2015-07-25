@@ -47,5 +47,10 @@
     responsePromise.error(function(data, status, headers, config) {
       $scope.store.beers = false;
     });
+
+    $scope.emptyInventory = function(beer) {
+      if (beer.inventory.quantity === 1) return 10;
+      return 0;
+    }
   });
 })();
