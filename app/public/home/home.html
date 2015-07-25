@@ -27,12 +27,13 @@
         </form>
       </accordion-group>
     </accordion>
-    <p ng-if="!locationData">Loading locations...</p>
-    <div class="list-group" ng-if="locationData" ng-repeat="(key, location) in locationData | limitTo: 12">
+    <p ng-if="!stores">Loading locations...</p>
+    <div class="list-group" ng-if="stores" ng-repeat="(key, store) in stores | limitTo: 12">
       <a ui-sref="store({storeID: location.id})" class="list-group-item">
-        <h2 class="list-group-item-heading">{{location.name}}</h2>
+        <h2 class="list-group-item-heading">{{store.name}}</h2>
         <p class="list-group-item-text">
-          {{location.address_line_1}}
+          {{store.address_line_1}}<br>
+          {{store.location.distance_from_me}}
         </p>
       </a>
     </div>
