@@ -2,4 +2,4 @@
 
 Not much to read here. Just visit our website, discover craft beer.
 
-(http://www.getcrafty.co)
+http://www.getcrafty.co

@@ -66,10 +66,22 @@ restify.serve(router, ProductModel);
 app.use(router);
 
 app.get('/api/v1/storesNear', function(req, res) {
-   StoreModel.find(apiQueries.storesNear(req.query.long, req.query.lat), function(err,docs){
-       res.send(docs);
-   });
+    StoreModel.geoNear({
+            type: "Point",
+            coordinates: [parseFloat(req.query.long), parseFloat(req.query.lat)]
+        },
+        { maxDistance: 50000, spherical: true }, function(err,docs){
+
+            var results = []
+            docs.forEach(function(doc) {
+                doc.obj.location.distance_from_me = doc.dis;
+                results.push(doc.obj);
+            });
+
+            res.send(results);
+    });
 });
+
 
 app.get('/api/v1/inventoryByStore', function(req, res) {
     InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), function(err,docs){

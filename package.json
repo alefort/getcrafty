@@ -1,5 +1,5 @@
 {
-  "name": "Get Crafty",
+  "name": "get-crafty",
   "private": true,
   "version": "0.0.1",
   "description": "Discover Craft Beer",
@@ -31,8 +31,13 @@
     "update-index-async": "node -e \"require('shelljs/global'); sed('-i', /\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/, '//@@NG_LOADER_START@@\\n' + sed(/sourceMappingURL=angular-loader.min.js.map/,'sourceMappingURL=bower_components/angular-loader/angular-loader.min.js.map','app/public/bower_components/angular-loader/angular-loader.min.js') + '\\n//@@NG_LOADER_END@@', 'app/public/index-async.html');\""
   },
   "dependencies": {
-    "body-parser": "^1.12.3",
+    "body-parser": "^1.13.2",
     "express": "^4.12.3",
-    "mongoose": "^4.0.3"
+    "mongoose": "^4.0.3",
+    "express-restify-mongoose": "^1.0.3",
+    "method-override": "^2.3.4",
+    "compression": "^1.5.1",
+    "cors": "^2.7.1",
+    "get-config": "^0.4.7"
   }
 }
