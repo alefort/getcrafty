@@ -29,7 +29,7 @@
     </accordion>
     <p ng-if="!stores">Loading locations...</p>
     <div class="list-group" ng-if="stores" ng-repeat="(key, store) in stores | limitTo: 12">
-      <a ui-sref="store({storeID: location.id})" class="list-group-item">
+      <a ui-sref="store({storeID: store.id})" class="list-group-item">
         <h2 class="list-group-item-heading">{{store.name}}</h2>
         <p class="list-group-item-text">
           {{store.address_line_1}}<br>
