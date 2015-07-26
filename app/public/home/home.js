@@ -16,7 +16,7 @@
         responsePromise,
         config = {};
 
-    $scope.input = {postal: 'M5V1K1'}; // TODO: change to empty string when done testing
+    $scope.input = {postal: ''};
 
     $geolocation.getCurrentPosition({
       timeout: 60000

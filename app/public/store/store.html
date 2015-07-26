@@ -12,6 +12,21 @@
   </section>
   <section class="store-beers">
     <h2>Beers</h2>
+    <accordion>
+      <accordion-group>
+        <accordion-heading>Filters <i class="fa fa-angle-right"></i></accordion-heading>
+        <accordion>
+          <accordion-group>
+            <accordion-heading>Country of Origin <i class="fa fa-angle-right"></i></accordion-heading>
+            Test
+          </accordion-group>
+          <accordion-group>
+            <accordion-heading>Beer Type <i class="fa fa-angle-right"></i></accordion-heading>
+            Test
+          </accordion-group>
+        </accordion>
+      </accordion-group>
+    </accordion>
     <p ng-if="!store.beers">Loading beer selection...</p>
     <div class="list-group" ng-if="store.beers" ng-repeat="(key, beer) in store.beers | orderBy : [emptyInventory, 'name']">
       <a ui-sref="beer({beerID: beer.id, storeID: store.id})" class="list-group-item">
