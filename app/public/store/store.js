@@ -11,41 +11,20 @@
       });
   });
 
-  store.controller('storeCtrl', function($scope, $state, $stateParams, $http) {
+  store.controller('storeCtrl', function($scope, $stateParams, $http, storeInformation, storeBeers) {
     var storeID = ($stateParams.storeID || "");
-    
+    var storePromise = storeInformation.get(storeID);
+    var beersPromise = storeBeers.get(storeID);
+
     $scope.store = {};
-    
-    // get store info
-    var config = {
-      url: 'http://www.getcrafty.co:3000/api/v1/stores/?id=' + storeID,
-    }
-
-    var responsePromise = $http(config);
-
-    responsePromise.success(function(data, status, headers, config) {
-      $scope.store = data[0];
-      console.log($scope.store);
-    });
-
-    responsePromise.error(function(data, status, headers, config) {
-      alert("AJAX failed!");
-    });
-
     $scope.store.beers = {};
 
-    var config = {
-      url: 'http://www.getcrafty.co:3000/api/v1/productsAtStore?store_id=' + storeID,
-    }
-
-    var responsePromise = $http(config);
-
-    responsePromise.success(function(data, status, headers, config) {
-      $scope.store.beers = data;
+    storePromise.success(function(data) {
+      $scope.store = data[0];
     });
 
-    responsePromise.error(function(data, status, headers, config) {
-      $scope.store.beers = false;
+    beersPromise.success(function(data) {
+      $scope.store.beers = data;
     });
 
     $scope.emptyInventory = function(beer) {
@@ -53,4 +32,33 @@
       return 0;
     }
   });
+
+  store.factory('storeInformation', function($http) {
+    var factory = {};
+
+    factory.get = function(storeID) {
+      var config = {
+        url: 'http://www.getcrafty.co:3000/api/v1/stores/?id=' + storeID,
+      }
+
+      return $http(config);
+    }
+
+    return factory;
+  });
+
+  store.factory('storeBeers', function($http) {
+    var factory = {};
+
+    factory.get = function(storeID) {
+      var config = {
+        url: 'http://www.getcrafty.co:3000/api/v1/productsAtStore?store_id=' + storeID,
+      }
+
+      return $http(config);
+    }
+
+    return factory;
+  });
+
 })();

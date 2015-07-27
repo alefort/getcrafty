@@ -1,47 +1,49 @@
-<div class="container">
-  <section class="store-information">
-    <p ng-if="!store">Loading store information...</p>
-    <div class="store-information-inner" ng-if="store">
-      <h1 class="page-heading">{{store.name}}</h1>
-      <address>
-        {{store.address_line_1}}<br>
-        {{store.address_line_2}}<br>
-        {{store.telephone}}
-      </address>
+<div class="store" controller="storeCtrl">
+  <div class="container">
+    <section class="store-information">
+      <p ng-if="!store">Loading store information...</p>
+      <div class="store-information-inner" ng-if="store">
+        <h1 class="page-heading">{{store.name}}</h1>
+        <address>
+          {{store.address_line_1}}<br>
+          {{store.address_line_2}}<br>
+          {{store.telephone}}
+        </address>
+      </div>
+    </section>
+    <section class="store-beers">
+      <h2>Beers</h2>
+      <accordion>
+        <accordion-group>
+          <accordion-heading>Filters <i class="fa fa-angle-right"></i></accordion-heading>
+          <accordion>
+            <accordion-group>
+              <accordion-heading>Country of Origin <i class="fa fa-angle-right"></i></accordion-heading>
+              Test
+            </accordion-group>
+            <accordion-group>
+              <accordion-heading>Beer Type <i class="fa fa-angle-right"></i></accordion-heading>
+              Test
+            </accordion-group>
+          </accordion>
+        </accordion-group>
+      </accordion>
+      <p ng-if="!store.beers">Loading beer selection...</p>
+      <div class="list-group" ng-if="store.beers" ng-repeat="(key, beer) in store.beers | orderBy : [emptyInventory, 'name']">
+        <a ui-sref="beer({beerID: beer.id, storeID: store.id})" class="list-group-item">
+          <h4 class="list-group-item-heading"><i class="fa fa-beer"></i> {{beer.name}} <small>by {{beer.producer_name}}</small></h4>
+          <h5>{{beer.varietal}}</h5>
+          <span class="pull-left">{{beer.price_in_cents / 100 | currency}}</span>
+          <span class="pull-right">
+            <span class="no-inventory" ng-if="beer.inventory.quantity === 1">Maybe out of stock</span>
+            <span class="inventory" ng-if="beer.inventory.quantity > 1">{{beer.inventory.quantity}} {{beer.package_unit_type}}s available</span>
+          </span>
+          <div class="clearfix"></div>
+        </a>
+      </div>
+    </section>
+    <div class="action-bar">
+      <a ui-sref="main" class="btn btn-primary btn-action"><i class="fa fa-angle-left"></i> Select a new store</a>
     </div>
-  </section>
-  <section class="store-beers">
-    <h2>Beers</h2>
-    <accordion>
-      <accordion-group>
-        <accordion-heading>Filters <i class="fa fa-angle-right"></i></accordion-heading>
-        <accordion>
-          <accordion-group>
-            <accordion-heading>Country of Origin <i class="fa fa-angle-right"></i></accordion-heading>
-            Test
-          </accordion-group>
-          <accordion-group>
-            <accordion-heading>Beer Type <i class="fa fa-angle-right"></i></accordion-heading>
-            Test
-          </accordion-group>
-        </accordion>
-      </accordion-group>
-    </accordion>
-    <p ng-if="!store.beers">Loading beer selection...</p>
-    <div class="list-group" ng-if="store.beers" ng-repeat="(key, beer) in store.beers | orderBy : [emptyInventory, 'name']">
-      <a ui-sref="beer({beerID: beer.id, storeID: store.id})" class="list-group-item">
-        <h4 class="list-group-item-heading"><i class="fa fa-beer"></i> {{beer.name}} <small>by {{beer.producer_name}}</small></h4>
-        <h5>{{beer.varietal}}</h5>
-        <span class="pull-left">{{beer.price_in_cents / 100 | currency}}</span>
-        <span class="pull-right">
-          <span class="no-inventory" ng-if="beer.inventory.quantity === 1">Maybe out of stock</span>
-          <span class="inventory" ng-if="beer.inventory.quantity > 1">{{beer.inventory.quantity}} {{beer.package_unit_type}}s available</span>
-        </span>
-        <div class="clearfix"></div>
-      </a>
-    </div>
-  </section>
-  <div class="action-bar">
-    <a ui-sref="main" class="btn btn-primary btn-action"><i class="fa fa-angle-left"></i> Select a new store</a>
   </div>
 </div>
