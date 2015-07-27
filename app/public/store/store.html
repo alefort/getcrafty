@@ -17,13 +17,11 @@
         <accordion-group>
           <accordion-heading>Filters <i class="fa fa-angle-right"></i></accordion-heading>
           <accordion>
-            <accordion-group>
-              <accordion-heading>Country of Origin <i class="fa fa-angle-right"></i></accordion-heading>
-              Test
-            </accordion-group>
-            <accordion-group>
-              <accordion-heading>Beer Type <i class="fa fa-angle-right"></i></accordion-heading>
-              Test
+            <accordion-group ng-repeat="filterType in filters">
+              <accordion-heading>{{filterType.filter_type_title}} <i class="fa fa-angle-right"></i></accordion-heading>
+              <div class="btn-group">
+                <label ng-repeat="(key, filter) in filterType.filters" class="btn btn-primary" ng-model="filter.filter_active" btn-checkbox>{{key}}</label>
+              </div>
             </accordion-group>
           </accordion>
         </accordion-group>

@@ -11,7 +11,7 @@
       });
   });
 
-  store.controller('storeCtrl', function($scope, $stateParams, $http, storeInformation, storeBeers) {
+  store.controller('storeCtrl', function($scope, $stateParams, $http, storeInformation, storeBeers, beerFilters) {
     var storeID = ($stateParams.storeID || "");
     var storePromise = storeInformation.get(storeID);
     var beersPromise = storeBeers.get(storeID);
@@ -25,6 +25,10 @@
 
     beersPromise.success(function(data) {
       $scope.store.beers = data;
+      $scope.filters = beerFilters.get($scope.store.beers);
+      console.log('yay');
+      console.log($scope.filters);
+      console.log('yay');
     });
 
     $scope.emptyInventory = function(beer) {
@@ -56,6 +60,45 @@
       }
 
       return $http(config);
+    }
+
+    return factory;
+  });
+
+  store.factory('beerFilters', function(storeBeers) {
+    var factory = {};
+
+    factory.get = function(beers) {
+      var filters = {};
+
+      filters['styles'] = {
+        filter_type_title: 'Beer Styles',
+        filter_type: 'styles',
+        filter_type_active: false,
+        filters: {},
+      };
+
+      angular.forEach(beers, function(beer) {
+        var beerStyle = beer.varietal;
+
+        if (beerStyle === "") {
+          beerStyle = beer.tertiary_category;
+        }
+
+        if (beerStyle === "") {
+          beerStyle = beer.secondary_category;
+        }
+
+        if (typeof filters.styles.filters[beerStyle] === 'undefined') {
+          filters.styles.filters[beerStyle] = {
+            filter_name: beerStyle,
+            filter_active: false,
+          }
+        }
+      });
+
+      //console.log(filters);
+      return filters;
     }
 
     return factory;
