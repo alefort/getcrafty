@@ -31,6 +31,13 @@
       if (beer.inventory.quantity === 1) return 10;
       return 0;
     }
+
+    $scope.getBeerStyle = function(beer) {
+      if (beer.varietal !== "") return beer.varietal;
+      if (beer.tertiary_category !== "") return beer.tertiary_category;
+      if (beer.secondary_category !== "") return beer.secondary_category;
+      return beer.primary_category;
+    }
   });
 
   store.factory('storeInformation', function($http) {
