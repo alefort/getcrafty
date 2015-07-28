@@ -18,6 +18,7 @@
 
     $scope.store = {};
     $scope.store.beers = {};
+    $scope.searchText = null;
 
     storePromise.success(function(data) {
       $scope.store = data[0];

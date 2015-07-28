@@ -7,6 +7,7 @@
     'ui.bootstrap',
     'ngGeolocation',
     'angular-loading-bar',
+    'angular-toArrayFilter',
     'getCrafty.home',
     'getCrafty.beer',
     'getCrafty.beerSearch',

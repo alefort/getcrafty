@@ -27,7 +27,7 @@
         </div>
       </form>
       <p ng-if="!store.beers">Loading beer selection...</p>
-      <div class="list-group" ng-if="store.beers" ng-repeat="(key, beer) in store.beers | filter: searchText | orderBy: [emptyInventory, 'name']">
+      <div class="list-group" ng-if="store.beers" ng-repeat="(key, beer) in store.beers | toArray | filter: searchText | orderBy: [emptyInventory, 'name']">
         <a ui-sref="beer({beerID: beer.id, storeID: store.id})" class="list-group-item">
           <h4 class="list-group-item-heading"><i class="fa fa-beer"></i> {{beer.name}} <small>by {{beer.producer_name}}</small></h4>
           <h5>{{getBeerStyle(beer)}}</h5>
