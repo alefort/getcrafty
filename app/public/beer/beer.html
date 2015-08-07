@@ -5,10 +5,14 @@
     <h2>{{beer.tertiary_category}}</h2>
     <p>A {{beer.style}} beer by {{beer.producer_name}} ({{beer.origin}})</p>
     <a href="{{beer.image_url}}"><img ng-src="{{beer.image_thumb_url}}"></a><br>
-    <h3>Serving Suggestion:</h3>
-    <p>{{beer.serving_suggestion}}</p>
-    <h3>Tasting Note:</h3>
-    <p>{{beer.tasting_note}}</p>
+    <div class="serving-suggestion" ng-if="beer.serving_suggestion.length">
+      <h3>Serving Suggestion:</h3>
+      <p>{{beer.serving_suggestion}}</p>
+    </div>
+    <div class="tasting-note" ng-if="beer.tasting_note.length">
+      <h3>Tasting Note:</h3>
+      <p>{{beer.tasting_note}}</p>
+    </div>
     <strong>Inventory:</strong> {{beer.inventory_count}}<br>
     <strong>Package:</strong> {{beer.package}}<br>
     <strong>Alcohol Content:</strong> {{beer.alcohol_content / 100}}%<br>
