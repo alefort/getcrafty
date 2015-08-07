@@ -58,10 +58,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(cors());
 
+var access_control = {
+    prereq: function(req) {
+        // Disallow POST PUT DELETE
+        return false;
+    }
+};
+
 var router = express.Router();
-restify.serve(router, InventoryModel);
-restify.serve(router, StoreModel);
-restify.serve(router, ProductModel);
+restify.serve(router, InventoryModel, access_control);
+restify.serve(router, StoreModel, access_control);
+restify.serve(router, ProductModel, access_control);
 
 app.use(router);
 
@@ -71,7 +78,6 @@ app.get('/api/v1/storesNear', function(req, res) {
             coordinates: [parseFloat(req.query.long), parseFloat(req.query.lat)]
         },
         { maxDistance: 50000, spherical: true }, function(err,docs){
-
             var results = []
             docs.forEach(function(doc) {
                 doc.obj.location.distance_from_me = doc.dis;
@@ -81,7 +87,6 @@ app.get('/api/v1/storesNear', function(req, res) {
             res.send(results);
     });
 });
-
 
 app.get('/api/v1/inventoryByStore', function(req, res) {
     InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), function(err,docs){
