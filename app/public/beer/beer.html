@@ -4,7 +4,6 @@
     <h1>{{beer.name}} <small>{{beer.price_in_cents / 100 | currency}}</small></h1>
     <h2>{{beer.tertiary_category}}</h2>
     <p>A {{beer.style}} beer by {{beer.producer_name}} ({{beer.origin}})</p>
-    <strong>Tags:</strong> {{beer.tags}}<br>
     <a href="{{beer.image_url}}"><img ng-src="{{beer.image_thumb_url}}"></a><br>
     <h3>Serving Suggestion:</h3>
     <p>{{beer.serving_suggestion}}</p>
