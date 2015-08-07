@@ -19,6 +19,10 @@ body {
   font-size: 18px;
 }
 
+.container {
+  max-width: 900px;
+}
+
 .jumbotron {
   text-align: center;
 
@@ -28,7 +32,7 @@ body {
   }
 
   img {
-    max-width: 100%;
+    max-width: 500px;
     height: auto;
   }
 }
@@ -91,5 +95,30 @@ h6 {
 
   .btn-new-beer {
     padding: 15px;
+  }
+}
+
+.form-filter {
+  margin-bottom: 30px;
+
+  .btn {
+    background: @blue-dark;
+    border-radius: 0;
+    border: 1px solid @blue-dark;
+    color: @white;
+    box-shadow: none;
+    padding: 9px 15px 8px;
+
+    &:hover,
+    &:focus {
+      background-color: @grey-dark;
+    }
+  }
+
+  .form-control {
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 18px;
+    height: auto;
   }
 }
