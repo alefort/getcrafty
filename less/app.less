@@ -1,11 +1,7 @@
-@ash-dark: #313234;
-@brown: #883222;
-@beige: #ab9e90;
 @white: #fff;
-
-@primary: @ash-dark;
-
 @grey-dark: #313234;
+@black: #000;
+
 @umber: #883222;
 @beige: #ab9e90;
 
@@ -15,9 +11,12 @@
 @green-light: #687C70;
 @green-dark: #2E4135;
 
+@primary: @grey-dark;
+
 body {
   font-family: 'Roboto', sans-serif;
   padding-bottom: 100px;
+  font-size: 18px;
 }
 
 .jumbotron {
@@ -58,8 +57,39 @@ h6 {
   background-color: @white;
 
   .btn {
+    border-radius: 0;
+    border: 0;
+    background: @blue-dark;
+    color: @white;
+    font-family: 'Roboto';
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 18px;
+    padding: 15px 30px;
+    line-height: 1.1;
+
+    &:hover,
+    &:focus {
+      background-color: @grey-dark;
+    }
+
+    i {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 12px;
+      position: relative;
+      bottom: 2px;
+      margin-right: 3px;
+    }
+
     small {
       display: block;
+      text-transform: none;
+      font-weight: normal;
     }
+  }
+
+  .btn-new-beer {
+    padding: 15px;
   }
 }

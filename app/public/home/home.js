@@ -16,7 +16,7 @@
         responsePromise,
         config = {};
 
-    $scope.input = {postal: 'M5V1K1'}; // TODO: change to empty string when done testing
+    $scope.input = {postal: ''};
 
     $geolocation.getCurrentPosition({
       timeout: 60000
@@ -30,11 +30,12 @@
           config = {};
 
         config.url = 'http://www.getcrafty.co:3000/api/v1/storesNear?lat=' + lat + '&long=' + lon;
-        $scope.locationData = {};
+        $scope.stores = {};
         responsePromise = $http(config);
 
         responsePromise.success(function(data, status, headers, config) {
-          $scope.locationData = data;
+          $scope.stores = data;
+          console.log(data);
         });
 
         responsePromise.error(function(data, status, headers, config) {

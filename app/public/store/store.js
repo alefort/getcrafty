@@ -11,40 +11,62 @@
       });
   });
 
-  store.controller('storeCtrl', function($scope, $state, $stateParams, $http) {
+  store.controller('storeCtrl', function($scope, $stateParams, $http, storeInformation, storeBeers) {
     var storeID = ($stateParams.storeID || "");
-    
+    var storePromise = storeInformation.get(storeID);
+    var beersPromise = storeBeers.get(storeID);
+
     $scope.store = {};
-    
-    // get store info
-    var config = {
-      url: 'http://www.getcrafty.co:3000/api/v1/stores/?id=' + storeID,
-    }
+    $scope.store.beers = {};
+    $scope.searchText = null;
 
-    var responsePromise = $http(config);
-
-    responsePromise.success(function(data, status, headers, config) {
+    storePromise.success(function(data) {
       $scope.store = data[0];
     });
 
-    responsePromise.error(function(data, status, headers, config) {
-      alert("AJAX failed!");
-    });
-
-    $scope.store.beers = {};
-
-    var config = {
-      url: 'http://www.getcrafty.co:3000/api/v1/productsAtStore?store_id=' + storeID,
-    }
-
-    var responsePromise = $http(config);
-
-    responsePromise.success(function(data, status, headers, config) {
+    beersPromise.success(function(data) {
       $scope.store.beers = data;
     });
 
-    responsePromise.error(function(data, status, headers, config) {
-      $scope.store.beers = false;
-    });
+    $scope.emptyInventory = function(beer) {
+      if (beer.inventory.quantity === 1) return 10;
+      return 0;
+    }
+
+    $scope.getBeerStyle = function(beer) {
+      if (beer.varietal !== "") return beer.varietal;
+      if (beer.tertiary_category !== "") return beer.tertiary_category;
+      if (beer.secondary_category !== "") return beer.secondary_category;
+      return beer.primary_category;
+    }
   });
+
+  store.factory('storeInformation', function($http) {
+    var factory = {};
+
+    factory.get = function(storeID) {
+      var config = {
+        url: 'http://www.getcrafty.co:3000/api/v1/stores/?id=' + storeID,
+      }
+
+      return $http(config);
+    }
+
+    return factory;
+  });
+
+  store.factory('storeBeers', function($http) {
+    var factory = {};
+
+    factory.get = function(storeID) {
+      var config = {
+        url: 'http://www.getcrafty.co:3000/api/v1/productsAtStore?store_id=' + storeID,
+      }
+
+      return $http(config);
+    }
+
+    return factory;
+  });
+
 })();
