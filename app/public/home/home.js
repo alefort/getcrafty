@@ -35,7 +35,6 @@
 
         responsePromise.success(function(data, status, headers, config) {
           $scope.stores = data;
-          console.log(data);
         });
 
         responsePromise.error(function(data, status, headers, config) {
@@ -45,24 +44,45 @@
 
     $scope.postalSearch = function(postal) {
       var coords = {},
+          postal_pattern = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/,
+          city_pattern = /^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/,
           responsePromise,
           config = {};
+      
+      if (postal.match(postal_pattern)) {
+        postal = postal.replace(' ', '').replace('-', '');
 
-      postal = postal.replace(' ', '').replace('-', '');
+        var config = {
+          url: 'http://geocoder.ca/?json=1&postal=' + postal
+        }
 
-      var config = {
-        url: 'http://geocoder.ca/?json=1&postal=' + postal
+        var responsePromise = $http(config);
+
+        responsePromise.success(function(data, status, headers, config) {
+          $scope.getLocations(data.latt, data.longt);
+        });
+
+        responsePromise.error(function(data, status, headers, config) {
+          alert("AJAX failed!");
+        });
+      } else if (postal.match(city_pattern)) {
+
+        var config = {
+          url: 'http://geocoder.ca/?json=1&city=' + postal
+        }
+
+        var responsePromise = $http(config);
+
+        responsePromise.success(function(data, status, headers, config) {
+          $scope.getLocations(data.latt, data.longt);
+        });
+
+        responsePromise.error(function(data, status, headers, config) {
+          alert("AJAX failed!");
+        });
+      } else {
+        console.log('error');
       }
-
-     var responsePromise = $http(config);
-
-      responsePromise.success(function(data, status, headers, config) {
-        $scope.getLocations(data.latt, data.longt);
-      });
-
-      responsePromise.error(function(data, status, headers, config) {
-        alert("AJAX failed!");
-      });
     }
   });
 })();
