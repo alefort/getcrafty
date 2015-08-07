@@ -34,7 +34,7 @@
           <span class="pull-left">{{beer.price_in_cents / 100 | currency}}</span>
           <span class="pull-right">
             <span class="no-inventory" ng-if="beer.inventory.quantity === 1">Maybe out of stock</span>
-            <span class="inventory" ng-if="beer.inventory.quantity > 1">{{beer.inventory.quantity}} {{beer.package_unit_type}}s available</span>
+            <span class="inventory" ng-if="beer.inventory.quantity > 1">{{getInventory(beer)}}</span>
           </span>
           <div class="clearfix"></div>
         </a>
