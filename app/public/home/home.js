@@ -35,6 +35,7 @@
 
         responsePromise.success(function(data, status, headers, config) {
           $scope.stores = data;
+          console.log(data);
         });
 
         responsePromise.error(function(data, status, headers, config) {
