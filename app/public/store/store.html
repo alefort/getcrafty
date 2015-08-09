@@ -4,6 +4,24 @@
       <p ng-if="!store">Loading store information...</p>
       <div class="store-information-inner" ng-if="store">
         <h1 class="page-heading">{{store.name}}</h1>
+        <div class="badges">
+          <span class="badge" ng-if="store.has_parking">
+            P
+            <span class="sr-only">Location has parking</span>
+          </span>
+          <span class="badge" ng-if="store.has_transit_access">
+            <i class="fa fa-bus"></i>
+            <span class="sr-only">Location has transit access</span>
+          </span>
+          <span class="badge" ng-if="store.has_wheelchair_accessability">
+            <i class="fa fa-wheelchair"></i>
+            <span class="sr-only">Location has wheelchair accessibility</span>
+          </span>
+          <span class="badge" ng-if="store.has_beer_cold_room">
+            <i class="fa fa-diamond"></i>
+            <span class="sr-only">Location has a cold beer room</span>
+          </span>
+        </div>
         <address>
           <div class="address-1" ng-if="store.address_line_1.length">{{store.address_line_1}}</div>
           <div class="address-2" ng-if="store.address_line_2.length">{{store.address_line_2}}</div>
@@ -17,7 +35,7 @@
         <div class="form-group">
           <label class="sr-only" for="search">Search</label>
           <div class="input-group">
-            <input type="text" ng-model="searchText" class="form-control" id="search" name="search" placeholder="Narrow your results...">
+            <input type="text" ng-model="searchText" class="form-control" id="search" name="search" placeholder="Refine your beers...">
             <span class="input-group-btn">
               <button class="btn btn-primary" role="button=" type="submit">
                 <span class="btn-text sr-only">Search</span>
