@@ -26,6 +26,7 @@
 
     beersPromise.success(function(data) {
       $scope.store.beers = data;
+      console.log(data);
     });
 
     $scope.emptyInventory = function(beer) {
