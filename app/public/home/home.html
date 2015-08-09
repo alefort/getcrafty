@@ -30,11 +30,12 @@
     <div class="list-group" ng-if="stores" ng-repeat="(key, store) in stores | limitTo: 12">
       <a ui-sref="store({storeID: store.id})" class="list-group-item">
         <h2 class="list-group-item-heading">{{store.name}}</h2>
-        <p class="list-group-item-text">
-          {{store.address_line_1}}<br>
-          {{store.city}}<br>
+        <div class="list-group-item-text">
+          <div class="address-1" ng-if="store.address_line_1.length">{{store.address_line_1}}</div>
+          <div class="address-2" ng-if="store.address_line_2.length">{{store.address_line_2}}</div>
+          <div class="city" ng-if="store.city.length">{{store.city}}, ON&nbsp;&nbsp;{{store.postal_code}}</div>
           <strong>{{store.location.distance_from_me / 1000 | number: 1}} km away</strong>
-        </p>
+        </div>
       </a>
     </div>
   </section>

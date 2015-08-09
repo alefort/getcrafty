@@ -5,9 +5,10 @@
       <div class="store-information-inner" ng-if="store">
         <h1 class="page-heading">{{store.name}}</h1>
         <address>
-          {{store.address_line_1}}<br>
-          {{store.address_line_2}}<br>
-          {{store.telephone}}
+          <div class="address-1" ng-if="store.address_line_1.length">{{store.address_line_1}}</div>
+          <div class="address-2" ng-if="store.address_line_2.length">{{store.address_line_2}}</div>
+          <div class="city" ng-if="store.city.length">{{store.city}}, ON&nbsp;&nbsp;{{store.postal_code}}</div>
+          <a ng-if="store.telephone.length" href="tel:{{store.telephone}}">{{store.telephone}}</a>
         </address>
       </div>
     </section>

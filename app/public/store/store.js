@@ -22,6 +22,7 @@
 
     storePromise.success(function(data) {
       $scope.store = data[0];
+      console.log(data[0]);
     });
 
     beersPromise.success(function(data) {
