@@ -30,7 +30,7 @@
 
       storePromise.success(function(data) {
         $scope.store = data[0];
-        console.log(data[0]);
+        //console.log(data[0]);
       });
 
       storeBeerPromise.success(function(data) {
@@ -73,10 +73,8 @@
 
     factory.get = function(storeID, beerID) {
       var config = {
-        url: 'http://www.getcrafty.co:3000/api/v1/productsAtStore?store_id=' + storeID + '&id=' + beerID,
+        url: 'http://www.getcrafty.co:3000/api/v1/inventories?store_id=' + storeID + '&product_id=' + beerID,
       }
-
-      console.log(config.url);
 
       return $http(config);
     }

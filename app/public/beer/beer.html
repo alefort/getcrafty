@@ -13,7 +13,10 @@
       <h3>Tasting Note:</h3>
       <p>{{beer.tasting_note}}</p>
     </div>
-    <strong>Inventory:</strong> {{beer.inventory_count}}<br>
+    <div class="beer-inventory">
+      <span ng-if="store" class="beer-inventory-store"><strong>Inventory:</strong> {{store_beer.quantity}} in store</span>
+      <span ng-if="!store" class="beer-inventory-global"><strong>Inventory:</strong> {{beer.inventory_count}} across all stores</span>
+    </div>
     <strong>Package:</strong> {{beer.package}}<br>
     <strong>Alcohol Content:</strong> {{beer.alcohol_content / 100}}%<br>
     <strong>Updated:</strong> {{beer.updated_at | date:'MMMM d, yyyy'}}<br>
