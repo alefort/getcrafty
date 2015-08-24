@@ -173,9 +173,9 @@ var lcboLoader = {
 
         return record;
     },
-    loadDataset: function(schema, schemaName, fileName){
+    loadDataset: function(schema, schemaName, fileName, deleteQuery){
         /* First let's wipe the collection clean */
-        schema.remove({}, function(error){
+        schema.remove(deleteQuery, function(error){
             if (error) {
                 lcboLoader.error(error);
                 process.exit(1);
@@ -212,13 +212,19 @@ var lcboLoader = {
         });
     },
     loadStores: function(){
-        eventEmitter.emit('load_dataset', lcboLoader.mongo.store.model, 'stores', config.loader.datapath + '/stores.csv');
+        eventEmitter.emit('load_dataset', lcboLoader.mongo.store.model, 'stores', config.loader.datapath + '/stores.csv', {});
     },
     loadProducts: function(){
-        eventEmitter.emit('load_dataset', lcboLoader.mongo.product.model, 'products', config.loader.datapath + '/products.csv');
+        eventEmitter.emit('load_dataset', lcboLoader.mongo.product.model, 'products', config.loader.datapath + '/products.csv', {});
     },
     loadInventories: function(){
-        eventEmitter.emit('load_dataset', lcboLoader.mongo.inventory.model, 'inventories', config.loader.datapath + '/inventories.csv');
+        var oneWeekAgo = new Date();
+        oneWeekAgo.setDate(oneWeekAgo.getDate() -7);
+
+        var today = new Date();
+        var date_query = {updated_at: {$lt: oneWeekAgo}};
+
+        eventEmitter.emit('load_dataset', lcboLoader.mongo.inventory.model, 'inventories', config.loader.datapath + '/inventories.csv', {});
     },
     datasetLoaded: function(schemaName){
         switch(schemaName){
