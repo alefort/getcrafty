@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css">
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//i.icomoon.io/public/49c4a02d1c/GetCrafty/style.css">
     <link rel="stylesheet" href="css/app.css">
     <link rel="apple-touch-icon" sizes="57x57" href="/app/public/icons/apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/app/public/icons/apple-touch-icon-60x60.png">
@@ -47,8 +47,38 @@
       ga('send', 'pageview');
     </script>
   </head>
-  <body>
+  <body ng-class="{'menu-open': menuOpen}">
     <main class="main" id="main">
+      <header>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" ng-class="{'collapsed': !menuOpen}" ng-model="menuOpen" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <nav class="main-menu">
+        <ul class="nav nav-pills nav-stacked">
+          <li role="presentation">
+            <a href="#">Home</a>
+          </li>
+          <li role="presentation">
+            <a href="#">Login/Register</a>
+          </li>
+          <li role="presentation">
+            <a href="#">About Get Crafty</a>
+          </li>
+          <li role="presentation">
+            <a href="#">Privacy Policy/Terms of Use</a>
+          </li>
+        </ul>
+      </nav>
       <div ui-view></div>
     </main>
     <script src="bower_components/angular/angular.js"></script>

@@ -9,16 +9,16 @@
   <section class="home-locations">
     <accordion>
       <accordion-group>
-        <accordion-heading>Or search by postal code <i class="fa fa-angle-right"></i></accordion-heading>
+        <accordion-heading>Or search by location <i class="icon-angle-right"></i></accordion-heading>
         <form class="form-inline" ng-submit="postalSearch(input.postal)">
           <div class="form-group">
-            <label class="sr-only" for="postal-code">Postal Code</label>
+            <label class="sr-only" for="postal-code">Postal Code or City</label>
             <div class="input-group">
-              <input type="text" ng-model="input.postal" ng-pattern="/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/" pattern="^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$" class="form-control" id="postal-code" name="postal-code" placeholder="Postal Code" required>
+              <input type="text" ng-model="input.postal" class="form-control" id="postal-code" name="postal-code" placeholder="Postal / City" required>
               <span class="input-group-btn">
                 <button class="btn btn-primary" role="button=" type="submit">
                   <span class="btn-text sr-only">Search</span>
-                  <i class="fa fa-search"></i>
+                  <i class="icon-search"></i>
                 </button>
               </span>
             </div>
@@ -29,11 +29,31 @@
     <p ng-if="!stores">Loading locations...</p>
     <div class="list-group" ng-if="stores" ng-repeat="(key, store) in stores | limitTo: 12">
       <a ui-sref="store({storeID: store.id})" class="list-group-item">
-        <h2 class="list-group-item-heading">{{store.name}}</h2>
-        <p class="list-group-item-text">
-          {{store.address_line_1}}<br>
+        <h3 class="list-group-item-heading">{{store.name}}</h3>
+        <div class="list-group-item-text">
+          <div class="badges">
+            <span class="badge" ng-if="store.has_parking">
+              P
+              <span class="sr-only">Location has parking</span>
+            </span>
+            <span class="badge" ng-if="store.has_transit_access">
+              <i class="icon-bus"></i>
+              <span class="sr-only">Location has transit access</span>
+            </span>
+            <span class="badge" ng-if="store.has_wheelchair_accessability">
+              <i class="icon-wheelchair"></i>
+              <span class="sr-only">Location has wheelchair accessibility</span>
+            </span>
+            <span class="badge" ng-if="store.has_beer_cold_room">
+              <i class="icon-weather-snow"></i>
+              <span class="sr-only">Location has a cold beer room</span>
+            </span>
+          </div>
+          <div class="address-1" ng-if="store.address_line_1.length">{{store.address_line_1}}</div>
+          <div class="address-2" ng-if="store.address_line_2.length">{{store.address_line_2}}</div>
+          <div class="city" ng-if="store.city.length">{{store.city}}, ON&nbsp;&nbsp;{{store.postal_code}}</div>
           <strong>{{store.location.distance_from_me / 1000 | number: 1}} km away</strong>
-        </p>
+        </div>
       </a>
     </div>
   </section>

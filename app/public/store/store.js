@@ -22,10 +22,12 @@
 
     storePromise.success(function(data) {
       $scope.store = data[0];
+      console.log(data[0]);
     });
 
     beersPromise.success(function(data) {
       $scope.store.beers = data;
+      console.log(data);
     });
 
     $scope.emptyInventory = function(beer) {
@@ -38,6 +40,14 @@
       if (beer.tertiary_category !== "") return beer.tertiary_category;
       if (beer.secondary_category !== "") return beer.secondary_category;
       return beer.primary_category;
+    }
+
+    $scope.getInventory = function(beer) {
+      if (beer.package.indexOf('x') !== -1) {
+        return beer.inventory.quantity + ' ' + beer.package.charAt(0) + '-packs available';
+      }
+
+      return beer.inventory.quantity + ' ' + beer.package_unit_type + 's available';
     }
   });
 

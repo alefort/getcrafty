@@ -4,20 +4,26 @@
     <h1>{{beer.name}} <small>{{beer.price_in_cents / 100 | currency}}</small></h1>
     <h2>{{beer.tertiary_category}}</h2>
     <p>A {{beer.style}} beer by {{beer.producer_name}} ({{beer.origin}})</p>
-    <strong>Tags:</strong> {{beer.tags}}<br>
     <a href="{{beer.image_url}}"><img ng-src="{{beer.image_thumb_url}}"></a><br>
-    <h3>Serving Suggestion:</h3>
-    <p>{{beer.serving_suggestion}}</p>
-    <h3>Tasting Note:</h3>
-    <p>{{beer.tasting_note}}</p>
-    <strong>Inventory:</strong> {{beer.inventory_count}}<br>
+    <div class="serving-suggestion" ng-if="beer.serving_suggestion.length">
+      <h3>Serving Suggestion:</h3>
+      <p>{{beer.serving_suggestion}}</p>
+    </div>
+    <div class="tasting-note" ng-if="beer.tasting_note.length">
+      <h3>Tasting Note:</h3>
+      <p>{{beer.tasting_note}}</p>
+    </div>
+    <div class="beer-inventory">
+      <span ng-if="store" class="beer-inventory-store"><strong>Inventory:</strong> {{store_beer.quantity}} in store</span>
+      <span ng-if="!store" class="beer-inventory-global"><strong>Inventory:</strong> {{beer.inventory_count}} across all stores</span>
+    </div>
     <strong>Package:</strong> {{beer.package}}<br>
     <strong>Alcohol Content:</strong> {{beer.alcohol_content / 100}}%<br>
     <strong>Updated:</strong> {{beer.updated_at | date:'MMMM d, yyyy'}}<br>
   </div>
   <div ng-if="store" class="action-bar">
     <a ui-sref="store({storeID: store.id})" class="btn btn-primary btn-action btn-new-beer">
-      <span class="btn-text"><i class="fa fa-angle-left"></i> Select a new beer</span>
+      <span class="btn-text"><i class="icon-angle-left"></i> Select a new beer</span>
       <small>from {{store.name}}</small>
     </a>
   </div>

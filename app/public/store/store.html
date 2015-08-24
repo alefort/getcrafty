@@ -4,44 +4,64 @@
       <p ng-if="!store">Loading store information...</p>
       <div class="store-information-inner" ng-if="store">
         <h1 class="page-heading">{{store.name}}</h1>
+        <div class="badges">
+          <span class="badge" ng-if="store.has_parking">
+            P
+            <span class="sr-only">Location has parking</span>
+          </span>
+          <span class="badge" ng-if="store.has_transit_access">
+            <i class="icon-bus"></i>
+            <span class="sr-only">Location has transit access</span>
+          </span>
+          <span class="badge" ng-if="store.has_wheelchair_accessability">
+            <i class="icon-wheelchair"></i>
+            <span class="sr-only">Location has wheelchair accessibility</span>
+          </span>
+          <span class="badge" ng-if="store.has_beer_cold_room">
+            <i class="icon-weather-snow"></i>
+            <span class="sr-only">Location has a cold beer room</span>
+          </span>
+        </div>
         <address>
-          {{store.address_line_1}}<br>
-          {{store.address_line_2}}<br>
-          {{store.telephone}}
+          <div class="address-1" ng-if="store.address_line_1.length">{{store.address_line_1}}</div>
+          <div class="address-2" ng-if="store.address_line_2.length">{{store.address_line_2}}</div>
+          <div class="city" ng-if="store.city.length">{{store.city}}, ON&nbsp;&nbsp;{{store.postal_code}}</div>
+          <a ng-if="store.telephone.length" href="tel:{{store.telephone}}">{{store.telephone}}</a>
         </address>
       </div>
     </section>
     <section class="store-beers">
-      <form class="form-inline" ng-submit="postalSearch(input.postal)">
+      <form class="form-filter form-inline" ng-submit="postalSearch(input.postal)">
         <div class="form-group">
           <label class="sr-only" for="search">Search</label>
           <div class="input-group">
-            <input type="text" ng-model="searchText" class="form-control" id="search" name="search" placeholder="Search...">
+            <input type="text" ng-model="searchText" class="form-control" id="search" name="search" placeholder="Refine your beers...">
             <span class="input-group-btn">
               <button class="btn btn-primary" role="button=" type="submit">
                 <span class="btn-text sr-only">Search</span>
-                <i class="fa fa-search"></i>
+                <i class="icon-search"></i>
               </button>
             </span>
           </div>
         </div>
       </form>
       <p ng-if="!store.beers">Loading beer selection...</p>
-      <div class="list-group" ng-if="store.beers" ng-repeat="(key, beer) in store.beers | toArray | filter: searchText | orderBy: [emptyInventory, 'name']">
-        <a ui-sref="beer({beerID: beer.id, storeID: store.id})" class="list-group-item">
-          <h4 class="list-group-item-heading"><i class="fa fa-beer"></i> {{beer.name}} <small>by {{beer.producer_name}}</small></h4>
-          <h5>{{getBeerStyle(beer)}}</h5>
-          <span class="pull-left">{{beer.price_in_cents / 100 | currency}}</span>
-          <span class="pull-right">
+      <div class="list-group" ng-if="store.beers">
+        <a ui-sref="beer({beerID: beer.id, storeID: store.id})" class="list-group-item" ng-repeat="(key, beer) in store.beers | toArray | filter: searchText | orderBy: [emptyInventory, 'name']">
+          <h4 class="list-group-item-heading"><i class="icon-beer"></i> {{beer.name}} <small>by {{beer.producer_name}}</small> <span class="badge" ng-if="beer.is_new">New</span></h4>
+          <h5>{{getBeerStyle(beer)}} - <strong>{{beer.alcohol_content / 100}}%</strong></h5>
+          <h5>
+            {{beer.package}} -
             <span class="no-inventory" ng-if="beer.inventory.quantity === 1">Maybe out of stock</span>
-            <span class="inventory" ng-if="beer.inventory.quantity > 1">{{beer.inventory.quantity}} {{beer.package_unit_type}}s available</span>
-          </span>
+            <span class="inventory" ng-if="beer.inventory.quantity > 1">{{getInventory(beer)}}</span>
+          </h5>
+          <strong>{{beer.price_in_cents / 100 | currency}}</strong></span>
           <div class="clearfix"></div>
         </a>
       </div>
     </section>
     <div class="action-bar">
-      <a ui-sref="main" class="btn btn-primary btn-action"><i class="fa fa-angle-left"></i> Select a new store</a>
+      <a ui-sref="main" class="btn btn-primary btn-action"><i class="icon-angle-left"></i> Select a new store</a>
     </div>
   </div>
 </div>
