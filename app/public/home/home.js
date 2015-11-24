@@ -35,6 +35,7 @@
 
         responsePromise.success(function(data, status, headers, config) {
           $scope.stores = data;
+		  $scope.htmlReady();
           console.log(data);
         });
 
@@ -61,6 +62,7 @@
 
         responsePromise.success(function(data, status, headers, config) {
           $scope.getLocations(data.latt, data.longt);
+		  $scope.htmlReady();
         });
 
         responsePromise.error(function(data, status, headers, config) {
@@ -76,6 +78,7 @@
 
         responsePromise.success(function(data, status, headers, config) {
           $scope.getLocations(data.latt, data.longt);
+		  $scope.htmlReady();
         });
 
         responsePromise.error(function(data, status, headers, config) {

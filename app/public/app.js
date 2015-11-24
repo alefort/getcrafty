@@ -13,7 +13,8 @@
     'getCrafty.beerSearch',
     'getCrafty.store',
     'getCrafty.stores',
-    'getCrafty.version'
+    'getCrafty.version',
+	'seo'
   ]);
 
   app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
+    <meta name="fragment" content="!" />
     <title>Get Crafty</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Oswald:400,700,300|Roboto:400,700,700italic,400italic' rel='stylesheet">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
@@ -66,16 +67,10 @@
       <nav class="main-menu">
         <ul class="nav nav-pills nav-stacked">
           <li role="presentation">
-            <a href="#">Home</a>
+            <a ui-sref="main">Home</a>
           </li>
           <li role="presentation">
-            <a href="#">Login/Register</a>
-          </li>
-          <li role="presentation">
-            <a href="#">About Get Crafty</a>
-          </li>
-          <li role="presentation">
-            <a href="#">Privacy Policy/Terms of Use</a>
+            <a ui-sref="main">Restart Search</a>
           </li>
         </ul>
       </nav>
@@ -98,5 +93,6 @@
     <script src="components/version/version.js"></script>
     <script src="components/version/version-directive.js"></script>
     <script src="components/version/interpolate-filter.js"></script>
+	<script src="js/angular-seo.js"></script>
   </body>
 </html>

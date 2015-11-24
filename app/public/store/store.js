@@ -49,6 +49,10 @@
 
       return beer.inventory.quantity + ' ' + beer.package_unit_type + 's available';
     }
+
+    $scope.googleMapURL = function(latitude, longitude) {
+      return 'http://maps.google.com/maps?&z=17&q=LCBO&ll=' + latitude + "+" + longitude;
+    }
   });
 
   store.factory('storeInformation', function($http) {
