@@ -174,9 +174,13 @@ var lcboLoader = {
         return record;
     },
     uppercaseData: function(record){
-        var tertiary_category = record.tertiary_category.replace(/\(([^)]+)\)/, function(_, style) { return style.toUpperCase(); });
+        if(record.varietal != undefined && record.varietal != ''){
+            var varietal = record.varietal.replace(/\(([^)]+)\)/, function(_, style) { return '(' + style.toUpperCase() + ')'; });
 
-        record.tertiary_category = tertiary_category;
+            record.varietal = varietal;
+        }
+
+        return record;
     },
     loadDataset: function(schema, schemaName, fileName, deleteQuery){
         /* First let's wipe the collection clean */
