@@ -125,4 +125,5 @@ app.get('/api/v1/productsAtStore', function(req, res) {
 
 app.listen(3000, function() {
     console.log("Express server listening on port 3000");
+    console.log(config);
 });
