@@ -20,7 +20,6 @@
 
     beerPromise.success(function(data) {
       $scope.beer = data[0];
-      console.log(data[0]);
     });
 
     if (storeID) {
@@ -30,12 +29,10 @@
 
       storePromise.success(function(data) {
         $scope.store = data[0];
-        //console.log(data[0]);
       });
 
       storeBeerPromise.success(function(data) {
         $scope.store_beer = data[0];
-        console.log(data);
       });
     }
   });

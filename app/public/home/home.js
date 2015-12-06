@@ -36,7 +36,6 @@
         responsePromise.success(function(data, status, headers, config) {
           $scope.stores = data;
 		  $scope.htmlReady();
-          console.log(data);
         });
 
         responsePromise.error(function(data, status, headers, config) {
@@ -85,7 +84,7 @@
           alert("AJAX failed!");
         });
       } else {
-        console.log('error');
+
       }
     }
   });
