@@ -173,6 +173,11 @@ var lcboLoader = {
 
         return record;
     },
+    uppercaseData: function(record){
+        var tertiary_category = record.tertiary_category.replace(/\(([^)]+)\)/, function(_, style) { return style.toUpperCase(); });
+
+        record.tertiary_category = tertiary_category;
+    },
     loadDataset: function(schema, schemaName, fileName, deleteQuery){
         /* First let's wipe the collection clean */
         schema.remove(deleteQuery, function(error){
@@ -185,6 +190,7 @@ var lcboLoader = {
 
             reader.addListener('data', function(data) {
                 var record = lcboLoader.convertTsFs(data);
+                record = lcboLoader.uppercaseData(data);
 
                 /*
                 No need to process records that are dead

@@ -36,7 +36,7 @@
     }
 
     $scope.getBeerStyle = function(beer) {
-      if (beer.varietal !== "") return beer.varietal;
+      if (beer.varietal !== "") return beer.varietal.replace(/\(([^)]+)\)/, function(_, style) { return style.toUpperCase(); });;
       if (beer.tertiary_category !== "") return beer.tertiary_category;
       if (beer.secondary_category !== "") return beer.secondary_category;
       return beer.primary_category;
