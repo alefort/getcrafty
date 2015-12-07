@@ -49,7 +49,8 @@
     };
 
     $scope.googleMapURL = function(latitude, longitude) {
-      return 'http://maps.google.com/maps?&z=17&q=LCBO&ll=' + latitude + "+" + longitude;
+      //return 'http://maps.google.com/maps?&z=17&q=LCBO&ll=' + latitude + "+" + longitude;
+      return 'http://maps.google.com/maps/place/LCBO/@' + latitude + ',' + longitude +',17z';
     }
   });
 
