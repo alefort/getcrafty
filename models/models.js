@@ -16,6 +16,7 @@ module.exports = {
             id: Number,
             is_dead: Boolean,
             name: String,
+            url_friendly_name: String,
             tags: String,
             address_line_1: String,
             address_line_2: String,

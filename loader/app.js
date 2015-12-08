@@ -87,6 +87,8 @@ var lcboLoader = {
         doc.location = {};
         doc.location.latitude = doc.latitude;
         doc.location.longitude = doc.longitude;
+        doc.url_friendly_name = doc.name.replace(/[^a-z0-9]/gi, '-').toLowerCase() + '-' + doc.city.replace(/[^a-z0-9]/gi, '-').toLowerCase();
+        doc.url_friendly_name = doc.url_friendly_name.replace('--','-');
 
         doc.save(function(error, doc) {
             if (error) {
