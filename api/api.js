@@ -32,8 +32,8 @@ var apiQueries = {
             }
         };
     },
-    getInventoryByStore: function (store_id) {
-        return {store_id: store_id};
+    getInventoryByStore: function (store_url) {
+        return {url_friendly_name: store_url};
     },
     getProductsFromIDs: function (ids, primaryCategory, producerExclusions) {
         return {
@@ -104,7 +104,7 @@ app.get('/api/v1/productIdByStore', function(req, res) {
 });
 
 app.get('/api/v1/productsAtStore', function(req, res) {
-    InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), function(err,docs){
+    InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_url), function(err,docs){
         var arrayIds = [];
         var arrayInventories = [];
 
