@@ -28,7 +28,7 @@
     </accordion>
     <p ng-if="!stores">Loading locations...</p>
     <div class="list-group" ng-if="stores" ng-repeat="(key, store) in stores | limitTo: 12">
-      <a ui-sref="store({storeID: store.id})" class="list-group-item">
+      <a ui-sref="store({storeID: store.url_friendly_name})" class="list-group-item">
         <h3 class="list-group-item-heading">{{store.name}}</h3>
         <div class="list-group-item-text">
           <div class="badges">

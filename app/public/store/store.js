@@ -59,7 +59,7 @@
 
     factory.get = function(storeID) {
       var config = {
-        url: 'http://www.getcrafty.co:3000/api/v1/stores/?id=' + storeID,
+        url: 'http://www.getcrafty.co:3000/api/v1/stores/?url_friendly_name=' + storeID,
       };
 
       return $http(config);
@@ -73,7 +73,7 @@
 
     factory.get = function(storeID) {
       var config = {
-        url: 'http://www.getcrafty.co:3000/api/v1/productsAtStore?store_id=' + storeID,
+        url: 'http://www.getcrafty.co:3000/api/v1/productsAtStore?url_friendly_name=' + storeID,
       };
 
       return $http(config);
