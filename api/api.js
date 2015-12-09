@@ -89,13 +89,13 @@ app.get('/api/v1/storesNear', function(req, res) {
 });
 
 app.get('/api/v1/inventoryByStore', function(req, res) {
-    InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), function(err,docs){
+    InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_url), function(err,docs){
         res.send(docs);
     });
 });
 
 app.get('/api/v1/productIdByStore', function(req, res) {
-    InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_id), {
+    InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_url), {
         '_id': 0,
         'product_id': 1
     }, function(err,docs){
