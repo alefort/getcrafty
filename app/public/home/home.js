@@ -48,7 +48,7 @@
           city_pattern = /^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/,
           responsePromise,
           config = {};
-      
+
       if (postal.match(postal_pattern)) {
         postal = postal.replace(' ', '').replace('-', '');
 
