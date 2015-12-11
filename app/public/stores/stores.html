@@ -3,7 +3,7 @@
     <h1>Locations Nearest You</h1>
   </div>
   <div class="list-group" ng-repeat="(key, location) in locationData">
-    <a href="#/store/{{location.store_no}}" class="list-group-item">
+    <a href="#/store/{{location.url_friendly_name}}" class="list-group-item">
       <h2 class="list-group-item-heading">{{location.name}}</h2>
       <p class="list-group-item-text">
         {{location.address_line_1}}<br>

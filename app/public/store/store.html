@@ -48,7 +48,7 @@
       </form>
       <p ng-if="!store.beers">Loading beer selection...</p>
       <div class="list-group" ng-if="store.beers">
-        <a ui-sref="beer({beerID: beer.id, storeID: store.id})" class="list-group-item" ng-repeat="(key, beer) in store.beers | toArray | filter: searchText | orderBy: [emptyInventory, 'name']">
+        <a ui-sref="beer({beerID: beer.id, storeURL: store.url_friendly_name})" class="list-group-item" ng-repeat="(key, beer) in store.beers | toArray | filter: searchText | orderBy: [emptyInventory, 'name']">
           <h4 class="list-group-item-heading"><i class="icon-beer"></i> {{beer.name}} <small>by {{beer.producer_name}}</small> <span class="badge" ng-if="beer.is_new">New</span></h4>
           <h5>{{getBeerStyle(beer)}} - <strong>{{beer.alcohol_content / 100}}%</strong></h5>
           <h5>

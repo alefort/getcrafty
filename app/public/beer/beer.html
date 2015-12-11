@@ -22,7 +22,7 @@
     <strong>Updated:</strong> {{beer.updated_at | date:'MMMM d, yyyy'}}<br>
   </div>
   <div ng-if="store" class="action-bar">
-    <a ui-sref="store({storeID: store.id})" class="btn btn-primary btn-action btn-new-beer">
+    <a ui-sref="store({storeURL: store.url_friendly_name})" class="btn btn-primary btn-action btn-new-beer">
       <span class="btn-text"><i class="icon-angle-left"></i> Select a new beer</span>
       <small>from {{store.name}}</small>
     </a>

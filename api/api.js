@@ -32,8 +32,8 @@ var apiQueries = {
             }
         };
     },
-    getInventoryByStore: function (store_url) {
-        return {url_friendly_name: store_url};
+    getInventoryByStore: function (store_id) {
+        return {store_id: store_id};
     },
     getProductsFromIDs: function (ids, primaryCategory, producerExclusions) {
         return {
@@ -48,6 +48,9 @@ var apiQueries = {
                 $nin: ['Specialty']
             }
         };
+    },
+    getStoreIdByURL: function(store_url) {
+        return {url_friendly_name: store_url};s
     }
 };
 
@@ -104,21 +107,25 @@ app.get('/api/v1/productIdByStore', function(req, res) {
 });
 
 app.get('/api/v1/productsAtStore', function(req, res) {
-    InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_url), function(err,docs){
-        var arrayIds = [];
-        var arrayInventories = [];
+    StoreModel.find(apiQueries.getStoreIdByURL(req.query.store_url), function(err,docs){
+        store_id = docs[0].id;
 
-        for(var index in docs){
-            arrayIds.push(docs[index].product_id);
-            arrayInventories[docs[index].product_id] = docs[index];
-        }
+        InventoryModel.find(apiQueries.getInventoryByStore(store_id), function(err,docs){
+            var arrayIds = [];
+            var arrayInventories = [];
 
-        ProductModel.find(apiQueries.getProductsFromIDs(arrayIds, 'Beer', config.api.brewery_exclusions), function(err,products){
-            for(var index in products){
-                var product = products[index];
-                product.inventory.quantity = arrayInventories[product.id].quantity;
+            for(var index in docs){
+                arrayIds.push(docs[index].product_id);
+                arrayInventories[docs[index].product_id] = docs[index];
             }
-            res.send(products);
+
+            ProductModel.find(apiQueries.getProductsFromIDs(arrayIds, 'Beer', config.api.brewery_exclusions), function(err,products){
+                for(var index in products){
+                    var product = products[index];
+                    product.inventory.quantity = arrayInventories[product.id].quantity;
+                }
+                res.send(products);
+            });
         });
     });
 });

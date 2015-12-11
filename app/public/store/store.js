@@ -5,16 +5,16 @@
 
   store.config(function($stateProvider) {
       $stateProvider.state('store', {
-        url: '/store/{storeID}',
+        url: '/store/{storeURL}',
         templateUrl: 'store/store.html',
         controller: 'storeCtrl'
       });
   });
 
   store.controller('storeCtrl', function($scope, $stateParams, $http, storeInformation, storeBeers) {
-    var storeID = ($stateParams.storeID || "");
-    var storePromise = storeInformation.get(storeID);
-    var beersPromise = storeBeers.get(storeID);
+    var storeURL = ($stateParams.storeURL || "");
+    var storePromise = storeInformation.get(storeURL);
+    var beersPromise = storeBeers.get(storeURL);
 
     $scope.store = {};
     $scope.store.beers = {};
@@ -57,9 +57,9 @@
   store.factory('storeInformation', function($http) {
     var factory = {};
 
-    factory.get = function(storeID) {
+    factory.get = function(store_url) {
       var config = {
-        url: 'http://www.getcrafty.co:3000/api/v1/stores/?id=' + storeID,
+        url: 'http://www.getcrafty.co:3000/api/v1/stores/?url_friendly_name=' + store_url,
       };
 
       return $http(config);
@@ -71,9 +71,9 @@
   store.factory('storeBeers', function($http) {
     var factory = {};
 
-    factory.get = function(storeID) {
+    factory.get = function(store_url) {
       var config = {
-        url: 'http://www.getcrafty.co:3000/api/v1/productsAtStore?store_id=' + storeID,
+        url: 'http://www.getcrafty.co:3000/api/v1/productsAtStore?store_url=' + store_url,
       };
 
       return $http(config);

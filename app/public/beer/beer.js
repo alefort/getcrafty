@@ -5,15 +5,15 @@
 
   beer.config(function($stateProvider) {
       $stateProvider.state('beer', {
-        url: '/beer/{beerID}/{storeID}',
+        url: '/beer/{beerID}/{storeURL}',
         templateUrl: 'beer/beer.html',
-        controller: 'beerCtrl',
+        controller: 'beerCtrl'
       });
   });
 
   beer.controller('beerCtrl', function($scope, $state, $stateParams, $http, beerInformation, storeInformation, storeBeerInformation) {
     var beerID = ($stateParams.beerID || "");
-    var storeID = ($stateParams.storeID || "");
+    var storeURL = ($stateParams.storeURL || "");
     $scope.beer_data = {};
 
     var beerPromise = beerInformation.get(beerID);
@@ -22,10 +22,10 @@
       $scope.beer = data[0];
     });
 
-    if (storeID) {
+    if (storeURL) {
       $scope.store = {};
-      var storePromise = storeInformation.get(storeID);
-      var storeBeerPromise = storeBeerInformation.get(storeID, beerID);
+      var storePromise = storeInformation.get(storeURL);
+      var storeBeerPromise = storeBeerInformation.get(storeURL, beerID);
 
       storePromise.success(function(data) {
         $scope.store = data[0];
@@ -42,11 +42,11 @@
 
     factory.get = function(beerID) {
       var config = {
-        url: 'http://www.getcrafty.co:3000/api/v1/products/?id=' + beerID,
-      }
+        url: 'http://www.getcrafty.co:3000/api/v1/products/?id=' + beerID
+      };
 
       return $http(config);
-    }
+    };
 
     return factory;
   });
@@ -54,13 +54,13 @@
   beer.factory('storeInformation', function($http) {
     var factory = {};
 
-    factory.get = function(storeID) {
+    factory.get = function(storeURL) {
       var config = {
-        url: 'http://www.getcrafty.co:3000/api/v1/stores/?id=' + storeID,
-      }
+        url: 'http://www.getcrafty.co:3000/api/v1/stores/?id=' + store
+      };
 
       return $http(config);
-    }
+    };
 
     return factory;
   });
@@ -68,13 +68,13 @@
   beer.factory('storeBeerInformation', function($http) {
     var factory = {};
 
-    factory.get = function(storeID, beerID) {
+    factory.get = function(storeURL, beerID) {
       var config = {
-        url: 'http://www.getcrafty.co:3000/api/v1/inventories?store_id=' + storeID + '&product_id=' + beerID,
-      }
+        url: 'http://www.getcrafty.co:3000/api/v1/inventories?store_url=' + storeURL + '&product_id=' + beerID
+      };
 
       return $http(config);
-    }
+    };
 
     return factory;
   });
