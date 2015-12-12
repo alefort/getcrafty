@@ -1,8 +1,17 @@
 <section class="home-locations">
   <div class="container">
+    <div class="home-intro-block">
+      <p ng-if="stores">The following LCBOs are near you. Choose one and start discovering craft beer.</p>
+      <p ng-if="!stores">
+        <span>Loading locations...</span>
+      </p>
+      <p ng-if="!stores">
+        <img src="img/balls.gif">
+      </p>
+    </div>
     <accordion>
       <accordion-group>
-        <accordion-heading>Or search by location <i class="icon-angle-right"></i></accordion-heading>
+        <accordion-heading>Manual Search (by location) <i class="icon-angle-right"></i></accordion-heading>
         <form class="form-inline" ng-submit="postalSearch(input.postal)">
           <div class="form-group">
             <label class="sr-only" for="postal-code">Postal Code or City</label>
@@ -19,7 +28,6 @@
         </form>
       </accordion-group>
     </accordion>
-    <p ng-if="!stores">Loading locations...</p>
     <div class="list-group" ng-if="stores" ng-repeat="(key, store) in stores | limitTo: 12">
       <a ui-sref="store({storeURL: store.url_friendly_name})" class="list-group-item">
         <h3 class="list-group-item-heading">{{store.name}}</h3>
