@@ -29,7 +29,7 @@
       var responsePromise,
           config = {};
 
-        config.url = 'http://192.168.33.11:3000/api/v1/storesNear?lat=' + lat + '&long=' + lon;
+        config.url = 'http://www.getcrafty.co:3000/api/v1/storesNear?lat=' + lat + '&long=' + lon;
         $scope.stores = {};
         responsePromise = $http(config);
 

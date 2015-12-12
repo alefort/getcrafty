@@ -48,7 +48,7 @@
 
     factory.get = function(beerID) {
       var config = {
-        url: 'http://192.168.33.11:3000/api/v1/products/?url_friendly_name=' + beerID
+        url: 'http://www.getcrafty.co:3000/api/v1/products/?url_friendly_name=' + beerID
       };
 
       return $http(config);
@@ -62,7 +62,7 @@
 
     factory.get = function(storeURL) {
       var config = {
-        url: 'http://192.168.33.11:3000/api/v1/stores/?url_friendly_name=' + storeURL
+        url: 'http://www.getcrafty.co:3000/api/v1/stores/?url_friendly_name=' + storeURL
       };
 
       return $http(config);
@@ -76,7 +76,7 @@
 
     factory.get = function(storeID, beerID) {
       var config = {
-        url: 'http://192.168.33.11:3000/api/v1/inventories?store_id=' + storeID + '&product_id=' + beerID
+        url: 'http://www.getcrafty.co:3000/api/v1/inventories?store_id=' + storeID + '&product_id=' + beerID
       };
 
       return $http(config);
