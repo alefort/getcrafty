@@ -65,6 +65,7 @@ module.exports = {
             id: Number,
             is_dead: Boolean,
             name: String,
+            url_friendly_name: String,
             tags: String,
             is_discontinued: Boolean,
             price_in_cents: Number,

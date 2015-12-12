@@ -82,13 +82,18 @@ var lcboLoader = {
         lcboLoader.log('Terminating data load process.');
         process.exit(0);
     },
+    make_url_friendly_string: function(to_convert){
+        var url_friendly_string = to_convert.replace(/[^a-z0-9]/gi, '-').toLowerCase();
+        url_friendly_string = url_friendly_string.replace('--','-');
+
+        return url_friendly_string;
+    },
     processStoreRecord: function(storeRecord){
         var doc = lcboLoader.mongo.store.model(storeRecord);
         doc.location = {};
         doc.location.latitude = doc.latitude;
         doc.location.longitude = doc.longitude;
-        doc.url_friendly_name = doc.name.replace(/[^a-z0-9]/gi, '-').toLowerCase() + '-' + doc.city.replace(/[^a-z0-9]/gi, '-').toLowerCase();
-        doc.url_friendly_name = doc.url_friendly_name.replace('--','-');
+        doc.url_friendly_name = lcboLoader.make_url_friendly_string(doc.name + '-' + doc.city);
 
         doc.save(function(error, doc) {
             if (error) {
@@ -101,6 +106,8 @@ var lcboLoader = {
     },
     processProductRecord: function(productRecord){
         var doc = lcboLoader.mongo.product.model(productRecord);
+
+        doc.url_friendly_name = lcboLoader.make_url_friendly_string(doc.name + '-' + doc.id);
 
         doc.save(function(error, doc) {
             if (error) {
