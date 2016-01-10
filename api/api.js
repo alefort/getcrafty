@@ -9,13 +9,27 @@ var express = require('express'),
     methodOverride = require('method-override'),
     compress = require('compression'),
     cors = require('cors'),
-    config = require('get-config').sync(__dirname + '/config');
+    config = require('get-config').sync(__dirname + '/config'),
+    FileStreamRotator = require('file-stream-rotator'),
+    morgan = require('morgan'),
+    fs = require('fs');
 
 mongoose.connect('mongodb://localhost/lcbo');
 
 var InventoryModel = mongoose.model('inventory', models.schema.inventory);
 var StoreModel = mongoose.model('store', models.schema.store);
 var ProductModel = mongoose.model('product', models.schema.product);
+
+var logDirectory = __dirname + '/log';
+// ensure log directory exists
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+
+// create a rotating write stream
+var accessLogStream = FileStreamRotator.getStream({
+    filename: logDirectory + '/access-%DATE%.log',
+    frequency: 'daily',
+    verbose: false
+});
 
 var apiQueries = {
     storesNear: function (long, lat) {
@@ -60,6 +74,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(cors());
+app.use(morgan('combined', {stream: accessLogStream}));
 
 var access_control = {
     prereq: function(req) {
