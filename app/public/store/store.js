@@ -7,7 +7,7 @@
       $stateProvider.state('store', {
         url: '/store/{storeURL}',
         templateUrl: 'store/store.html',
-        controller: 'storeCtrl'
+        controller: 'storeCtrl',
       });
   });
 

@@ -12,13 +12,13 @@
     <accordion>
       <accordion-group>
         <accordion-heading>Manual Search (by location) <i class="icon-angle-right"></i></accordion-heading>
-        <form class="form-inline" ng-submit="postalSearch(input.postal)">
+        <form class="form-inline" ng-submit="postalSearch($storage.storeSearch)">
           <div class="form-group">
             <label class="sr-only" for="postal-code">Postal Code or City</label>
             <div class="input-group">
-              <input type="text" ng-model="input.postal" class="form-control" id="postal-code" name="postal-code" placeholder="Postal / City" required>
+              <input type="text" ng-model="$storage.storeSearch" class="form-control" id="postal-code" name="postal-code" placeholder="Postal / City" required>
               <span class="input-group-btn">
-                <button class="btn btn-primary" role="button=" type="submit">
+                <button class="btn btn-primary" role="button=" type="submit" ng-disabled="$storage.storeSearch === null || $storage.storeSearch === ''">
                   <span class="btn-text sr-only">Search</span>
                   <i class="icon-search"></i>
                 </button>
@@ -28,7 +28,7 @@
         </form>
       </accordion-group>
     </accordion>
-    <div class="list-group" ng-if="stores" ng-repeat="(key, store) in stores | limitTo: 12">
+    <div class="list-group" ng-if="stores" ng-repeat="(key, store) in stores track by $index | limitTo: 12">
       <a ui-sref="store({storeURL: store.url_friendly_name})" class="list-group-item">
         <h3 class="list-group-item-heading">{{store.name}}</h3>
         <div class="list-group-item-text">
@@ -57,5 +57,6 @@
         </div>
       </a>
     </div>
+    <p class="stores-error" ng-show="storesError">{{storesError}}</p>
   </div>
 </section>
