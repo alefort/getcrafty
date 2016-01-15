@@ -37,6 +37,7 @@
     $scope.$storage = $localStorage.$default({
       storeSearch: '',
       beerSearch: '',
+      stores: [],
     });
 
     $scope.loadFinished = function() {

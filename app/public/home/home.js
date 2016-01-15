@@ -11,30 +11,37 @@
       });
   });
 
-  home.controller('homeCtrl', function($scope, $state, $stateParams, $http, $geolocation) {
+  home.controller('homeCtrl', function($scope, $state, $stateParams, $http, $geolocation, $localStorage, $sessionStorage) {
     var coords = {},
         responsePromise,
-        config = {};
+        config = {},
+        $storage = $scope.$storage;
 
     $scope.input = {postal: ''};
 
-    $geolocation.getCurrentPosition({
-      timeout: 60000
-    }).then(function(position) {
-      coords = position.coords;
-      $scope.getLocations(coords.latitude, coords.longitude);
-    });
+    if ($storage.stores.length) {
+      $scope.stores = $storage.stores;
+    } else {
+      $geolocation.getCurrentPosition({
+        timeout: 60000
+      }).then(function(position) {
+        coords = position.coords;
+        $scope.getLocations(coords.latitude, coords.longitude);
+      });
+    }
 
     $scope.getLocations = function(lat, lon) {
       var responsePromise,
           config = {};
 
         config.url = 'http://www.getcrafty.co:3000/api/v1/storesNear?lat=' + lat + '&long=' + lon;
-        $scope.stores = {};
+        $scope.stores = [];
+        $storage.stores = [];
         responsePromise = $http(config);
 
         responsePromise.success(function(data, status, headers, config) {
           $scope.stores = data;
+          $storage.stores = data;
         });
 
         responsePromise.error(function(data, status, headers, config) {
@@ -72,12 +79,14 @@
           if (typeof(data.error) !== undefined) {
             $scope.getLocations(data.latt, data.longt);
           } else {
-            $scope.stores = {};
+            $scope.stores = [];
+            $storage.stores = [];
             $scope.storesError = 'Please try your search again!';
           }
         });
       } else {
-        $scope.stores = {};
+        $scope.stores = [];
+        $storage.stores = [];
         $scope.storesError = 'Please try your search again!';
       }
     }
