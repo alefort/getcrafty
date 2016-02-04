@@ -22,13 +22,19 @@
     if ($storage.stores.length) {
       $scope.stores = $storage.stores;
     } else {
+      $scope.doGeolocation();
+    }
+
+    $scope.doGeolocation = function() {
+      $scope.stores = [];
+      
       $geolocation.getCurrentPosition({
         timeout: 60000
       }).then(function(position) {
         coords = position.coords;
         $scope.getLocations(coords.latitude, coords.longitude);
       });
-    }
+    };
 
     $scope.getLocations = function(lat, lon) {
       var responsePromise,

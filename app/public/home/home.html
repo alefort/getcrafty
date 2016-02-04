@@ -9,9 +9,15 @@
         <img src="img/balls.gif">
       </p>
     </div>
+    <div class="reset-gps-container">
+      <button class="btn btn-primary btn-reset-gps" type="button" role="button" ng-click="doGeolocation()">
+        <i class="icon-map-marker"></i>
+        <span class="btn-text">Restart GPS Search</span>
+      </button>
+    </div>
     <accordion>
       <accordion-group>
-        <accordion-heading>Manual Search (by location) <i class="icon-angle-right"></i></accordion-heading>
+        <accordion-heading>Manual Location Search <i class="icon-angle-right"></i></accordion-heading>
         <form class="form-inline" ng-submit="postalSearch($storage.storeSearch)">
           <div class="form-group">
             <label class="sr-only" for="postal-code">Postal Code or City</label>

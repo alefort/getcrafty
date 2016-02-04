@@ -411,7 +411,7 @@
 			"file": "app/public/index.html",
 			"settings":
 			{
-				"buffer_size": 6032,
+				"buffer_size": 6097,
 				"line_ending": "Windows"
 			}
 		},
@@ -419,15 +419,7 @@
 			"file": "less/app.less",
 			"settings":
 			{
-				"buffer_size": 2675,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/public/store/store.js",
-			"settings":
-			{
-				"buffer_size": 2404,
+				"buffer_size": 2752,
 				"line_ending": "Windows"
 			}
 		},
@@ -435,7 +427,7 @@
 			"file": "app/public/home/home.html",
 			"settings":
 			{
-				"buffer_size": 2566,
+				"buffer_size": 3057,
 				"line_ending": "Windows"
 			}
 		},
@@ -443,7 +435,31 @@
 			"file": "app/public/home/home.js",
 			"settings":
 			{
-				"buffer_size": 2430,
+				"buffer_size": 2723,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Scott/Desktop/v2/wp-config-sample.php",
+			"settings":
+			{
+				"buffer_size": 3063,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Scott/AppData/Local/Temp/fz3temp-1/base.php",
+			"settings":
+			{
+				"buffer_size": 1204,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Scott/AppData/Local/Temp/fz3temp-1/footer.php",
+			"settings":
+			{
+				"buffer_size": 1122,
 				"line_ending": "Windows"
 			}
 		},
@@ -451,23 +467,7 @@
 			"file": "app/public/store/store.html",
 			"settings":
 			{
-				"buffer_size": 3523,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "models/models.js",
-			"settings":
-			{
-				"buffer_size": 4074,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/public/beer/beer.js",
-			"settings":
-			{
-				"buffer_size": 1937,
+				"buffer_size": 3554,
 				"line_ending": "Windows"
 			}
 		},
@@ -475,7 +475,24 @@
 			"file": "app/public/app.js",
 			"settings":
 			{
-				"buffer_size": 2959,
+				"buffer_size": 3100,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "# All paths in this configuration file are relative to Dynmap's data-folder: minecraft_server/plugins/dynmap/\n\n# All map templates are defined in the templates directory\n# To use the HDMap very-low-res (2 ppb) map templates as world defaults, set value to vlowres\n#   The definitions of these templates are in normal-vlowres.txt, nether-vlowres.txt, and the_end-vlowres.txt\n# To use the HDMap low-res (4 ppb) map templates as world defaults, set value to lowres\n#   The definitions of these templates are in normal-lowres.txt, nether-lowres.txt, and the_end-lowres.txt\n# To use the HDMap hi-res (16 ppb) map templates (these can take a VERY long time for initial fullrender), set value to hires\n#   The definitions of these templates are in normal-hires.txt, nether-hires.txt, and the_end-hires.txt\n# To use the HDMap low-res (4 ppb) map templates, with support for boosting resolution selectively to hi-res (16 ppb), set value to low_boost_hi\n#   The definitions of these templates are in normal-low_boost_hi.txt, nether-low_boost_hi.txt, and the_end-low_boost_hi.txt\n# To use the HDMap hi-res (16 ppb) map templates, with support for boosting resolution selectively to vhi-res (32 ppb), set value to hi_boost_vhi\n#   The definitions of these templates are in normal-hi_boost_vhi.txt, nether-hi_boost_vhi.txt, and the_end-hi_boost_vhi.txt\n# To use the HDMap hi-res (16 ppb) map templates, with support for boosting resolution selectively to xhi-res (64 ppb), set value to hi_boost_xhi\n#   The definitions of these templates are in normal-hi_boost_xhi.txt, nether-hi_boost_xhi.txt, and the_end-hi_boost_xhi.txt\ndeftemplatesuffix: lowres\n\n# Map storage scheme: only uncommoent one 'type' value\n#  filetree: classic and default scheme: tree of files, with all map data under the directory indicated by 'tilespath' setting\n#  sqlite: single SQLite database file (this can get VERY BIG), located at 'dbfile' setting (default is file dynmap.db in data directory)\n#  mysql: MySQL database, at hostname:port in database, accessed via userid with password\nstorage:\n  # Filetree storage (standard tree of image files for maps)\n  type: filetree\n  # SQLite db for map storage (uses dbfile as storage location)\n  #type: sqlite\n  #dbfile: dynmap.db\n  # MySQL DB for map storage (at 'hostname':'port' in database 'database' using user 'userid' password 'password' and table prefix 'prefix'\n  #type: mysql\n  #hostname: localhost\n  #port: 3306\n  #database: dynmap\n  #userid: dynmap\n  #password: dynmap\n  #prefix: \"\"\n  \ncomponents:\n  - class: org.dynmap.ClientConfigurationComponent\n  \n  - class: org.dynmap.InternalClientUpdateComponent\n    sendhealth: true\n    sendposition: true\n    allowwebchat: true\n    webchat-interval: 5\n    hidewebchatip: false\n    trustclientname: false\n    includehiddenplayers: false\n    # (optional) if true, color codes in player display names are used\n    use-name-colors: false\n    # (optional) if true, player login IDs will be used for web chat when their IPs match\n    use-player-login-ip: true\n    # (optional) if use-player-login-ip is true, setting this to true will cause chat messages not matching a known player IP to be ignored\n    require-player-login-ip: false\n    # (optional) block player login IDs that are banned from chatting\n    block-banned-player-chat: true\n    # Require login for web-to-server chat (requires login-enabled: true)\n    webchat-requires-login: false\n    # If set to true, users must have dynmap.webchat permission in order to chat\n    webchat-permissions: false\n    # Limit length of single chat messages\n    chatlengthlimit: 256\n  #  # Optional - make players hidden when they are inside/underground/in shadows (#=light level: 0=full shadow,15=sky)\n  #  hideifshadow: 4\n  #  # Optional - make player hidden when they are under cover (#=sky light level,0=underground,15=open to sky)\n  #  hideifundercover: 14\n  #  # (Optional) if true, players that are crouching/sneaking will be hidden \n    hideifsneaking: false\n    # If true, player positions/status is protected (login with ID with dynmap.playermarkers.seeall permission required for info other than self)\n    protected-player-info: false\n    # If true, hide players with invisibility potion effects active\n    hide-if-invisiblity-potion: true\n    # If true, player names are not shown on map, chat, list\n    hidenames: false\n  #- class: org.dynmap.JsonFileClientUpdateComponent\n  #  writeinterval: 1\n  #  sendhealth: true\n  #  sendposition: true\n  #  allowwebchat: true\n  #  webchat-interval: 5\n  #  hidewebchatip: false\n  #  includehiddenplayers: false\n  #  use-name-colors: false\n  #  use-player-login-ip: false\n  #  require-player-login-ip: false\n  #  block-banned-player-chat: true\n  #  hideifshadow: 0\n  #  hideifundercover: 0\n  #  hideifsneaking: false\n  #  # Require login for web-to-server chat (requires login-enabled: true)\n  #  webchat-requires-login: false\n  #  # If set to true, users must have dynmap.webchat permission in order to chat\n  #  webchat-permissions: false\n  #  # Limit length of single chat messages\n  #  chatlengthlimit: 256\n  #  hide-if-invisiblity-potion: true\n  #  hidenames: false\n   \n  - class: org.dynmap.SimpleWebChatComponent\n    allowchat: true\n    # If true, web UI users can supply name for chat using 'playername' URL parameter.  'trustclientname' must also be set true.\n    allowurlname: false\n  \n  # Note: this component is needed for the dmarker commands, and for the Marker API to be available to other plugins\n  - class: org.dynmap.MarkersComponent\n    type: markers\n    showlabel: false\n    enablesigns: false\n    # Default marker set for sign markers\n    default-sign-set: markers\n    # (optional) add spawn point markers to standard marker layer\n    showspawn: true\n    spawnicon: world\n    spawnlabel: \"Spawn\"\n    # (optional) layer for showing offline player's positions (for 'maxofflinetime' minutes after logoff)\n    showofflineplayers: false\n    offlinelabel: \"Offline\"\n    offlineicon: offlineuser\n    offlinehidebydefault: true\n    offlineminzoom: 0\n    maxofflinetime: 30\n    # (optional) layer for showing player's spawn beds\n    showspawnbeds: false\n    spawnbedlabel: \"Spawn Beds\"\n    spawnbedicon: bed\n    spawnbedhidebydefault: true\n    spawnbedminzoom: 0\n    spawnbedformat: \"%name%'s bed\"\n    # (optional) show world border (vanilla 1.8+)\n    showworldborder: true\n    \n  - class: org.dynmap.ClientComponent\n    type: chat\n    allowurlname: false\n  - class: org.dynmap.ClientComponent\n    type: chatballoon\n    focuschatballoons: false\n  - class: org.dynmap.ClientComponent\n    type: chatbox\n    showplayerfaces: true\n    messagettl: 5\n    # Optional: set number of lines in scrollable message history: if set, messagettl is not used to age out messages\n    #scrollback: 100\n    # Optiona; set maximum number of lines visible for chatbox\n    #visiblelines: 10\n    # Optional: send push button\n    sendbutton: false\n  - class: org.dynmap.ClientComponent\n    type: playermarkers\n    showplayerfaces: true\n    showplayerhealth: true\n    # If true, show player body too (only valid if showplayerfaces=true\n    showplayerbody: false\n    # Option to make player faces small - don't use with showplayerhealth\n    smallplayerfaces: false\n    # Optional - make player faces layer hidden by default\n    hidebydefault: false\n    # Optional - ordering priority in layer menu (low goes before high - default is 0)\n    layerprio: 0\n    # Optional - label for player marker layer (default is 'Players')\n    label: \"Players\"\n    \n  #- class: org.dynmap.ClientComponent\n  #  type: digitalclock\n  - class: org.dynmap.ClientComponent\n    type: link\n    \n  - class: org.dynmap.ClientComponent\n    type: timeofdayclock\n    showdigitalclock: true\n    showweather: true\n  # Mouse pointer world coordinate display\n  - class: org.dynmap.ClientComponent\n    type: coord\n    label: \"Location\"\n    hidey: false\n    show-mcr: false\n    \n  # Note: more than one logo component can be defined\n  #- class: org.dynmap.ClientComponent\n  #  type: logo\n  #  text: \"Dynmap\"\n  #  #logourl: \"images/block_surface.png\"\n  #  linkurl: \"http://forums.bukkit.org/threads/dynmap.489/\"\n  #  # Valid positions: top-left, top-right, bottom-left, bottom-right\n  #  position: bottom-right\n\n  #- class: org.dynmap.ClientComponent\n  #  type: inactive\n  #  timeout: 1800 # in seconds (1800 seconds = 30 minutes)\n  #  redirecturl: inactive.html\n  #  #showmessage: 'You were inactive for too long.'\n  \n  #- class: org.dynmap.TestComponent\n  #  stuff: \"This is some configuration-value\"\n\n# Treat hiddenplayers.txt as a whitelist for players to be shown on the map? (Default false)\ndisplay-whitelist: false\n\n# How often a tile gets rendered (in seconds).\nrenderinterval: 1\n\n# How many tiles on update queue before accelerate render interval\nrenderacceleratethreshold: 60\n\n# How often to render tiles when backlog is above renderacceleratethreshold\nrenderaccelerateinterval: 0.2\n\n# How many update tiles to work on at once (if not defined, default is 1/2 the number of cores)\ntiles-rendered-at-once: 2\n\n# If true, use normal priority threads for rendering (versus low priority) - this can keep rendering\n# from starving on busy Windows boxes (Linux JVMs pretty much ignore thread priority), but may result\n# in more competition for CPU resources with other processes\nusenormalthreadpriority: true\n\n# Save and restore pending tile renders - prevents their loss on server shutdown or /reload\nsaverestorepending: true\n\n# Save period for pending jobs (in seconds): periodic saving for crash recovery of jobs\nsave-pending-period: 900\n\n# Zoom-out tile update period - how often to scan for and process tile updates into zoom-out tiles (in seconds)\nzoomoutperiod: 30\n\n# Control whether zoom out tiles are validated on startup (can be needed if zoomout processing is interrupted, but can be expensive on large maps)\ninitial-zoomout-validate: true\n\n# Default delay on processing of updated tiles, in seconds.  This can reduce potentially expensive re-rendering\n# of frequently updated tiles (such as due to machines, pistons, quarries or other automation).  Values can\n# also be set on individual worlds and individual maps.\ntileupdatedelay: 30\n\n# Tile hashing is used to minimize tile file updates when no changes have occurred - set to false to disable\nenabletilehash: true\n\n# Optional - hide ores: render as normal stone (so that they aren't revealed by maps)\n#hideores: true\n\n# Optional - enabled BetterGrass style rendering of grass and snow block sides\n#better-grass: true\n\n# Optional - enable smooth lighting by default on all maps supporting it (can be set per map as lighting option)\nsmooth-lighting: true\n\n# Optional - use world provider lighting table (good for custom worlds with custom lighting curves, like nether)\n#   false=classic Dynmap lighting curve\nuse-brightness-table: true\n\n# Optional - render specific block IDs using the texures and models of another block ID: can be used to hide/disguise specific\n#  blocks (e.g. make ores look like stone, hide chests) or to provide simple support for rendering unsupported custom blocks\nblock-id-alias:\n#    \"14\": 1\n#    \"15\": 1\n#    \"16\": 1\n  \n# Default image format for HDMaps (png, jpg, jpg-q75, jpg-q80, jpg-q85, jpg-q90, jpg-q95, jpg-q100)\n# Has no effect on maps with explicit format settings\nimage-format: png\n\n#  use-generated-textures: if true, use generated textures (same as client); false is static water/lava textures\n#  correct-water-lighting: if true, use corrected water lighting (same as client); false is legacy water (darker)\n#  transparent-leaves: if true, leaves are transparent (lighting-wise): false is needed for some Spout versions that break lighting on leaf blocks\nuse-generated-textures: true\ncorrect-water-lighting: true\ntransparent-leaves: true\n\n# ctm-support: if true, Connected Texture Mod (CTM) in texture packs is enabled (default)\nctm-support: true\n# custom-colors-support: if true, Custom Colors in texture packs is enabled (default)\ncustom-colors-support: true\n\n# Control loading of player faces (if set to false, skins are never fetched)\n#fetchskins: false\n\n# Control updating of player faces, once loaded (if faces are being managed by other apps or manually)\n#refreshskins: false\n\n# Customize URL used for fetching player skins (%player% is macro for name)\nskin-url: \"http://skins.minecraft.net/MinecraftSkins/%player%.png\"\n\n# Control behavior for new (1.0+) compass orientation (sunrise moved 90 degrees: east is now what used to be south)\n#   default is 'newrose' (preserve pre-1.0 maps, rotate rose)\n#   'newnorth' is used to rotate maps and rose (requires fullrender of any HDMap map - same as 'newrose' for FlatMap or KzedMap)\ncompass-mode: newnorth\n\nrender-triggers:\n  #- playermove\n  #- playerjoin\n  - blockplaced\n  - blockbreak\n  - leavesdecay\n  - blockburn\n  - chunkgenerated\n  - blockformed\n  - blockfaded\n  - blockspread\n  - pistonmoved\n  - explosion\n  #- blockfromto\n  #- blockphysics\n  - structuregrow\n  - blockgrow\n  #- blockredstone\n\n# Title for the web page - if not specified, defaults to the server's name (unless it is the default of 'Unknown Server')\n#webpage-title: \"My Awesome Server Map\"\n\n# The path where the tile-files are placed.\ntilespath: web/tiles\n\n# The path where the web-files are located.\nwebpath: web\n\n# The path were the /dynmapexp command exports OBJ ZIP files\nexportpath: export\n\n# The network-interface the webserver will bind to (0.0.0.0 for all interfaces, 127.0.0.1 for only local access).\n# If not set, uses same setting as server in server.properties (or 0.0.0.0 if not specified)\n#webserver-bindaddress: 0.0.0.0\n\n# The TCP-port the webserver will listen on.\nwebserver-port: 1922\n\n# Maximum concurrent session on internal web server - limits resources used in Bukkit server\nmax-sessions: 30\n\n# Disables Webserver portion of Dynmap (Advanced users only)\ndisable-webserver: false\n\n# Enable/disable having the web server allow symbolic links (true=compatible with existing code, false=more secure (default))\nallow-symlinks: true\n\n# Enable login support\nlogin-enabled: false\n# Require login to access website (requires login-enabled: true)\nlogin-required: false\n\n# Period between tile renders for fullrender, in seconds (non-zero to pace fullrenders, lessen CPU load)\ntimesliceinterval: 0.0\n\n# Maximum chunk loads per server tick (1/20th of a second) - reducing this below 90 will impact render performance, but also will reduce server thread load\nmaxchunkspertick: 200\n\n# Progress report interval for fullrender/radiusrender, in tiles.  Must be 100 or greater\nprogressloginterval: 100\n\n# Parallel fullrender: if defined, number of concurrent threads used for fullrender or radiusrender\n#   Note: setting this will result in much more intensive CPU use, some additional memory use.  Caution should be used when\n#  setting this to equal or exceed the number of physical cores on the system.\n#parallelrendercnt: 4\n\n# Interval the browser should poll for updates.\nupdaterate: 2000\n\n# If nonzero, server will pause fullrender/radiusrender processing when 'fullrenderplayerlimit' or more users are logged in\nfullrenderplayerlimit: 0\n# If nonzero, server will pause update render processing when 'updateplayerlimit' or more users are logged in\nupdateplayerlimit: 0\n# Target limit on server thread use - msec per tick\nper-tick-time-limit: 50\n# If TPS of server is below this setting, update renders processing is paused\nupdate-min-tps: 18.0\n# If TPS of server is below this setting, full/radius renders processing is paused\nfullrender-min-tps: 18.0\n# If TPS of server is below this setting, zoom out processing is paused\nzoomout-min-tps: 18.0\n\nshowplayerfacesinmenu: true\n\n# Control whether players that are hidden or not on current map are grayed out (true=yes)\ngrayplayerswhenhidden: true\n\n# Use player permissions to order player list: first to last, players are ordered by first permission listed that they have\n# That is, anyone with first listed permission goes before anyone with second, etc, with users with none of the nodes going last\nplayer-sort-permission-nodes:\n  - bukkit.command.op\n  \n# Set sidebaropened: 'true' to pin menu sidebar opened permanently, 'pinned' to default the sidebar to pinned, but allow it to unpin\n#sidebaropened: true\n\n# Customized HTTP response headers - add 'id: value' pairs to all HTTP response headers (internal web server only)\n#http-response-headers:\n#    Access-Control-Allow-Origin: \"my-domain.com\"\n#    X-Custom-Header-Of-Mine: \"MyHeaderValue\"\n\n# Trusted proxies for web server - which proxy addresses are trusted to supply valid X-Forwarded-For fields\ntrusted-proxies:\n  - \"127.0.0.1\"\n  - \"0:0:0:0:0:0:0:1\"\n  \n# Join/quit message format for web chat: set to \"\" to disable notice on web UI\njoinmessage: \"%playername% joined\"\nquitmessage: \"%playername% quit\"\n\nspammessage: \"You may only chat once every %interval% seconds.\"\n# format for messages from web: %playername% substitutes sender ID (typically IP), %message% includes text\nwebmsgformat: \"&color;2[WEB] %playername%: &color;f%message%\"\n\n# Control whether layer control is presented on the UI (default is true)\nshowlayercontrol: true\n\n# Enable checking for banned IPs via banned-ips.txt (internal web server only)\ncheck-banned-ips: true\n\n# Default selection when map page is loaded\ndefaultzoom: 0\ndefaultworld: world\ndefaultmap: flat\n# (optional) Zoom level and map to switch to when following a player, if possible\n#followzoom: 3\n#followmap: surface\n\n# If true, make persistent record of IP addresses used by player logins, to support web IP to player matching\npersist-ids-by-ip: true\n\n# If true, map text to cyrillic\ncyrillic-support: false\n\n# If true, coordinates will be rounded\nround-coordinates: true\n\n# Messages to customize\nmsg:\n    maptypes: \"Map Types\"\n    players: \"Players\"\n    chatrequireslogin: \"Chat Requires Login\"\n    chatnotallowed: \"You are not permitted to send chat messages\"\n    hiddennamejoin: \"Player joined\"\n    hiddennamequit: \"Player quit\"\n\n# URL for client configuration (only need to be tailored for proxies or other non-standard configurations)\nurl:\n    # configuration URL\n    #configuration: \"up/configuration\"\n    # update URL\n    #update: \"up/world/{world}/{timestamp}\"\n    # sendmessage URL\n    #sendmessage: \"up/sendmessage\"\n    # login URL\n    #login: \"up/login\"\n    # register URL\n    #register: \"up/register\"\n    # tiles base URL\n    #tiles: \"tiles/\"\n    # markers base URL\n    #markers: \"tiles/\"\n    \n# Spout support controls\nspout:\n    # If false, ignore spout even if detected\n    enabled: true\n    # If true, previously loaded textures will be assumed to still be valid (faster startup, but\n    # can result in stale textures if originals are updated - delete files in texturepacks/standard/spoout\n    # to clean cached textures and force reload on next startup)\n    use-existing-textures: true\n    \n# Customization commands - allows scripts to be run before/after certain events\ncustom-commands:\n    image-updates:\n        # Command run just before any image file is written or updated: run with single parameter with fully qualified file name\n        preupdatecommand: \"\"\n        # Command run just after any image file is written or updated: run with single parameter with fully qualified file name\n        postupdatecommand: \"\"\n\n# Snapshot cache size, in chunks\nsnapshotcachesize: 500\n# Snapshot cache uses soft references (true), else weak references (false)\nsoft-ref-cache: true\n        \n# Set to true to enable verbose startup messages - can help with debugging map configuration problems\n# Set to false for a much quieter startup log\nverbose: false\n\n# Enables debugging.\n#debuggers:\n#  - class: org.dynmap.debug.LogDebugger\n# Debug: dump blocks missing render data\ndump-missing-blocks: false\n",
+			"settings":
+			{
+				"buffer_size": 19681,
+				"line_ending": "Windows",
+				"name": "# All paths in this configuration file are relativ"
+			}
+		},
+		{
+			"file": "/C/xampp/htdocs/crossfitmetric/wp-content/themes/crossfitmetric/templates/footer.php",
+			"settings":
+			{
+				"buffer_size": 460,
 				"line_ending": "Windows"
 			}
 		}
@@ -536,10 +553,11 @@
 	},
 	"file_history":
 	[
-		"/C/xampp/htdocs/getcrafty/app/public/home/home.html",
-		"/C/xampp/htdocs/getcrafty/app/public/store/store.js",
-		"/C/xampp/htdocs/getcrafty/app/public/store/store.html",
 		"/C/xampp/htdocs/getcrafty/app/public/beer/beer.js",
+		"/C/xampp/htdocs/getcrafty/models/models.js",
+		"/C/xampp/htdocs/getcrafty/app/public/store/store.js",
+		"/C/xampp/htdocs/getcrafty/app/public/home/home.html",
+		"/C/xampp/htdocs/getcrafty/app/public/store/store.html",
 		"/C/xampp/htdocs/getcrafty/app/public/beer/beer.html",
 		"/C/xampp/htdocs/getcrafty/less/app.less",
 		"/C/xampp/htdocs/getcrafty/app/public/bower_components/bootstrap/less/bootstrap.less",
@@ -662,8 +680,7 @@
 		"/C/xampp/htdocs/dev/sundownersdaycare.com/src/wp-content/themes/sundowners/less/carousel.less",
 		"/C/xampp/htdocs/dev/sundownersdaycare.com/src/wp-content/themes/sundowners/less/location-inner.less",
 		"/C/xampp/htdocs/dev/sundownersdaycare.com/src/wp-content/themes/sundowners/less/common/colours.less",
-		"/C/xampp/htdocs/dev/sundownersdaycare.com/src/wp-content/themes/sundowners/lib/class.TBK-Theme.php",
-		"/C/xampp/htdocs/dev/sundownersdaycare.com/src/wp-content/themes/sundowners/page.php"
+		"/C/xampp/htdocs/dev/sundownersdaycare.com/src/wp-content/themes/sundowners/lib/class.TBK-Theme.php"
 	],
 	"find":
 	{
@@ -799,6 +816,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"stores",
+			"postalsearch",
 			"id",
 			"postal",
 			"getcrafty.co",
@@ -924,9 +943,7 @@
 			".nav-collapse",
 			".navbar.nav",
 			".navbar .nav",
-			".brand",
-			".offset12",
-			".offset11"
+			".brand"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1072,7 +1089,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -1080,15 +1097,15 @@
 					"file": "app/public/index.html",
 					"settings":
 					{
-						"buffer_size": 6032,
+						"buffer_size": 6097,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3454,
-								3454
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1109,15 +1126,15 @@
 					"file": "less/app.less",
 					"settings":
 					{
-						"buffer_size": 2675,
+						"buffer_size": 2752,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								373,
-								373
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1134,46 +1151,18 @@
 				},
 				{
 					"buffer": 2,
-					"file": "app/public/store/store.js",
-					"settings":
-					{
-						"buffer_size": 2404,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2335,
-								2335
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 186.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "app/public/home/home.html",
 					"settings":
 					{
-						"buffer_size": 2566,
+						"buffer_size": 3057,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								970,
-								976
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1189,19 +1178,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 3,
 					"file": "app/public/home/home.js",
 					"settings":
 					{
-						"buffer_size": 2430,
+						"buffer_size": 2723,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								653,
-								653
+								526,
+								526
 							]
 						],
 						"settings":
@@ -1211,17 +1200,97 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 84.0,
+						"translation.y": 540.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/Users/Scott/Desktop/v2/wp-config-sample.php",
+					"settings":
+					{
+						"buffer_size": 3063,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2365,
+								2365
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 918.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 5,
+					"file": "/C/Users/Scott/AppData/Local/Temp/fz3temp-1/base.php",
+					"settings":
+					{
+						"buffer_size": 1204,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/C/Users/Scott/AppData/Local/Temp/fz3temp-1/footer.php",
+					"settings":
+					{
+						"buffer_size": 1122,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1122,
+								1122
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
 					"file": "app/public/store/store.html",
 					"settings":
 					{
-						"buffer_size": 3523,
+						"buffer_size": 3554,
 						"regions":
 						{
 						},
@@ -1245,75 +1314,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "models/models.js",
-					"settings":
-					{
-						"buffer_size": 4074,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "app/public/beer/beer.js",
-					"settings":
-					{
-						"buffer_size": 1937,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 336.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
 					"buffer": 8,
 					"file": "app/public/app.js",
 					"settings":
 					{
-						"buffer_size": 2959,
+						"buffer_size": 3100,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1088,
-								1088
+								894,
+								926
 							]
 						],
 						"settings":
@@ -1323,7 +1336,61 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 42.0,
+						"translation.y": 1188.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"settings":
+					{
+						"buffer_size": 19681,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								19681
+							]
+						],
+						"settings":
+						{
+							"auto_name": "# All paths in this configuration file are relativ",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5238.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "/C/xampp/htdocs/crossfitmetric/wp-content/themes/crossfitmetric/templates/footer.php",
+					"settings":
+					{
+						"buffer_size": 460,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
