@@ -1,0 +1,15 @@
+.keyframes(@name; @arguments) {
+	@-webkit-keyframes @name { @arguments(); }
+	        @keyframes @name { @arguments(); }
+}
+
+.animation(@arguments) {
+	-webkit-animation: @arguments;
+	        animation: @arguments;
+}
+
+.transform(@string) {
+	-webkit-transform: @string;
+	    -ms-transform: @string;
+	        transform: @string;
+}
