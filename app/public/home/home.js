@@ -19,12 +19,6 @@
 
     $scope.input = {postal: ''};
 
-    if ($storage.stores.length) {
-      $scope.stores = $storage.stores;
-    } else {
-      $scope.doGeolocation();
-    }
-
     $scope.doGeolocation = function() {
       $scope.stores = [];
       
@@ -95,6 +89,12 @@
         $storage.stores = [];
         $scope.storesError = 'Please try your search again!';
       }
+    }
+
+    if ($storage.stores.length) {
+      $scope.stores = $storage.stores;
+    } else {
+      $scope.doGeolocation();
     }
   });
 })();
