@@ -3,8 +3,8 @@
 
   var app = angular.module('getCrafty', [
     'ngAnimate',
+    'ngMaterial',
     'ui.router',
-    'ui.bootstrap',
     'ngGeolocation',
     'angular-loading-bar',
     'angular-toArrayFilter',
@@ -33,12 +33,16 @@
     $scope.currentPath = $location.path();
   });
 
-  app.controller('BodyCtrl', function($scope, $localStorage, $sessionStorage) {
+  app.controller('BodyCtrl', function($scope, $localStorage, $sessionStorage, $mdSidenav) {
     $scope.$storage = $localStorage.$default({
       storeSearch: '',
       beerSearch: '',
       stores: [],
     });
+
+    $scope.openMenu = function() {
+      $mdSidenav('main').toggle();
+    };
 
     $scope.loadFinished = function() {
       setTimeout(function() {

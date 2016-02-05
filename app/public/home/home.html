@@ -10,10 +10,10 @@
       </p>
     </div>
     <div class="reset-gps-container">
-      <button class="btn btn-primary btn-reset-gps" type="button" role="button" ng-click="doGeolocation()">
-        <i class="icon-map-marker"></i>
+      <md-button class="md-secondary" type="button" role="button" ng-click="doGeolocation()" aria-label="Refresh locations">
+        <md-icon md-font-set="icomoon" class="icon-map-marker"></md-icon>
         <span class="btn-text">Refresh Locations</span>
-      </button>
+      </md-button>
     </div>
     <accordion>
       <accordion-group>
@@ -34,34 +34,40 @@
         </form>
       </accordion-group>
     </accordion>
-    <div class="list-group" ng-if="stores" ng-repeat="(key, store) in stores track by $index | limitTo: 12">
-      <a ui-sref="store({storeURL: store.url_friendly_name})" class="list-group-item">
-        <h3 class="list-group-item-heading">{{store.name}}</h3>
-        <div class="list-group-item-text">
-          <div class="badges">
-            <span class="badge" ng-if="store.has_parking">
-              P
-              <span class="sr-only">Location has parking</span>
-            </span>
-            <span class="badge" ng-if="store.has_transit_access">
-              <i class="icon-bus"></i>
-              <span class="sr-only">Location has transit access</span>
-            </span>
-            <span class="badge" ng-if="store.has_wheelchair_accessability">
-              <i class="icon-wheelchair"></i>
-              <span class="sr-only">Location has wheelchair accessibility</span>
-            </span>
-            <span class="badge" ng-if="store.has_beer_cold_room">
-              <i class="icon-weather-snow"></i>
-              <span class="sr-only">Location has a cold beer room</span>
-            </span>
-          </div>
+    <div class="stores" ng-if="stores" ng-repeat="(key, store) in stores track by $index | limitTo: 12">
+      <md-card ui-sref="store({storeURL: store.url_friendly_name})">
+        <md-card-header>
+          <md-card-header-text>
+            <span class="md-title">{{store.name}}</span>
+            <span class="md-subhead">{{store.location.distance_from_me / 1000 | number: 1}} km away</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content>
           <div class="address-1" ng-if="store.address_line_1.length">{{store.address_line_1}}</div>
           <div class="address-2" ng-if="store.address_line_2.length">{{store.address_line_2}}</div>
           <div class="city" ng-if="store.city.length">{{store.city}}, ON&nbsp;&nbsp;{{store.postal_code}}</div>
-          <strong>{{store.location.distance_from_me / 1000 | number: 1}} km away</strong>
-        </div>
-      </a>
+        </md-card-content>
+        <md-card-footer>
+          <md-chips class="store-chips">
+            <md-chip ng-show="store.has_parking" aria-label="Location has parking">
+              P
+              <md-tooltip>Location has parking</md-tooltip>
+            </md-chip>
+            <md-chip ng-show="store.has_transit_access" aria-label="Location has transit access">
+              <md-icon md-font-set="icomoon" class="icon-bus"></md-icon>
+              <md-tooltip>Location has transit access</md-tooltip>
+            </md-chip>
+            <md-chip ng-show="store.has_wheelchair_accessability" aria-label="Location has wheelchair accessibility">
+              <md-icon md-font-set="icomoon" class="icon-wheelchair"></md-icon>
+              <md-tooltip>Location has wheelchair accessibility</md-tooltip>
+            </md-chip>
+            <md-chip ng-show="store.has_beer_cold_room" aria-label="Location has a cold beer room">
+              <md-icon md-font-set="icomoon" class="icon-weather-snow"></md-icon>
+              <md-tooltip>Location has a cold beer room</md-tooltip>
+            </md-chip>
+          </md-chips>
+        </md-card-footer>
+      </md-card>
     </div>
     <p class="stores-error" ng-show="storesError">{{storesError}}</p>
   </div>

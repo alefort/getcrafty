@@ -7,11 +7,11 @@
     <meta name="description" content="">
     <meta name="fragment" content="!" />
     <title>Get Crafty</title>
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Oswald:400,700,300|Roboto:400,700,700italic,400italic' rel='stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Oswald:400,700,300|Roboto:400,700,700italic,400italic">
     <link rel="stylesheet" href="/bower_components/html5-boilerplate/css/normalize.css">
     <link rel="stylesheet" href="/bower_components/html5-boilerplate/css/main.css">
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
     <link rel="stylesheet" href="/bower_components/angular-loading-bar/build/loading-bar.min.css">
     <link rel="stylesheet" href="//i.icomoon.io/public/49c4a02d1c/GetCrafty/style.css">
     <link rel="stylesheet" href="/css/app.css">
@@ -48,7 +48,7 @@
       ga('send', 'pageview');
     </script>
   </head>
-  <body ng-class="{'menu-open': menuOpen}" ng-controller="BodyCtrl" when-ready="loadFinished()" wait-for-interpolation="true">
+  <body ng-controller="BodyCtrl" when-ready="loadFinished()" wait-for-interpolation="true" layout="column">
     <section class="loading-screen active" id="loading-screen">
       <div class="container">
         <img class="brand" src="img/logo-large.png" alt="Get Crafty">
@@ -56,43 +56,46 @@
         <p>Discover craft beer at nearby LCBO locations.</p>
       </div>
     </section>
-    <main class="main" id="main">
-      <header>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" ng-class="{'collapsed': !menuOpen}" ng-model="menuOpen" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" ui-sref="main">
-                <img class="logo" src="img/logo.png" alt="Logo">
-                <img class="brand" src="img/brand-2.png" alt="Get Crafty">
-              </a>
-            </div>
-          </div>
-        </nav>
+    <md-sidenav class="site-sidenav md-sidenav-left" md-component-id="main" tabindex="-1">
+      <header class="nav-header">
+        <a ui-sref="main" class="nav-header-logo md-button">
+          <img src="img/logo-stacked.png" alt="Get Crafty">
+        </a>
       </header>
-      <nav class="main-menu">
-        <ul class="nav nav-pills nav-stacked">
-          <li role="presentation">
-            <a ui-sref="main">Home</a>
+      <md-content flex role="navigation" class="flex">
+        <ul class="main-menu">
+          <li>
+            <a class="md-button" ui-sref="main">Home</a>
           </li>
-          <li role="presentation">
-            <a ui-sref="main">Restart Search</a>
+          <li>
+            <a class="md-button" ui-sref="main">Restart Search</a>
           </li>
         </ul>
-      </nav>
+      </md-content>
+    </md-sidenav>
+    <main layout="column" tabindex="-1" role="main" flex class="layout-column flex" ng-cloak>
+    <md-toolbar md-scroll-shrink class="md-menu-toolbar navbar">
+      <div class="md-toolbar-tools">
+        <md-button class="navbar-brand" ui-sref="main" aria-label="Home">
+          <img class="logo" src="img/logo.png" alt="Logo">
+          <img class="brand" src="img/brand-2.png" alt="Get Crafty">
+        </md-button>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Menu" ng-click="openMenu()">
+          <md-icon md-font-set="material-icons">menu</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-content md-scroll-y flex class="main layout-column flex" id="main" ng-cloak layout="column">
       <div ui-view></div>
     </main>
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
     <script src="/bower_components/ngGeolocation/ngGeolocation.js"></script>
-    <script src="/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="/bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
     <script src="/bower_components/angular-toArrayFilter/toArrayFilter.js"></script>
     <script src="/bower_components/ngstorage/ngStorage.min.js"></script>
