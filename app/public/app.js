@@ -9,6 +9,7 @@
     'angular-loading-bar',
     'angular-toArrayFilter',
     'ngStorage',
+    'vAccordion',
     'getCrafty.home',
     'getCrafty.beer',
     'getCrafty.beerSearch',

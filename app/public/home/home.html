@@ -15,25 +15,30 @@
         <span class="btn-text">Refresh Locations</span>
       </md-button>
     </div>
-    <accordion>
-      <accordion-group>
-        <accordion-heading>Manual Location Search <i class="icon-angle-right"></i></accordion-heading>
-        <form class="form-inline" ng-submit="postalSearch($storage.storeSearch)">
-          <div class="form-group">
-            <label class="sr-only" for="postal-code">Postal Code or City</label>
-            <div class="input-group">
-              <input type="text" ng-model="$storage.storeSearch" class="form-control" id="postal-code" name="postal-code" placeholder="Postal / City" required>
-              <span class="input-group-btn">
-                <button class="btn btn-primary" role="button=" type="submit" ng-disabled="$storage.storeSearch === null || $storage.storeSearch === ''">
-                  <span class="btn-text sr-only">Search</span>
-                  <i class="icon-search"></i>
-                </button>
-              </span>
-            </div>
-          </div>
-        </form>
-      </accordion-group>
-    </accordion>
+    <div class="manual-search-container">
+      <v-accordion class="vAccordion--default">
+        <v-pane>
+          <v-pane-header>Manual Search</v-pane-header>
+          <v-pane-content>
+            <form class="manual-search-form" ng-submit="postalSearch($storage.storeSearch)" name="manualSearch" layout="row">
+              <md-input-container flex="95">
+                <label for="postal-code">Postal Code or City</label>
+                <input type="text" ng-model="$storage.storeSearch" id="postal-code" name="postalCode" required>
+                <div ng-messages="manualSearch.postalCode.$error">
+                  <div ng-message="required">Please enter a postal code or city!</div>
+                </div>
+              </md-input-container>
+              <md-input-container flex class="submit-container">
+                <md-button class="md-icon-button" role="button" aria-label="Search" type="submit">
+                  <md-icon md-font-set="icomoon" class="icon-search"></md-icon>
+                </md-button>
+              </md-input-container>
+            </form>
+          </v-pane-content>
+        </v-pane>
+      </v-accordion>
+    </div>
+
     <div class="stores" ng-if="stores" ng-repeat="(key, store) in stores track by $index | limitTo: 12">
       <md-card ui-sref="store({storeURL: store.url_friendly_name})">
         <md-card-header>

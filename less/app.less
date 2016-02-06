@@ -27,11 +27,8 @@ body {
   overflow: hidden;
 }
 
-.container {
-  max-width: 900px;
-}
-
-.md-button.md-secondary {
+.md-button.md-secondary,
+.md-button.md-tertiary {
   background-color: @new-secondary;
   color: @white;
   padding: 0 12px;
@@ -54,6 +51,15 @@ body {
   .btn-text {
     display: inline-block;
     vertical-align: middle;
+  }
+}
+
+.md-button.md-tertiary {
+  background-color: @new-primary;
+
+  &:hover,
+  &:focus {
+    background-color: @new-secondary;
   }
 }
 
@@ -160,6 +166,14 @@ body {
   }
 }
 
+.manual-search-form {
+  padding-left: 15px;
+
+  md-input-container.submit-container {
+    padding-left: 0;
+  }
+}
+
 h1,
 h2,
 h3,
@@ -183,6 +197,7 @@ h6 {
     line-height: 31px;
   }
 }
+
 
 .action-bar {
   position: fixed;
@@ -285,7 +300,8 @@ h6 {
   }
 }
 
-.reset-gps-container {
+.reset-gps-container,
+.manual-search-container {
   text-align: center;
   margin-bottom: 15px;
 }

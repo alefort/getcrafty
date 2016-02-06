@@ -20,6 +20,7 @@
     "angular-animate": "~1.4.3",
     "angular-toArrayFilter": "~1.0.1",
     "ui-router-extras": "~0.1.0",
-    "ngstorage": "~0.3.10"
+    "ngstorage": "~0.3.10",
+    "v-accordion": "~1.4.1"
   }
 }
