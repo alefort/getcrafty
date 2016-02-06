@@ -167,10 +167,12 @@ body {
 }
 
 .manual-search-form {
-  padding-left: 15px;
-
   md-input-container.submit-container {
     padding-left: 0;
+  }
+
+  .md-button.md-icon-button {
+    margin: 0;
   }
 }
 
@@ -300,10 +302,20 @@ h6 {
   }
 }
 
-.reset-gps-container,
-.manual-search-container {
+.reset-gps-container {
   text-align: center;
   margin-bottom: 15px;
+}
+
+.manual-search-card {
+  margin-bottom: 50px;
+
+  .vAccordion--default {
+    v-pane-header {
+      border-bottom: 0;
+      margin-bottom: 0;
+    }
+  }
 }
 
 .btn-reset-gps {
