@@ -47,19 +47,26 @@
         </div>
       </form>
       <p ng-if="!store.beers">Loading beer selection...</p>
-      <div class="list-group" ng-if="store.beers">
-        <a ui-sref="beer({beerID: beer.url_friendly_name, storeURL: store.url_friendly_name})" class="list-group-item" ng-repeat="(key, beer) in store.beers | toArray | filter: searchText | orderBy: [emptyInventory, 'name']">
-          <h4 class="list-group-item-heading"><i class="icon-beer"></i> {{beer.name}} <small>by {{beer.producer_name}}</small> <span class="badge" ng-if="beer.is_new">New</span></h4>
-          <h5>{{getBeerStyle(beer)}} - <strong>{{beer.alcohol_content / 100}}%</strong></h5>
-          <h5>
-            {{beer.package}} -
-            <span class="no-inventory" ng-if="beer.inventory.quantity === 1">Maybe out of stock</span>
-            <span class="inventory" ng-if="beer.inventory.quantity > 1">{{getInventory(beer)}}</span>
-          </h5>
-          <strong>{{beer.price_in_cents / 100 | currency}}</strong></span>
-          <div class="clearfix"></div>
-        </a>
-      </div>
+      <md-list role="list" class="beers" ng-if="store.beers">
+        <md-subheader>Beers at {{store.name}}</md-subheader>
+        <md-list-item role="listitem" tabindex="-1" class="md-clickable md-3-line" ng-repeat="(key, beer) in store.beers | toArray | filter: searchText | orderBy: [emptyInventory, 'name']">
+          <md-button class="md-no-style md-ink-ripple" ui-sref="beer({beerID: beer.url_friendly_name, storeURL: store.url_friendly_name})">
+            <div class="md-list-item-inner">
+              <md-icon class="md-avatar-icon icon-beer" md-font-set="icomoon"></md-icon>
+              <div class="md-list-item-text">
+                <h3>{{beer.name}} <small>by {{beer.producer_name}}</small> <span class="badge" ng-if="beer.is_new">New</span></h3>
+                <h4>{{getBeerStyle(beer)}} - <strong>{{beer.alcohol_content / 100}}%</strong></h4>
+                <h5>
+                  {{beer.package}} -
+                  <span class="no-inventory" ng-if="beer.inventory.quantity === 1">Maybe out of stock</span>
+                  <span class="inventory" ng-if="beer.inventory.quantity > 1">{{getInventory(beer)}}</span>
+                </h5>
+                <strong>{{beer.price_in_cents / 100 | currency}}</strong></span>
+              </div>
+            </div>
+          </md-button>
+        </md-list-item>
+      </md-list>
     </section>
     <div class="action-bar">
       <a ui-sref="main" class="btn btn-primary btn-action"><i class="icon-angle-left"></i> Select a new store</a>
