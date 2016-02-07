@@ -10,8 +10,8 @@
       </p>
     </div>
     <div class="reset-gps-container">
-      <md-button class="md-secondary" type="button" role="button" ng-click="doGeolocation()" aria-label="Refresh locations">
-        <md-icon md-font-set="icomoon" class="icon-map-marker"></md-icon>
+      <md-button class="md-secondary md-ink-ripple" type="button" role="button" ng-click="doGeolocation()" aria-label="Refresh locations">
+        <md-icon md-font-set="material-icons">my_location</md-icon>
         <span class="btn-text">Refresh Locations</span>
       </md-button>
     </div>
@@ -40,41 +40,49 @@
         </v-accordion>
       </md-card-content>
     </md-card>
-    <div class="stores" ng-if="stores" ng-repeat="(key, store) in stores track by $index | limitTo: 12">
-      <md-card ui-sref="store({storeURL: store.url_friendly_name})">
-        <md-card-header>
-          <md-card-header-text>
-            <span class="md-title">{{store.name}}</span>
-            <span class="md-subhead">{{store.location.distance_from_me / 1000 | number: 1}} km away</span>
-          </md-card-header-text>
-        </md-card-header>
-        <md-card-content>
-          <div class="address-1" ng-if="store.address_line_1.length">{{store.address_line_1}}</div>
-          <div class="address-2" ng-if="store.address_line_2.length">{{store.address_line_2}}</div>
-          <div class="city" ng-if="store.city.length">{{store.city}}, ON&nbsp;&nbsp;{{store.postal_code}}</div>
-        </md-card-content>
-        <md-card-footer>
-          <md-chips class="store-chips">
-            <md-chip ng-show="store.has_parking" aria-label="Location has parking">
-              P
-              <md-tooltip>Location has parking</md-tooltip>
-            </md-chip>
-            <md-chip ng-show="store.has_transit_access" aria-label="Location has transit access">
-              <md-icon md-font-set="icomoon" class="icon-bus"></md-icon>
-              <md-tooltip>Location has transit access</md-tooltip>
-            </md-chip>
-            <md-chip ng-show="store.has_wheelchair_accessability" aria-label="Location has wheelchair accessibility">
-              <md-icon md-font-set="icomoon" class="icon-wheelchair"></md-icon>
-              <md-tooltip>Location has wheelchair accessibility</md-tooltip>
-            </md-chip>
-            <md-chip ng-show="store.has_beer_cold_room" aria-label="Location has a cold beer room">
-              <md-icon md-font-set="icomoon" class="icon-weather-snow"></md-icon>
-              <md-tooltip>Location has a cold beer room</md-tooltip>
-            </md-chip>
-          </md-chips>
-        </md-card-footer>
-      </md-card>
-    </div>
+    <md-list role="list" class="stores" ng-if="stores">
+      <md-subheader>Closest Store Listings</md-subheader>
+      <md-list-item role="listitem" tabindex="-1" class="md-clickable md-3-line" ng-repeat="(key, store) in stores track by $index | limitTo: 12">
+        <md-button class="md-no-style md-ink-ripple" ui-sref="store({storeURL: store.url_friendly_name})">
+          <div class="md-list-item-inner">
+            <md-icon class="md-avatar-icon" md-font-set="material-icons">location_on</md-icon>
+            <div class="md-list-item-text">
+              <h3>{{store.name}}</h3>
+              <p>{{store.location.distance_from_me / 1000 | number: 1}} km away</p>
+              <div class="address">
+                <div class="address-line address-line-1" ng-if="store.address_line_1.length">{{store.address_line_1}}</div>
+                <div class="address-line address-line-2" ng-if="store.address_line_2.length">{{store.address_line_2}}</div>
+                <div class="address-line address-line-3" ng-if="store.city.length && store.postal_code.length">
+                  <span ng-if="store.city.length">{{store.city}}, ON
+                  <span ng-if="store.postal_code.length">&nbsp;{{store.postal_code}}</span>
+                </div>
+              </div>
+              <md-chips class="store-chips">
+                <md-chip ng-show="store.has_parking" aria-label="Location has parking">
+                  P
+                  <md-tooltip>Location has parking</md-tooltip>
+                </md-chip>
+                <md-chip ng-show="store.has_transit_access" aria-label="Location has transit access">
+                  <md-icon md-font-set="icomoon" class="icon-bus"></md-icon>
+                  <md-tooltip>Location has transit access</md-tooltip>
+                </md-chip>
+                <md-chip ng-show="store.has_wheelchair_accessability" aria-label="Location has wheelchair accessibility">
+                  <md-icon md-font-set="icomoon" class="icon-wheelchair"></md-icon>
+                  <md-tooltip>Location has wheelchair accessibility</md-tooltip>
+                </md-chip>
+                <md-chip ng-show="store.has_beer_cold_room" aria-label="Location has a cold beer room">
+                  <md-icon md-font-set="icomoon" class="icon-weather-snow"></md-icon>
+                  <md-tooltip>Location has a cold beer room</md-tooltip>
+                </md-chip>
+              </md-chips>
+            </div>
+            <!--
+
+             -->
+          </div>
+        </md-button>
+      </md-list-item>
+    </md-list>
     <p class="stores-error" ng-show="storesError">{{storesError}}</p>
   </div>
 </section>
