@@ -43,7 +43,8 @@ var eventController = {
 var lcboLoader = {
     init: function(){
         lcboLoader.mongo.db = mongoose.connect('mongodb://' + lcboLoader.config.mongo.host + '/' + lcboLoader.config.mongo.db);
-        lcboLoader.log('Successfully connected to Mongo');
+        lcboLoader.log('Successfully connected to Mongo server ' + mongoose.connection.host + ' on port ' + mongoose.connection.port);
+        mongoose.set('debug', true);
     },
     log: function(message){
         console.log(lcboLoader.getDate() + ':  ' + message);
@@ -75,6 +76,9 @@ var lcboLoader = {
         },
         inventory: {
             model: mongoose.model('inventory', models.schema.inventory)
+        },
+        inventory_archive: {
+            model: mongoose.model('archive', models.schema.inventory_archive)
         },
         db: ''
     },
@@ -237,13 +241,38 @@ var lcboLoader = {
         eventEmitter.emit('load_dataset', lcboLoader.mongo.product.model, 'products', config.loader.datapath + '/products.csv', {});
     },
     loadInventories: function(){
-        var oneWeekAgo = new Date();
-        oneWeekAgo.setDate(oneWeekAgo.getDate() -7);
+        // Need to copy the data over to inventories archive collection before pruning and loading below
+        var oneMonthAgo = new Date();
+        oneMonthAgo.setDate(oneMonthAgo.getDate() -30);
 
-        var today = new Date();
-        var date_query = {updated_at: {$lt: oneWeekAgo}};
+        var date_query = {updated_at: {$lt: oneMonthAgo}};
+        // Prune the archives to only keep one month of data
+        var model = lcboLoader.mongo.inventory_archive.model;
+        model.remove(date_query, function(error){
+            lcboLoader.mongo.inventory.model.find({}).exec(function(err, docs){
+                for (var i = 0; i < docs.length; i++) {
+                    var archived_inventory = {};
+                    archived_inventory.product_id = docs[i].product_id;
+                    archived_inventory.store_id = docs[i].store_id;
+                    archived_inventory.is_dead = docs[i].is_dead;
+                    archived_inventory.quantity = docs[i].quantity;
+                    archived_inventory.reported_on = docs[i].reported_on;
+                    archived_inventory.updated_at = docs[i].updated_at;
 
-        eventEmitter.emit('load_dataset', lcboLoader.mongo.inventory.model, 'inventories', config.loader.datapath + '/inventories.csv', {});
+                    var doc = lcboLoader.mongo.inventory_archive.model(archived_inventory);
+
+                    doc.save(function(error, doc) {
+                        if (error) {
+                            lcboLoader.error(error);
+                            process.exit(1);
+                        }
+
+                        return;
+                    });
+                }
+                eventEmitter.emit('load_dataset', lcboLoader.mongo.inventory.model, 'inventories', config.loader.datapath + '/inventories.csv', {});
+            });
+        });
     },
     datasetLoaded: function(schemaName){
         switch(schemaName){
@@ -264,4 +293,4 @@ eventController.init();
 lcboLoader.init();
 /* Now, let's kick off the work */
 eventEmitter.emit('download_data');
-//lcboLoader.loadAllDatasets();
+//lcboLoader.loadStores();

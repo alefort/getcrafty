@@ -12,7 +12,8 @@ var express = require('express'),
     config = require('get-config').sync(__dirname + '/config'),
     FileStreamRotator = require('file-stream-rotator'),
     morgan = require('morgan'),
-    fs = require('fs');
+    fs = require('fs'),
+    jwt = require('jsonwebtoken');
 
 mongoose.connect('mongodb://localhost/lcbo');
 
