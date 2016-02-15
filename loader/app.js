@@ -249,28 +249,31 @@ var lcboLoader = {
         // Prune the archives to only keep one month of data
         var model = lcboLoader.mongo.inventory_archive.model;
         model.remove(date_query, function(error){
-            lcboLoader.mongo.inventory.model.find({}).lean().exec(function(err, docs){
-                console.log('# of inventory records: ' + docs.length);
-                for (var i = 0; i < docs.length; i++) {
-                    var archived_inventory = {};
-                    archived_inventory.product_id = docs[i].product_id;
-                    archived_inventory.store_id = docs[i].store_id;
-                    archived_inventory.is_dead = docs[i].is_dead;
-                    archived_inventory.quantity = docs[i].quantity;
-                    archived_inventory.reported_on = docs[i].reported_on;
-                    archived_inventory.updated_at = docs[i].updated_at;
+            var stream = lcboLoader.mongo.inventory.model.find({}).lean().stream();
 
-                    var doc = lcboLoader.mongo.inventory_archive.model(archived_inventory);
+            stream.on('data', function (doc) {
+                var archived_inventory = {};
+                archived_inventory.product_id = doc.product_id;
+                archived_inventory.store_id = doc.store_id;
+                archived_inventory.is_dead = doc.is_dead;
+                archived_inventory.quantity = doc.quantity;
+                archived_inventory.reported_on = doc.reported_on;
+                archived_inventory.updated_at = doc.updated_at;
 
-                    doc.save(function(error, doc) {
-                        if (error) {
-                            lcboLoader.error(error);
-                            process.exit(1);
-                        }
+                var archive_doc = lcboLoader.mongo.inventory_archive.model(archived_inventory);
 
-                        return;
-                    });
-                }
+                archive_doc.save(function(error, doc) {
+                    if (error) {
+                        lcboLoader.error(error);
+                        process.exit(1);
+                    }
+
+                    return;
+                });
+            }).on('error', function (err) {
+                lcboLoader.error(err);
+                process.exit(1);
+            }).on('close', function () {
                 eventEmitter.emit('load_dataset', lcboLoader.mongo.inventory.model, 'inventories', config.loader.datapath + '/inventories.csv', {});
             });
         });
