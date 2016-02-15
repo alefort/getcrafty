@@ -44,7 +44,7 @@ var lcboLoader = {
     init: function(){
         lcboLoader.mongo.db = mongoose.connect('mongodb://' + lcboLoader.config.mongo.host + '/' + lcboLoader.config.mongo.db);
         lcboLoader.log('Successfully connected to Mongo server ' + mongoose.connection.host + ' on port ' + mongoose.connection.port);
-        mongoose.set('debug', true);
+        mongoose.set('debug', false);
     },
     log: function(message){
         console.log(lcboLoader.getDate() + ':  ' + message);
