@@ -250,6 +250,7 @@ var lcboLoader = {
         var model = lcboLoader.mongo.inventory_archive.model;
         model.remove(date_query, function(error){
             lcboLoader.mongo.inventory.model.find({}).exec(function(err, docs){
+                console.log('# of inventory records: ' + docs.length);
                 for (var i = 0; i < docs.length; i++) {
                     var archived_inventory = {};
                     archived_inventory.product_id = docs[i].product_id;
