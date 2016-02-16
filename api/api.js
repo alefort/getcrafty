@@ -13,7 +13,8 @@ var express = require('express'),
     FileStreamRotator = require('file-stream-rotator'),
     morgan = require('morgan'),
     fs = require('fs'),
-    jwt = require('jsonwebtoken');
+    jwt = require('jsonwebtoken'),
+    mongoose_cache = require('mongoose-cache').install(mongoose, config.api.cache_opts);
 
 mongoose.connect('mongodb://localhost/lcbo');
 
@@ -108,7 +109,7 @@ app.get('/api/v1/storesNear', function(req, res) {
 });
 
 app.get('/api/v1/inventoryByStore', function(req, res) {
-    InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_url), function(err,docs){
+    InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_url)).cache().exec(function(err,docs){
         res.send(docs);
     });
 });
@@ -117,16 +118,16 @@ app.get('/api/v1/productIdByStore', function(req, res) {
     InventoryModel.find(apiQueries.getInventoryByStore(req.query.store_url), {
         '_id': 0,
         'product_id': 1
-    }, function(err,docs){
+    }).cache().exec(function(err,docs){
         res.send(docs);
     });
 });
 
 app.get('/api/v1/productsAtStore', function(req, res) {
-    StoreModel.find(apiQueries.getStoreIdByURL(req.query.store_url), function(err,docs){
+    StoreModel.find(apiQueries.getStoreIdByURL(req.query.store_url)).cache().exec(function(err,docs){
         store_id = docs[0].id;
 
-        InventoryModel.find(apiQueries.getInventoryByStore(store_id), function(err,docs){
+        InventoryModel.find(apiQueries.getInventoryByStore(store_id)).cache().exec(function(err,docs){
             var arrayIds = [];
             var arrayInventories = [];
 
@@ -135,7 +136,7 @@ app.get('/api/v1/productsAtStore', function(req, res) {
                 arrayInventories[docs[index].product_id] = docs[index];
             }
 
-            ProductModel.find(apiQueries.getProductsFromIDs(arrayIds, 'Beer', config.api.brewery_exclusions), function(err,products){
+            ProductModel.find(apiQueries.getProductsFromIDs(arrayIds, 'Beer', config.api.brewery_exclusions)).cache().exec(function(err,products){
                 for(var index in products){
                     var product = products[index];
                     product.inventory.quantity = arrayInventories[product.id].quantity;

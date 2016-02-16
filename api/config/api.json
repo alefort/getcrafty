@@ -50,5 +50,10 @@
     "Browary Warka",
     "Stroh Brewery Company",
     "Baltika Brewery"
-  ]
+  ],
+  "cache_opts": {
+    "max" : 50,
+    "maxAge" : 7200000,
+    "debug" : false
+  }
 }
