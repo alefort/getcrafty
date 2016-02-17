@@ -1,27 +1,14 @@
 <div class="store" controller="storeCtrl">
-  <div class="container">
-    <section class="store-information">
-      <p ng-if="!store">Loading store information...</p>
-      <div class="store-information-inner" ng-if="store">
-        <h1 class="page-heading">{{store.name}}</h1>
-        <div class="badges">
-          <span class="badge" ng-if="store.has_parking">
-            P
-            <span class="sr-only">Location has parking</span>
-          </span>
-          <span class="badge" ng-if="store.has_transit_access">
-            <i class="icon-bus"></i>
-            <span class="sr-only">Location has transit access</span>
-          </span>
-          <span class="badge" ng-if="store.has_wheelchair_accessability">
-            <i class="icon-wheelchair"></i>
-            <span class="sr-only">Location has wheelchair accessibility</span>
-          </span>
-          <span class="badge" ng-if="store.has_beer_cold_room">
-            <i class="icon-weather-snow"></i>
-            <span class="sr-only">Location has a cold beer room</span>
-          </span>
-        </div>
+  <button class="md-fab md-fab-bottom-right md-button md-default-theme">
+    <md-icon md-font-set="material-icons">menu</md-icon>
+  </button>
+    <a ui-sref="main" class="btn btn-primary btn-action"><i class="icon-angle-left"></i> Select a new store</a>
+    <md-card class="store-information">
+      <md-card-title>
+        <md-card-title-text class="md-headline" ng-if="!store">Loading store information...</md-card-title-text>
+        <md-card-title-text class="md-headline" ng-if="store">{{store.name}}</md-card-title-text>
+      </md-card-title>
+      <md-card-content>
         <address>
           <div class="address-1" ng-if="store.address_line_1.length">{{store.address_line_1}}</div>
           <div class="address-2" ng-if="store.address_line_2.length">{{store.address_line_2}}</div>
@@ -29,23 +16,45 @@
           <a ng-if="store.telephone.length" href="tel:{{store.telephone}}">{{store.telephone}}</a><br>
           <a ng-href="{{googleMapURL(store.latitude, store.longitude)}}" target="_blank">Map</a>
         </address>
-      </div>
-    </section>
+      </md-card-content>
+      <md-card-footer>
+        <md-chips class="store-chips">
+          <md-chip ng-show="store.has_parking" aria-label="Location has parking">
+            P
+            <md-tooltip>Location has parking</md-tooltip>
+          </md-chip>
+          <md-chip ng-show="store.has_transit_access" aria-label="Location has transit access">
+            <md-icon md-font-set="icomoon" class="icon-bus"></md-icon>
+            <md-tooltip>Location has transit access</md-tooltip>
+          </md-chip>
+          <md-chip ng-show="store.has_wheelchair_accessability" aria-label="Location has wheelchair accessibility">
+            <md-icon md-font-set="icomoon" class="icon-wheelchair"></md-icon>
+            <md-tooltip>Location has wheelchair accessibility</md-tooltip>
+          </md-chip>
+          <md-chip ng-show="store.has_beer_cold_room" aria-label="Location has a cold beer room">
+            <md-icon md-font-set="icomoon" class="icon-weather-snow"></md-icon>
+            <md-tooltip>Location has a cold beer room</md-tooltip>
+          </md-chip>
+        </md-chips>
+      </md-card-footer>
+    </md-card>
+    <md-card class="manual-search-card">
+      <md-card-content>
+        <form class="form-filter form-inline" ng-submit="postalSearch(input.postal)" name="beerSearch" layout="row">
+          <md-input-container flex="95">
+            <label class="sr-only" for="beer-search">Refine your beers...</label>
+            <input type="text" ng-model="searchText" class="form-control" id="beer-search" name="search">
+          </md-input-container>
+          <md-input-container flex class="submit-container">
+            <md-button class="md-icon-button" role="button" aria-label="Search" type="submit">
+              <md-icon md-font-set="icomoon" class="icon-search"></md-icon>
+            </md-button>
+          </md-input-container>
+        </form>
+      </md-card-content>
+    </md-card>
     <section class="store-beers">
-      <form class="form-filter form-inline" ng-submit="postalSearch(input.postal)">
-        <div class="form-group">
-          <label class="sr-only" for="search">Search</label>
-          <div class="input-group">
-            <input type="text" ng-model="searchText" class="form-control" id="search" name="search" placeholder="Refine your beers...">
-            <span class="input-group-btn">
-              <button class="btn btn-primary" role="button=" type="submit">
-                <span class="btn-text sr-only">Search</span>
-                <i class="icon-search"></i>
-              </button>
-            </span>
-          </div>
-        </div>
-      </form>
+
       <p ng-if="!store.beers">Loading beer selection...</p>
       <md-list role="list" class="beers" ng-if="store.beers">
         <md-subheader>Beers at {{store.name}}</md-subheader>
@@ -68,8 +77,4 @@
         </md-list-item>
       </md-list>
     </section>
-    <div class="action-bar">
-      <a ui-sref="main" class="btn btn-primary btn-action"><i class="icon-angle-left"></i> Select a new store</a>
-    </div>
-  </div>
 </div>

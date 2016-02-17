@@ -27,6 +27,12 @@ body {
   overflow: hidden;
 }
 
+.view-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
 .md-button.md-secondary,
 .md-button.md-tertiary {
   background-color: @new-secondary;
@@ -203,11 +209,20 @@ h6 {
     height: auto;
     line-height: 31px;
   }
+
+  .md-chips {
+    padding-bottom: 0;
+    box-shadow: none;
+  }
+}
+
+address {
+  font-style: normal;
 }
 
 
 .action-bar {
-  position: fixed;
+  position: absolute;
   top: auto;
   right: 0;
   bottom: 0;
@@ -305,6 +320,26 @@ h6 {
 .manual-search-form {
   margin-left: -1px;
   margin-right: -10px;
+
+  md-input-container.submit-container {
+    padding-left: 0;
+  }
+
+  .md-button.md-icon-button {
+    margin: 0;
+  }
+}
+
+.manual-search-card {
+  md-card-content {
+    padding-bottom: 0;
+  }
+}
+
+.form-filter {
+  md-input-container {
+    margin-bottom: 0;
+  }
 
   md-input-container.submit-container {
     padding-left: 0;
