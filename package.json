@@ -32,12 +32,13 @@
   },
   "dependencies": {
     "body-parser": "^1.13.2",
-    "express": "^4.12.3",
-    "mongoose": "^4.0.3",
-    "express-restify-mongoose": "^1.0.3",
-    "method-override": "^2.3.4",
     "compression": "^1.5.1",
     "cors": "^2.7.1",
-    "get-config": "^0.4.7"
+    "express": "^4.12.3",
+    "express-restify-mongoose": "^1.0.3",
+    "get-config": "^0.4.7",
+    "method-override": "^2.3.4",
+    "mongoose": "^4.0.3",
+    "mongoose-cache": "^0.1.4"
   }
 }
