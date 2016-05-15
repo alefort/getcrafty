@@ -92,7 +92,7 @@ var taskRunner = {
 
         inventory_stream.on('data', function (doc) {
             archives.findOne({
-                store_id: doc.store_id,
+                store_id: -1,
                 product_id: doc.product_id,
                 reported_on:{
                     $lte: fivedaysAgo
