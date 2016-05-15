@@ -99,6 +99,7 @@ var taskRunner = {
                 }
             }).exec(function(err, record){
                 console.log(doc);
+                console.log(record);
                 process.exit(0);
                 doc.is_new = true;
                 doc = taskRunner.mongo.inventory_archive.model(doc);
