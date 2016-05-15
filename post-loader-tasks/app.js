@@ -92,20 +92,19 @@ var taskRunner = {
 
         inventory_stream.on('data', function (doc) {
             archives.findOne({
-                store_id: -1,
+                store_id: doc.store_id,
                 product_id: doc.product_id,
                 reported_on:{
                     $lte: fivedaysAgo
                 }
             }).exec(function(err, record){
-                console.log(doc);
-                console.log(record);
-                process.exit(0);
-                doc.is_new = true;
-                doc = taskRunner.mongo.inventory_archive.model(doc);
-                doc.save(function(err, doc){
-                    // Non critical, let it fail silently
-                });
+                if(record == null){
+                    doc.is_new = true;
+                    doc = taskRunner.mongo.inventory_archive.model(doc);
+                    doc.save(function(err, doc){
+                        // Non critical, let it fail silently
+                    });
+                }
             });
         }).on('error', function (err) {
             taskRunner.error(err);
