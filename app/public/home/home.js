@@ -85,9 +85,7 @@
         $scope.storesError = 'Please try your search again!';
       }
     }
-
-    // if (!$scope.stores.length) {
-    //   $scope.doGeolocation();
-    // }
+    
+    $scope.doGeolocation();
   });
 })();
