@@ -8,6 +8,7 @@ module.exports = {
             product_id: Number,
             store_id: Number,
             is_dead: Boolean,
+            is_new: Boolean,
             quantity: Number,
             reported_on: Date,
             updated_at: Date
@@ -16,6 +17,7 @@ module.exports = {
             product_id: Number,
             store_id: Number,
             is_dead: Boolean,
+            is_new: Boolean,
             quantity: Number,
             reported_on: Date,
             updated_at: Date

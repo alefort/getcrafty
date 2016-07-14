@@ -124,6 +124,7 @@ var lcboLoader = {
     },
     processInventoryRecord: function(inventoryRecord){
         var doc = lcboLoader.mongo.inventory.model(inventoryRecord);
+        doc.is_new = false;
 
         doc.save(function(error, doc) {
             if (error) {
