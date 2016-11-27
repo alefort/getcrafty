@@ -23,7 +23,7 @@ var mongoose = require('mongoose'),
     events = require('events'),
     eventEmitter = new events.EventEmitter(),
     ini = require('ini'),
-    config = require('get-config').sync(__dirname + '/config');
+    config = require('get-config').loadSync(__dirname + '/config');
 
 var eventController = {
     init: function(){
