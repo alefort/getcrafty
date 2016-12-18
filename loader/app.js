@@ -129,6 +129,10 @@ var lcboLoader = {
         doc.is_new = false;
 
         lcboLoader.mongo.product.model.findOne({ 'id': doc.product_id }, function (err, product) {
+            if(product == null){
+                return;
+            }
+            
             doc.save(function(error, doc) {
                 if (error) {
                     lcboLoader.error(error);
