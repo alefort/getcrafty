@@ -132,7 +132,7 @@ var lcboLoader = {
             if(product == null){
                 return;
             }
-            
+
             doc.save(function(error, doc) {
                 if (error) {
                     lcboLoader.error(error);
