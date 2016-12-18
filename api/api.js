@@ -99,7 +99,7 @@ app.get('/api/v1/storesNear', function(req, res) {
         },
         { maxDistance: 50000, spherical: true }, function(err,docs){
             var results = []
-            console.log(err);
+            console.log(docs);
             if(docs !== undefined && docs.length > 0){
                 docs.forEach(function(doc) {
                     doc.obj.location.distance_from_me = doc.dis;
