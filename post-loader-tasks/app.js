@@ -91,7 +91,6 @@ var taskRunner = {
         fivedaysAgo.setDate(fivedaysAgo.getDate() - 5);
 
         inventory_stream.on('data', function (doc) {
-            console.log(doc);
             archives.findOne({
                 store_id: doc.store_id,
                 product_id: doc.product_id,
@@ -99,6 +98,7 @@ var taskRunner = {
                     $lte: fivedaysAgo
                 }
             }).exec(function(err, record){
+                console.log(doc);
                 if(record == null){
                     doc.is_new = true;
                     doc = taskRunner.mongo.inventory_archive.model(doc);
