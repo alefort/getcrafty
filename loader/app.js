@@ -128,7 +128,7 @@ var lcboLoader = {
         var doc = lcboLoader.mongo.inventory.model(inventoryRecord);
         doc.is_new = false;
 
-        lcboLoader.mongo.product.findOne({ 'id': doc.product_id }, function (err, product) {
+        lcboLoader.mongo.product.model.findOne({ 'id': doc.product_id }, function (err, product) {
             doc.save(function(error, doc) {
                 if (error) {
                     lcboLoader.error(error);
