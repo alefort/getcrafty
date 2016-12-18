@@ -113,14 +113,16 @@ var lcboLoader = {
 
         doc.url_friendly_name = lcboLoader.make_url_friendly_string(doc.name + '-' + doc.id);
 
-        doc.save(function(error, doc) {
-            if (error) {
-                lcboLoader.error(error);
-                process.exit(1);
-            }
+        if(doc.primary_category == 'Beer'){
+            doc.save(function(error, doc) {
+                if (error) {
+                    lcboLoader.error(error);
+                    process.exit(1);
+                }
 
-            return;
-        });
+                return;
+            });
+        }
     },
     processInventoryRecord: function(inventoryRecord){
         var doc = lcboLoader.mongo.inventory.model(inventoryRecord);
