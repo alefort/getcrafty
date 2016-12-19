@@ -101,6 +101,7 @@ var taskRunner = {
 
                 if(record == null){
                     doc.is_new = true;
+                    doc = taskRunner.mongo.inventory_archive.model(doc);
                     doc.save(function(err, doc){
                         // Non critical, let it fail silently
                         if(err){
