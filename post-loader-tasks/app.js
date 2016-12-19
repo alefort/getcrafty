@@ -98,14 +98,18 @@ var taskRunner = {
                     $lte: fivedaysAgo
                 }
             }).exec(function(err, record){
-                console.log(doc);
+
                 if(record == null){
                     doc.is_new = true;
-                    doc = taskRunner.mongo.inventory_archive.model(doc);
                     doc.save(function(err, doc){
                         // Non critical, let it fail silently
+                        if(err){
+                            console.log(err);
+                            process.exit(1);
+                        }
                     });
                 }
+                console.log(doc);
             });
         }).on('error', function (err) {
             taskRunner.error(err);
