@@ -109,9 +109,9 @@ var taskRunner = {
                             console.log(err);
                             process.exit(1);
                         }
+                        process.exit(1);
                     });
                 }
-                process.exit(1);
             });
         }).on('error', function (err) {
             taskRunner.error(err);
