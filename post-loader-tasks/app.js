@@ -98,6 +98,7 @@ var taskRunner = {
                     $lte: fivedaysAgo
                 }
             }).exec(function(err, record){
+                console.log('1');
                 console.log(record);
                 if(record == null){
                     doc.is_new = true;
@@ -110,6 +111,7 @@ var taskRunner = {
                         }
                     });
                 }
+                console.log('2');
                 console.log(doc);
                 process.exit(1);
             });
