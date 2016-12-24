@@ -103,6 +103,7 @@ var taskRunner = {
                     doc.is_new = true;
                     console.log(doc);
                     doc.save(function(err, doc){
+                        console.log(doc);
                         // Non critical, let it fail silently
                         if(err){
                             console.log(err);
