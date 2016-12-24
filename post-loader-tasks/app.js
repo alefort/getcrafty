@@ -101,9 +101,10 @@ var taskRunner = {
                 if(record == null){
                     doc = taskRunner.mongo.inventory_archive.model(doc);
                     doc.is_new = true;
-                    
+
                     doc.save(function(err, doc){
                         console.log(doc);
+                        process.exit(1);
                         // Non critical, let it fail silently
                         if(err){
                             console.log(err);
