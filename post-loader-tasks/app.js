@@ -98,7 +98,7 @@ var taskRunner = {
                     $lte: fivedaysAgo
                 }
             }).exec(function(err, record){
-
+                console.log(record);
                 if(record == null){
                     doc.is_new = true;
                     doc = taskRunner.mongo.inventory_archive.model(doc);
@@ -111,6 +111,7 @@ var taskRunner = {
                     });
                 }
                 console.log(doc);
+                process.exit(1);
             });
         }).on('error', function (err) {
             taskRunner.error(err);
