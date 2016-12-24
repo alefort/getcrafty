@@ -102,8 +102,6 @@ var taskRunner = {
                     doc = taskRunner.mongo.inventory.model(doc);
                     doc.is_new = true;
                     doc.isNew = false;
-
-                    console.log(doc);process.exit(1);
                     doc.save(function(err, doc){
                         // Non critical, let it fail silently
                         if(err){
