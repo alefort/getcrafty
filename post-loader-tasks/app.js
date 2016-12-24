@@ -98,7 +98,7 @@ var taskRunner = {
                     $lte: fivedaysAgo
                 }
             }).exec(function(err, record){
-                if(record == null){
+                if(record != null){
                     doc = taskRunner.mongo.inventory.model(doc);
                     doc.is_new = false;
                     doc.isNew = false;
