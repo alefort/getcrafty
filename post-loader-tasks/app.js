@@ -101,7 +101,7 @@ var taskRunner = {
                 if(record == null){
                     doc = taskRunner.mongo.inventory_archive.model(doc);
                     doc.is_new = true;
-                    console.log(doc);
+                    
                     doc.save(function(err, doc){
                         console.log(doc);
                         // Non critical, let it fail silently
@@ -109,7 +109,6 @@ var taskRunner = {
                             console.log(err);
                             process.exit(1);
                         }
-                        process.exit(1);
                     });
                 }
             });
