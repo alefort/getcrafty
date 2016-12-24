@@ -126,7 +126,7 @@ var lcboLoader = {
     },
     processInventoryRecord: function(inventoryRecord){
         var doc = lcboLoader.mongo.inventory.model(inventoryRecord);
-        doc.is_new = false;
+        doc.is_new = true;
 
         lcboLoader.mongo.product.model.findOne({ 'id': doc.product_id }, function (err, product) {
             if(product == null){
