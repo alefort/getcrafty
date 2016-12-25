@@ -100,7 +100,8 @@ module.exports = {
             inventory_volume_in_milliliters: Number,
             inventory_price_in_cents: Number,
             inventory: {
-                quantity: Number
+                quantity: Number,
+                is_new: Boolean
             },
             sugar_content: String,
             producer_name: String,
