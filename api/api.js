@@ -143,8 +143,7 @@ app.get('/api/v1/productsAtStore', function(req, res) {
                 for(var index in products){
                     var product = products[index];
                     product.inventory.quantity = arrayInventories[product.id].quantity;
-                    product.inventory.is_new = arrayInventories[product.id].is_new;
-                    console.log(arrayInventories[product.id].is_new);
+                    product.is_new = arrayInventories[product.id].is_new;
                 }
                 res.send(products);
             });
