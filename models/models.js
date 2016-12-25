@@ -74,6 +74,7 @@ module.exports = {
         product: new Schema( {
             id: Number,
             is_dead: Boolean,
+            is_new: Boolean,
             name: String,
             url_friendly_name: String,
             tags: String,
@@ -100,8 +101,7 @@ module.exports = {
             inventory_volume_in_milliliters: Number,
             inventory_price_in_cents: Number,
             inventory: {
-                quantity: Number,
-                is_new: Boolean
+                quantity: Number
             },
             sugar_content: String,
             producer_name: String,
