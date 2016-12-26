@@ -8,7 +8,6 @@
     'ngGeolocation',
     'angular-loading-bar',
     'angular-toArrayFilter',
-    'ngStorage',
     'getCrafty.home',
     'getCrafty.beer',
     'getCrafty.beerSearch',
@@ -33,13 +32,7 @@
     $scope.currentPath = $location.path();
   });
 
-  app.controller('BodyCtrl', function($scope, $localStorage, $sessionStorage) {
-    $scope.$storage = $localStorage.$default({
-      storeSearch: '',
-      beerSearch: '',
-      stores: [],
-    });
-
+  app.controller('BodyCtrl', function($scope) {
     $scope.loadFinished = function() {
       setTimeout(function() {
         angular.element(document.querySelector('#loading-screen')).removeClass('active');

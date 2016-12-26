@@ -18,13 +18,13 @@
     <accordion>
       <accordion-group>
         <accordion-heading>Manual Location Search <i class="icon-angle-right"></i></accordion-heading>
-        <form class="form-inline" ng-submit="postalSearch($storage.storeSearch)">
+        <form class="form-inline" ng-submit="postalSearch(input.postal)">
           <div class="form-group">
             <label class="sr-only" for="postal-code">Postal Code or City</label>
             <div class="input-group">
-              <input type="text" ng-model="$storage.storeSearch" class="form-control" id="postal-code" name="postal-code" placeholder="Postal / City" required>
+              <input type="text" ng-model="input.postal" class="form-control" id="postal-code" name="postal-code" placeholder="Postal / City" required>
               <span class="input-group-btn">
-                <button class="btn btn-primary" role="button=" type="submit" ng-disabled="$storage.storeSearch === null || $storage.storeSearch === ''">
+                <button class="btn btn-primary" role="button=" type="submit" ng-disabled="input.postal === null || input.postal === ''">
                   <span class="btn-text sr-only">Search</span>
                   <i class="icon-search"></i>
                 </button>

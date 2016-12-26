@@ -8,8 +8,18 @@ module.exports = {
             product_id: Number,
             store_id: Number,
             is_dead: Boolean,
+            is_new: Boolean,
             quantity: Number,
-            updated_on: Date,
+            reported_on: Date,
+            updated_at: Date
+        }),
+        inventory_archive: new Schema({
+            product_id: Number,
+            store_id: Number,
+            is_dead: Boolean,
+            is_new: Boolean,
+            quantity: Number,
+            reported_on: Date,
             updated_at: Date
         }),
         store: new Schema( {
